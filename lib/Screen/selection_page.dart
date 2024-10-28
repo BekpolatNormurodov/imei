@@ -23,17 +23,17 @@ class _SelectionPageState extends State<SelectionPage> {
               children: [
                 Row(
                   children: [
-                    _box("create-imei.png", "YO'QOLGAN", ListImImeiPage(), 86.0, 0.0),
+                    _box("create-imei.png", "YO'QOLGAN", ListImImeiLost(), 86.0, 0.0),
                     SizedBox(width: 14),
-                    _box("check-imei.png" , "TOPILGAN", ListImImeiPage(), 60.0, 12.0),
+                    _box("check-imei.png" , "TOPILGAN", ListImImeiLost(), 60.0, 12.0),
                   ],
                 ),
                 SizedBox(height: 14),
                 Row(
                   children: [
-                    _box("search.png", "TEKSHIRISH", ListImImeiPage(), 56.0, 12.0),
+                    _box("search.png", "TEKSHIRISH", ListImImeiLost(), 56.0, 12.0),
                     SizedBox(width: 14),
-                    _box("settings.png" , "SOZLAMALAR", CreateImeiPage(), 50.0, 16.0),
+                    _box("settings.png" , "SOZLAMALAR", CreateImeiLost(), 50.0, 16.0),
                   ],
                 ),
               ],

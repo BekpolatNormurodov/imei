@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor:
             enablePassword ? Colors.teal : Colors.white.withOpacity(.1),
         foregroundColor: Colors.grey,
-        padding: EdgeInsets.only(top: 18, bottom: 14),
+        padding: EdgeInsets.only(top: 16, bottom: 12),
       ),
       child: SizedBox(
         width: double.infinity,

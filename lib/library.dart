@@ -13,10 +13,12 @@ export 'package:imei/intro_page.dart';
 // Screen
 export 'package:imei/Auth/login_page.dart';
 export 'package:imei/Screen/selection_page.dart';
-export 'package:imei/Screen/create/create_imei_page.dart';
-export 'package:imei/Screen/create/cretae_owner_page.dart';
-export 'package:imei/Screen/check/list_imei_page.dart';
+export 'package:imei/Screen/lost/create_imei_lost.dart';
+export 'package:imei/Screen/lost/create_owner_lost.dart';
+export 'package:imei/Screen/lost/list_imei_lost.dart';
 export 'package:auto_animated/auto_animated.dart';
+export 'package:imei/Class/animation_search_class.dart';
+
 
 
 
