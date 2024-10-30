@@ -146,8 +146,21 @@ class _LoginPageState extends State<LoginPage> {
         if (passwordController.text == usersPassword) {
           // Get.offAll(Hive.box('data').isEmpty ? CreateSettings() : NavigatorBar());
           Get.off(SelectionPage());
-          Get.snackbar('Successful !!!', "Parol to'g'li kiritildi",
-              backgroundColor: Colors.green.withOpacity(.8));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                "Parol to'g'ri",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey.shade200,
+                ),
+              ),
+              showCloseIcon: true,
+              closeIconColor: Colors.teal.shade800,
+              backgroundColor: Colors.teal.shade300,
+            ),
+          );
           // var response = await WorkersPost().workersPost(
           //   username: usernameController.text,
           //   admin: false.toString(),
@@ -170,11 +183,7 @@ class _LoginPageState extends State<LoginPage> {
         //   setState(() {});
         // }
         else {
-          Get.snackbar(
-            'Error:',
-            'Parol xato !!!',
-            backgroundColor: Colors.red.withOpacity(.5),
-          );
+          Get.snackbar('Faild...', "Parol xato", backgroundColor: Colors.red.withOpacity(.8));
         }
       },
       style: ElevatedButton.styleFrom(

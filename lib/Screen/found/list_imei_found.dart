@@ -1,15 +1,13 @@
-import 'package:imei/Screen/lost/list_imei_lost.dart';
 import 'package:imei/library.dart';
-export 'package:flutter_slidable/flutter_slidable.dart';
 
-class ListImImeiLost extends StatefulWidget {
-  ListImImeiLost({super.key});
+class ListImImeiFound extends StatefulWidget {
+  ListImImeiFound({super.key});
 
   @override
-  State<ListImImeiLost> createState() => _ListImImeiLostState();
+  State<ListImImeiFound> createState() => _ListImImeiFoundState();
 }
 
-class _ListImImeiLostState extends State<ListImImeiLost> {
+class _ListImImeiFoundState extends State<ListImImeiFound> {
   final options = LiveOptions(
     delay: Duration(milliseconds: 30),
     showItemInterval: Duration(milliseconds: 40),
@@ -63,7 +61,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
           ),
         ),
         title: AnimatedSearchBar(
-            label: "YO'QOLGAN QURILMALAR",
+            label: "TOPILGAN QURILMALAR",
             controller: TextEditingController(),
             closeIcon: Icon(
               Icons.close,
@@ -119,7 +117,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
         child: LiveList.options(
           options: options,
           // itemCount: provider!.data.length,
-          itemCount: 6,
+          itemCount: 3,
           padding: EdgeInsets.only(top: 20, bottom: 10),
           itemBuilder: (
             BuildContext context,
@@ -140,39 +138,21 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                 onTap: () {},
                 child: Stack(
                   children: [
-                    Slidable(
-                      key: const ValueKey(0),
-                      endActionPane:  ActionPane(
-                        motion: ScrollMotion(),
-                        children: [
-                          SlidableAction(
-                            // An action can be bigger than the others.
-                            flex: 2,
-                            onPressed: (context){},
-                            backgroundColor: Color(0xFF7BC043),
-                            foregroundColor: Colors.white,
-                            icon: Icons.archive,
-                            label: 'Archive',
-                          ),
-                        ],
-                      ),
-                      child: Card(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                        color: Colors.grey.shade200,
-                        child: ListTile(
-                          leading:
-                              Image.asset("assets/icons/phone.png", width: 36),
-                          title: Padding(
-                            padding: EdgeInsets.only(left: 8),
-                            child: Text(
-                              "12345678901234",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black,
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                    Card(
+                      margin: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                      color: const Color.fromARGB(255, 89, 168, 115),
+                      child: ListTile(
+                        leading:
+                            Image.asset("assets/icons/phone.png", width: 36),
+                        title: Padding(
+                          padding: EdgeInsets.only(left: 8),
+                          child: Text(
+                            "12345678901234",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w500),
                           ),
                         ),
                       ),
@@ -182,7 +162,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                       bottom: 8,
                       child: Text(
                         "22:19",
-                        style: TextStyle(fontSize: 11, color: Colors.black45),
+                        style: TextStyle(fontSize: 11, color: Colors.black54),
                       ),
                     )
                   ],
@@ -190,15 +170,6 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
               ),
             ),
           ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal,
-        onPressed: () => Get.off(CreateImeiLost()),
-        child: Icon(
-          Icons.add,
-          size: 30,
-          color: Colors.grey.shade200,
         ),
       ),
     );

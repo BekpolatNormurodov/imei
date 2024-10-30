@@ -1,3 +1,4 @@
+import 'package:imei/Screen/lost/list_imei_lost.dart';
 import 'package:imei/library.dart';
 
 class SelectionPage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SelectionPageState extends State<SelectionPage> {
                   children: [
                     _box("create-imei.png", "YO'QOLGAN", ListImImeiLost(), 86.0, 0.0),
                     SizedBox(width: 14),
-                    _box("check-imei.png" , "TOPILGAN", ListImImeiLost(), 60.0, 12.0),
+                    _box("check-imei.png" , "TOPILGAN", ListImImeiFound(), 60.0, 12.0),
                   ],
                 ),
                 SizedBox(height: 14),
