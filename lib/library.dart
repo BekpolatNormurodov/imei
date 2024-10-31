@@ -17,5 +17,7 @@ export 'package:imei/Package/animated_search_bar.dart';
 export 'package:imei/Screen/selection_page.dart';
 export 'package:imei/Screen/lost/create_imei_lost.dart';
 export 'package:imei/Screen/found/list_imei_found.dart';
+export 'package:imei/Screen/lost/list_imei_lost.dart';
+
 
 

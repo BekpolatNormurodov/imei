@@ -1,6 +1,4 @@
-import 'package:imei/Screen/lost/list_imei_lost.dart';
 import 'package:imei/library.dart';
-export 'package:flutter_slidable/flutter_slidable.dart';
 
 class ListImImeiLost extends StatefulWidget {
   ListImImeiLost({super.key});
@@ -17,6 +15,15 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     visibleFraction: 0.05,
     reAnimateOnVisibility: false,
   );
+
+  List<String> imei = [
+    "1111111111111",
+    "2222222222222",
+    "3333333333333",
+    "1111111111111",
+    "2222222222222",
+    "3333333333333",
+  ];
 
   // SignedProvider? provider;
   // Timer? _timer;
@@ -51,6 +58,14 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
 
   @override
   Widget build(BuildContext context) {
+    imei = [
+      "1111111111111",
+      "2222222222222",
+      "3333333333333",
+      "1111111111111",
+      "2222222222222",
+      "3333333333333",
+    ];
     return Scaffold(
       backgroundColor: Color.fromRGBO(68, 68, 68, 1),
       appBar: AppBar(
@@ -118,8 +133,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
         height: double.infinity,
         child: LiveList.options(
           options: options,
-          // itemCount: provider!.data.length,
-          itemCount: 6,
+          itemCount: imei.length,
           padding: EdgeInsets.only(top: 20, bottom: 10),
           itemBuilder: (
             BuildContext context,
@@ -136,29 +150,94 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                 begin: Offset(0, -0.1),
                 end: Offset.zero,
               ).animate(animation),
-              child: GestureDetector(
-                onTap: () {},
-                child: Stack(
-                  children: [
-                    Slidable(
-                      key: const ValueKey(0),
-                      endActionPane:  ActionPane(
-                        motion: ScrollMotion(),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Dismissible(
+                  direction: DismissDirection.endToStart,
+                  background: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 0, vertical: 6),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // Icon(Icons.keyboard_double_arrow_left, color: Colors.lightBlueAccent),
+                        Text(
+                          "Topildi",
+                          style: TextStyle(
+                              color: Colors.tealAccent,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(width: 10),
+                        Icon(Icons.check_circle_outline,
+                            color: Colors.tealAccent, size: 26),
+                        SizedBox(width: 20),
+                      ],
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.teal.shade600,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  key: ValueKey<String>(imei[index]),
+                  onDismissed: (DismissDirection direction) {
+                    imei.removeAt(index);
+                    Get.defaultDialog(
+                      title: 'Tasdiqlash',
+                      content: Column(
                         children: [
-                          SlidableAction(
-                            // An action can be bigger than the others.
-                            flex: 2,
-                            onPressed: (context){},
-                            backgroundColor: Color(0xFF7BC043),
-                            foregroundColor: Colors.white,
-                            icon: Icons.archive,
-                            label: 'Archive',
+                          Text(
+                            "Qurilma topilganligi to'g'risida fuqaroning ariza raqamini kiriting",
+                            style: TextStyle(color: Colors.black, fontSize: 15),
+                            textAlign: TextAlign.center,
+                          ),
+                          Container(
+                            height: 44,
+                            margin: EdgeInsets.only(
+                                left: 8, right: 8, top: 18, bottom: 32),
+                            child: TextFormField(
+                              controller: TextEditingController(),
+                              cursorColor: Colors.black,
+                              cursorWidth: 1,
+                              keyboardType: TextInputType.phone,
+                              textInputAction: TextInputAction.next,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.only(
+                                  left: 16,
+                                  right: 4,
+                                ),
+                                label: Text(
+                                  "Shakl1",
+                                  style: TextStyle(
+                                      color: Colors.black.withOpacity(.4),
+                                      fontSize: 14),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black.withOpacity(.3))),
+                                focusedBorder: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.black54)),
+                              ),
+                            ),
                           ),
                         ],
                       ),
-                      child: Card(
+                      onCancel: () {
+                        Navigator.of(Get.overlayContext!, rootNavigator: true)
+                            .pop();
+                      },
+                      onConfirm: () {
+                        Get.to(ListImImeiFound());
+                         Navigator.of(Get.overlayContext!, rootNavigator: true)
+                            .pop();
+                      },
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      Card(
                         margin:
-                            EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+                            EdgeInsets.symmetric(horizontal: 0, vertical: 6),
                         color: Colors.grey.shade200,
                         child: ListTile(
                           leading:
@@ -166,26 +245,27 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                           title: Padding(
                             padding: EdgeInsets.only(left: 8),
                             child: Text(
-                              "12345678901234",
+                              imei[index],
                               style: TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.black,
-                                  letterSpacing: 1,
-                                  fontWeight: FontWeight.w500),
+                                fontSize: 14,
+                                color: Colors.black,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      right: 22,
-                      bottom: 8,
-                      child: Text(
-                        "22:19",
-                        style: TextStyle(fontSize: 11, color: Colors.black45),
-                      ),
-                    )
-                  ],
+                      Positioned(
+                        right: 9,
+                        bottom: 9,
+                        child: Text(
+                          "22:19",
+                          style: TextStyle(fontSize: 11, color: Colors.black45),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

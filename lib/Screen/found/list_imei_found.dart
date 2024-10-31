@@ -140,16 +140,16 @@ class _ListImImeiFoundState extends State<ListImImeiFound> {
                   children: [
                     Card(
                       margin: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                      color: const Color.fromARGB(255, 89, 168, 115),
+                      color: Colors.tealAccent.shade700,
                       child: ListTile(
                         leading:
-                            Image.asset("assets/icons/phone.png", width: 36),
+                            Image.asset("assets/icons/check-imei.png", width: 34),
                         title: Padding(
                           padding: EdgeInsets.only(left: 8),
                           child: Text(
                             "12345678901234",
                             style: TextStyle(
-                                fontSize: 15,
+                                fontSize: 14,
                                 color: Colors.black,
                                 letterSpacing: 1,
                                 fontWeight: FontWeight.w500),
@@ -159,7 +159,7 @@ class _ListImImeiFoundState extends State<ListImImeiFound> {
                     ),
                     Positioned(
                       right: 22,
-                      bottom: 8,
+                      bottom: 9,
                       child: Text(
                         "22:19",
                         style: TextStyle(fontSize: 11, color: Colors.black54),
