@@ -58,14 +58,6 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
 
   @override
   Widget build(BuildContext context) {
-    imei = [
-      "1111111111111",
-      "2222222222222",
-      "3333333333333",
-      "1111111111111",
-      "2222222222222",
-      "3333333333333",
-    ];
     return Scaffold(
       backgroundColor: Color.fromRGBO(68, 68, 68, 1),
       appBar: AppBar(
@@ -180,20 +172,52 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                   ),
                   key: ValueKey<String>(imei[index]),
                   onDismissed: (DismissDirection direction) {
-                    imei.removeAt(index);
                     Get.defaultDialog(
                       title: 'Tasdiqlash',
-                      content: Column(
-                        children: [
-                          Text(
-                            "Qurilma topilganligi to'g'risida fuqaroning ariza raqamini kiriting",
-                            style: TextStyle(color: Colors.black, fontSize: 15),
-                            textAlign: TextAlign.center,
-                          ),
-                          Container(
+                      titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      content: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          children: [
+                            RichText(
+                              textAlign: TextAlign.justify,
+                              text: TextSpan(
+                                style: TextStyle(fontSize: 15),
+                                children: [
+                                  TextSpan(
+                                    text:
+                                        "Qurilma topilganligini tasdiqlash uchun, ",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: "(94)-679-22-20",
+                                    style: TextStyle(
+                                        color: Colors.deepPurple.shade700),
+                                  ),
+                                  TextSpan(
+                                    text: " telefon nomerga yuborilgan  kodni kiriting",
+                                    style: TextStyle(color: Colors.black, wordSpacing: 2),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 6),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                OutlinedButton(
+                                  onPressed: () {},
+                                  child: Text("Kodni yuborish"),
+                                  style: OutlinedButton.styleFrom(
+                                    // padding: EdgeInsets.symmetric(horizontal: 2)
+                                  ),
+                                )
+                              ],
+                            ),
+                            Container(
                             height: 44,
                             margin: EdgeInsets.only(
-                                left: 8, right: 8, top: 18, bottom: 32),
+                                top: 40, bottom: 30),
                             child: TextFormField(
                               controller: TextEditingController(),
                               cursorColor: Colors.black,
@@ -220,17 +244,51 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                               ),
                             ),
                           ),
-                        ],
+                          ],
+                        ),
                       ),
-                      onCancel: () {
-                        Navigator.of(Get.overlayContext!, rootNavigator: true)
-                            .pop();
-                      },
-                      onConfirm: () {
-                        Get.to(ListImImeiFound());
-                         Navigator.of(Get.overlayContext!, rootNavigator: true)
-                            .pop();
-                      },
+                      confirm: Container(
+                        width: 100,
+                        height: 48,
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            Get.off(ListImImeiFound());
+                            Navigator.of(Get.overlayContext!,
+                                    rootNavigator: true)
+                                .pop();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Topilganlarga qo'shildi",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey.shade200,
+                                  ),
+                                ),
+                                showCloseIcon: true,
+                                closeIconColor: Colors.teal.shade800,
+                                backgroundColor: Colors.teal.shade300,
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.teal,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          label: Text(
+                            "Ok",
+                            style: TextStyle(
+                              color: Colors.grey.shade200,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: .5,
+                            ),
+                          ),
+                        ),
+                      ),
                     );
                   },
                   child: Stack(
