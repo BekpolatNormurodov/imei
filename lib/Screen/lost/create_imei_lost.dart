@@ -13,11 +13,10 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
   TextEditingController? modelController;
   TextEditingController? colorController;
   TextEditingController? shortInfoController;
-  TextEditingController? nameController;
-  TextEditingController? surnameController;
-  TextEditingController? lastnameController;
+  TextEditingController? fullnameController;
   TextEditingController? numberController;
   TextEditingController? jshshirController;
+  TextEditingController? shakl1Controller;
 
   int page = 1;
 
@@ -28,11 +27,10 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
     modelController = TextEditingController();
     colorController = TextEditingController();
     shortInfoController = TextEditingController();
-    nameController = TextEditingController();
-    surnameController = TextEditingController();
-    lastnameController = TextEditingController();
+    fullnameController = TextEditingController();
     numberController = TextEditingController();
     jshshirController = TextEditingController();
+    shakl1Controller = TextEditingController();
     super.initState();
   }
 
@@ -75,20 +73,21 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
                       Container(width: 30),
                     ],
                   ),
-                  SizedBox(height: page == 2 ? 14.h : 0),
+                  SizedBox(height: page == 2 ? 10.h : 0),
                   page == 2
                       ? Text(
-                          "* Qurilma egasining ma'lumotlari",
+                          "* Qurilma egasining ma'lumotlari.",
                           style: TextStyle(
                             fontSize: 16,
                             fontStyle: FontStyle.italic,
                             color: Colors.teal.shade400,
                             letterSpacing: 1,
+                            fontWeight: FontWeight.w500,
                           ),
                           textAlign: TextAlign.start,
                         )
                       : Container(),
-                  SizedBox(height: 20.h),
+                  SizedBox(height: 14.h),
                   page == 1 ? imei() : owner()
                 ],
               ),
@@ -287,7 +286,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
                                         content: Text(
                                           "Ma'lumotlar saqlandi.",
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 12,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.grey.shade200,
                                           ),
@@ -349,7 +348,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             cursorWidth: 1,
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade200),
             inputFormatters: [
               TextInputMask(
                 mask: '\\ 999999999999999',
@@ -372,7 +371,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 12),
         Text(
           "Oxirgi ishlagan SIM:",
           style: TextStyle(color: Colors.grey.shade200),
@@ -398,7 +397,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             cursorWidth: 1,
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade200),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 4,
@@ -414,7 +413,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 12),
         Text(
           "Modeli:",
           style: TextStyle(color: Colors.grey.shade200),
@@ -433,7 +432,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             cursorWidth: 1,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade200),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 10,
@@ -449,7 +448,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 12),
         Text(
           "Rangi:",
           style: TextStyle(color: Colors.grey.shade200),
@@ -465,7 +464,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             cursorWidth: 1,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade200),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 10,
@@ -481,7 +480,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 12),
         Text(
           "Holat haqida ma'lumot:",
           style: TextStyle(color: Colors.grey.shade200),
@@ -500,7 +499,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             cursorWidth: 1,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade200),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 10,
@@ -525,8 +524,8 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Ism:",
-          style: TextStyle(color: Colors.grey.shade200),
+          "F.I.SH:",
+          style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
         ),
         Container(
           height: 46,
@@ -537,84 +536,17 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
-            controller: nameController,
+            controller: fullnameController,
             cursorColor: Colors.grey.shade200,
             cursorWidth: 1,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 15, color: Colors.grey.shade200),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 10,
                 right: 10,
-                top: 8,
-              ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.person,
-                size: 24,
-                color: Colors.grey.shade200,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: 16),
-        Text(
-          "Familiya:",
-          style: TextStyle(color: Colors.grey.shade200),
-        ),
-        Container(
-          height: 46,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: TextFormField(
-            controller: surnameController,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.name,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(
-                left: 10,
-                right: 10,
-                top: 8,
-              ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.person,
-                size: 24,
-                color: Colors.grey.shade200,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: 16),
-        Text(
-          "Otasining ismi:",
-          style: TextStyle(color: Colors.grey.shade200),
-        ),
-        Container(
-          height: 46,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade200),
-              borderRadius: BorderRadius.circular(6.r)),
-          child: TextFormField(
-            controller: lastnameController,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.name,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(
-                left: 10,
-                right: 10,
-                top: 8,
+                top: 10,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -651,12 +583,12 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             cursorWidth: 1,
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
-                top: 8,
+                top: 10,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -670,7 +602,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 16),
         Text(
           "JSHSHIR:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
         ),
         Container(
           height: 46,
@@ -693,16 +625,54 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             cursorWidth: 1,
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 16, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
-                top: 8,
+                top: 10,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
                 Icons.document_scanner,
+                size: 22,
+                color: Colors.grey.shade200,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 16),
+        Text(
+          "Shakl1 №:",
+          style: TextStyle(color: Colors.grey.shade200),
+        ),
+        Container(
+          height: 46,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.grey.shade200,
+            ),
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: TextFormField(
+            controller: shakl1Controller,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.number,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey.shade200,
+            ),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(
+                left: 12,
+                right: 10,
+                top: 10,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.discount,
                 size: 22,
                 color: Colors.grey.shade200,
               ),

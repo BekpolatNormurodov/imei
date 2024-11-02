@@ -7,6 +7,7 @@ export 'package:typewritertext/typewritertext.dart';
 export 'package:line_awesome_flutter/line_awesome_flutter.dart';
 export 'package:easy_mask/easy_mask.dart';
 export 'package:auto_animated/auto_animated.dart';
+export 'package:smart_auth/smart_auth.dart';
 
 // main
 export 'package:imei/intro_page.dart';

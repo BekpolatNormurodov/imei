@@ -1,4 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:imei/library.dart';
+import 'package:flutter/services.dart';
+import 'package:pinput/pinput.dart';
+import 'package:smart_auth/smart_auth.dart';
 
 class ListImImeiLost extends StatefulWidget {
   ListImImeiLost({super.key});
@@ -8,6 +12,13 @@ class ListImImeiLost extends StatefulWidget {
 }
 
 class _ListImImeiLostState extends State<ListImImeiLost> {
+  late final SmsRetriever smsRetriever;
+  late final TextEditingController pinController;
+  late final FocusNode focusNode;
+  late final GlobalKey<FormState> formKey;
+
+  bool enableButton = false;
+
   final options = LiveOptions(
     delay: Duration(milliseconds: 30),
     showItemInterval: Duration(milliseconds: 40),
@@ -38,6 +49,18 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
   @override
   void initState() {
     super.initState();
+    if (kIsWeb) {
+      BrowserContextMenu.disableContextMenu();
+    }
+    formKey = GlobalKey<FormState>();
+    pinController = TextEditingController();
+    focusNode = FocusNode();
+
+    /// In case you need an SMS autofill feature
+    smsRetriever = SmsRetrieverImpl(
+      SmartAuth(),
+    );
+
     // provider = context.read<SignedProvider>();
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
     //   provider!.getData();
@@ -50,14 +73,35 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     // });
   }
 
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _timer?.cancel();
-  // }
+  @override
+  void dispose() {
+    if (kIsWeb) {
+      BrowserContextMenu.enableContextMenu();
+    }
+    pinController.dispose();
+    focusNode.dispose();
+    super.dispose();
+    // _timer?.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
+    const focusedBorderColor = Color.fromRGBO(23, 171, 144, 1);
+    const fillColor = Color.fromRGBO(243, 246, 249, 0);
+    const borderColor = Color.fromRGBO(23, 171, 144, 0.4);
+
+    final defaultPinTheme = PinTheme(
+      width: 40,
+      height: 40,
+      textStyle: const TextStyle(
+        fontSize: 16,
+        color: Color.fromRGBO(30, 60, 87, 1),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: borderColor),
+      ),
+    );
     return Scaffold(
       backgroundColor: Color.fromRGBO(68, 68, 68, 1),
       appBar: AppBar(
@@ -172,9 +216,12 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                   ),
                   key: ValueKey<String>(imei[index]),
                   onDismissed: (DismissDirection direction) {
+                    pinController.clear();
                     Get.defaultDialog(
                       title: 'Tasdiqlash',
-                      titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                      titlePadding: EdgeInsets.only(top: 16, bottom: 12),
+                      titleStyle:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
                       content: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Column(
@@ -195,8 +242,10 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                         color: Colors.deepPurple.shade700),
                                   ),
                                   TextSpan(
-                                    text: " telefon nomerga yuborilgan  kodni kiriting",
-                                    style: TextStyle(color: Colors.black, wordSpacing: 2),
+                                    text:
+                                        " telefon nomerga yuborilgan  kodni kiriting",
+                                    style: TextStyle(
+                                        color: Colors.black, wordSpacing: 2),
                                   ),
                                 ],
                               ),
@@ -209,59 +258,103 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                   onPressed: () {},
                                   child: Text("Kodni yuborish"),
                                   style: OutlinedButton.styleFrom(
-                                    // padding: EdgeInsets.symmetric(horizontal: 2)
-                                  ),
+                                      // padding: EdgeInsets.symmetric(horizontal: 2)
+                                      ),
                                 )
                               ],
                             ),
                             Container(
-                            height: 44,
-                            margin: EdgeInsets.only(
-                                top: 40, bottom: 30),
-                            child: TextFormField(
-                              controller: TextEditingController(),
-                              cursorColor: Colors.black,
-                              cursorWidth: 1,
-                              keyboardType: TextInputType.phone,
-                              textInputAction: TextInputAction.next,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.only(
-                                  left: 16,
-                                  right: 4,
+                              margin: EdgeInsets.only(top: 48, bottom: 24),
+                              child: Form(
+                                key: formKey,
+                                child: Directionality(
+                                  // Specify direction if desired
+                                  textDirection: TextDirection.ltr,
+                                  child: Pinput(
+                                    // You can pass your own SmsRetriever implementation based on any package
+                                    // in this example we are using the SmartAuth
+                                    smsRetriever: smsRetriever,
+                                    controller: pinController,
+                                    focusNode: focusNode,
+                                    defaultPinTheme: defaultPinTheme,
+                                    separatorBuilder: (index) =>
+                                        const SizedBox(width: 10),
+                                    validator: (value) {
+                                      value! == '2222'
+                                          ? enableButton = true
+                                          : enableButton = false;
+                                      print(value);
+                                      setState(() {});
+                                      return value == '2222'
+                                          ? null
+                                          : 'Kod xato!';
+                                    },
+                                    hapticFeedbackType:
+                                        HapticFeedbackType.lightImpact,
+                                    onCompleted: (pin) {
+                                      debugPrint('onCompleted: $pin');
+                                    },
+                                    onChanged: (value) {
+                                      debugPrint('onChanged: $value');
+                                    },
+                                    cursor: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(bottom: 9),
+                                          width: 16,
+                                          height: 1,
+                                          color: focusedBorderColor,
+                                        ),
+                                      ],
+                                    ),
+                                    focusedPinTheme: defaultPinTheme.copyWith(
+                                      decoration:
+                                          defaultPinTheme.decoration!.copyWith(
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                            color: focusedBorderColor),
+                                      ),
+                                    ),
+                                    submittedPinTheme: defaultPinTheme.copyWith(
+                                      decoration:
+                                          defaultPinTheme.decoration!.copyWith(
+                                        color: fillColor,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                            color: focusedBorderColor),
+                                      ),
+                                    ),
+                                    errorPinTheme:
+                                        defaultPinTheme.copyBorderWith(
+                                      border:
+                                          Border.all(color: Colors.redAccent),
+                                    ),
+                                  ),
                                 ),
-                                label: Text(
-                                  "Shakl1",
-                                  style: TextStyle(
-                                      color: Colors.black.withOpacity(.4),
-                                      fontSize: 14),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color: Colors.black.withOpacity(.3))),
-                                focusedBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.black54)),
                               ),
                             ),
-                          ),
                           ],
                         ),
                       ),
                       confirm: Container(
-                        width: 100,
                         height: 48,
+                        margin: EdgeInsets.only(bottom: 12),
                         child: ElevatedButton.icon(
                           onPressed: () async {
-                            Get.off(ListImImeiFound());
-                            Navigator.of(Get.overlayContext!,
-                                    rootNavigator: true)
-                                .pop();
+                            focusNode.unfocus();
+                            formKey.currentState!.validate();
+                            // Get.off(ListImImeiFound());
+                            // Navigator.of(Get.overlayContext!,
+                            //         rootNavigator: true)
+                            //     .pop();
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
-                                  "Topilganlarga qo'shildi",
+                                  "Qurilma, topilganlar ro'yxatiga qo'shildi",
                                   style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     fontWeight: FontWeight.w500,
                                     color: Colors.grey.shade200,
                                   ),
@@ -273,16 +366,18 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.teal,
+                            backgroundColor: enableButton
+                                ? Colors.teal
+                                : Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                           label: Text(
-                            "Ok",
+                            "TASDIQLASH",
                             style: TextStyle(
-                              color: Colors.grey.shade200,
-                              fontSize: 15,
+                              color:Colors.grey.shade200,
+                              fontSize: 14,
                               fontWeight: FontWeight.w600,
                               letterSpacing: .5,
                             ),
@@ -341,4 +436,31 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
       ),
     );
   }
+}
+
+class SmsRetrieverImpl implements SmsRetriever {
+  const SmsRetrieverImpl(this.smartAuth);
+
+  final SmartAuth smartAuth;
+
+  @override
+  Future<void> dispose() {
+    return smartAuth.removeSmsListener();
+  }
+
+  @override
+  Future<String?> getSmsCode() async {
+    final signature = await smartAuth.getAppSignature();
+    debugPrint('App Signature: $signature');
+    final res = await smartAuth.getSmsCode(
+      useUserConsentApi: true,
+    );
+    if (res.succeed && res.codeFound) {
+      return res.code!;
+    }
+    return null;
+  }
+
+  @override
+  bool get listenForMultipleSms => false;
 }
