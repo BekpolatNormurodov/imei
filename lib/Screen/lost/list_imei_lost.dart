@@ -1,8 +1,8 @@
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:imei/library.dart';
 import 'package:flutter/services.dart';
 import 'package:pinput/pinput.dart';
-import 'package:smart_auth/smart_auth.dart';
 
 class ListImImeiLost extends StatefulWidget {
   ListImImeiLost({super.key});
@@ -17,7 +17,10 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
   late final FocusNode focusNode;
   late final GlobalKey<FormState> formKey;
 
-  bool enableButton = false;
+  bool? enableButton;
+  Timer? _timer;
+  int _secoundCount = 0;
+  int _minutCount = 3;
 
   final options = LiveOptions(
     delay: Duration(milliseconds: 30),
@@ -80,29 +83,37 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     }
     pinController.dispose();
     focusNode.dispose();
+
+    _timer!.cancel();
+    setState(() {});
     super.dispose();
-    // _timer?.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
-    const focusedBorderColor = Color.fromRGBO(23, 171, 144, 1);
+    Color focusedBorderColor = Colors.deepPurpleAccent.shade700;
     const fillColor = Color.fromRGBO(243, 246, 249, 0);
-    const borderColor = Color.fromRGBO(23, 171, 144, 0.4);
+    Color borderColor = Colors.deepPurpleAccent.withOpacity(.4);
 
     final defaultPinTheme = PinTheme(
       width: 40,
       height: 40,
       textStyle: const TextStyle(
         fontSize: 16,
-        color: Color.fromRGBO(30, 60, 87, 1),
+        color: Color.fromARGB(255, 24, 10, 63),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: borderColor),
       ),
     );
+
+    if (_secoundCount == 0) {
+      _secoundCount = 59;
+      _minutCount -= 1;
+    }
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromRGBO(68, 68, 68, 1),
       appBar: AppBar(
         backgroundColor: Colors.teal,
@@ -216,174 +227,238 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                   ),
                   key: ValueKey<String>(imei[index]),
                   onDismissed: (DismissDirection direction) {
+                    enableButton = false;
                     pinController.clear();
-                    Get.defaultDialog(
-                      title: 'Tasdiqlash',
-                      titlePadding: EdgeInsets.only(top: 16, bottom: 12),
-                      titleStyle:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
-                      content: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Column(
-                          children: [
-                            RichText(
-                              textAlign: TextAlign.justify,
-                              text: TextSpan(
-                                style: TextStyle(fontSize: 15),
+                    // _timer!.cancel();
+                    _secoundCount = 0;
+                    _minutCount = 3;
+                    showDialog(
+                      barrierColor: Colors.black.withOpacity(.8),
+                      context: context,
+                      builder: (
+                        context,
+                      ) {
+                        return StatefulBuilder(
+                          builder: (context, StateSetter setState) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              scrollable: true,
+                              elevation: 10,
+                              iconPadding: EdgeInsets.zero,
+                              icon: Container(
+                                margin: EdgeInsets.only(top: 18),
+                                child: Text(
+                                  "SMS kodi",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 20),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              titlePadding: EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 16),
+                              title: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  TextSpan(
-                                    text:
-                                        "Qurilma topilganligini tasdiqlash uchun, ",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                    text: "(94)-679-22-20",
+                                  Text(
+                                    '* Tasdiqlash kodini kiriting.',
                                     style: TextStyle(
-                                        color: Colors.deepPurple.shade700),
+                                      fontSize: 16,
+                                      color: Colors.black.withOpacity(.6),
+                                    ),
+                                    textAlign: TextAlign.left,
                                   ),
-                                  TextSpan(
-                                    text:
-                                        " telefon nomerga yuborilgan  kodni kiriting",
+                                  Text(
+                                    "   +998 (94) 679-22-20",
                                     style: TextStyle(
-                                        color: Colors.black, wordSpacing: 2),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 8),
+                                    alignment: Alignment.centerRight,
+                                    child: OutlinedButton(
+                                      onPressed: () {
+                                        _timer = Timer.periodic(
+                                          Duration(seconds: 1),
+                                          (timer) {
+                                            this._secoundCount -= 1;
+                                            setState(
+                                              () {},
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Text(
+                                        "YUBORISH",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color:
+                                              Colors.deepPurpleAccent.shade700,
+                                          letterSpacing: .5,
+                                        ),
+                                      ),
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                          color: Colors.deepPurpleAccent,
+                                          width: 1,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(6)),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin:
+                                        EdgeInsets.only(top: 50, bottom: 30),
+                                    alignment: Alignment.center,
+                                    child: Form(
+                                      key: formKey,
+                                      child: Directionality(
+                                        // Specify
+                                        // direction if desired
+                                        textDirection: TextDirection.ltr,
+                                        child: Pinput(
+                                          // You can pass your own SmsRetriever implementation based on any package
+                                          // in this example we are using the SmartAuth
+                                          smsRetriever: smsRetriever,
+                                          controller: pinController,
+                                          focusNode: focusNode,
+                                          defaultPinTheme: defaultPinTheme,
+                                          separatorBuilder: (index) =>
+                                              const SizedBox(width: 10),
+                                          validator: (value) {
+                                            enableButton =
+                                                value! == '2222' ? true : false;
+                                            setState(() {});
+                                            print(enableButton);
+                                            return value == '2222'
+                                                ? null
+                                                : 'Kod xato!';
+                                          },
+                                          hapticFeedbackType:
+                                              HapticFeedbackType.lightImpact,
+                                          onCompleted: (pin) {
+                                            debugPrint('onCompleted: $pin');
+                                          },
+                                          onChanged: (value) {
+                                            debugPrint('onChanged: $value');
+                                          },
+                                          cursor: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                margin: const EdgeInsets.only(
+                                                    bottom: 9),
+                                                width: 16,
+                                                height: 1,
+                                                color: focusedBorderColor,
+                                              ),
+                                            ],
+                                          ),
+                                          focusedPinTheme:
+                                              defaultPinTheme.copyWith(
+                                            decoration: defaultPinTheme
+                                                .decoration!
+                                                .copyWith(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                  color: focusedBorderColor,
+                                                  width: .8),
+                                            ),
+                                          ),
+                                          submittedPinTheme:
+                                              defaultPinTheme.copyWith(
+                                            decoration: defaultPinTheme
+                                                .decoration!
+                                                .copyWith(
+                                              color: fillColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(
+                                                  color: focusedBorderColor),
+                                            ),
+                                          ),
+                                          errorPinTheme:
+                                              defaultPinTheme.copyBorderWith(
+                                            border: Border.all(
+                                                color: Colors.redAccent),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
-                            ),
-                            SizedBox(height: 6),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                OutlinedButton(
-                                  onPressed: () {},
-                                  child: Text("Kodni yuborish"),
-                                  style: OutlinedButton.styleFrom(
-                                      // padding: EdgeInsets.symmetric(horizontal: 2)
-                                      ),
-                                )
-                              ],
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 48, bottom: 24),
-                              child: Form(
-                                key: formKey,
-                                child: Directionality(
-                                  // Specify direction if desired
-                                  textDirection: TextDirection.ltr,
-                                  child: Pinput(
-                                    // You can pass your own SmsRetriever implementation based on any package
-                                    // in this example we are using the SmartAuth
-                                    smsRetriever: smsRetriever,
-                                    controller: pinController,
-                                    focusNode: focusNode,
-                                    defaultPinTheme: defaultPinTheme,
-                                    separatorBuilder: (index) =>
-                                        const SizedBox(width: 10),
-                                    validator: (value) {
-                                      value! == '2222'
-                                          ? enableButton = true
-                                          : enableButton = false;
-                                      print(value);
-                                      setState(() {});
-                                      return value == '2222'
-                                          ? null
-                                          : 'Kod xato!';
-                                    },
-                                    hapticFeedbackType:
-                                        HapticFeedbackType.lightImpact,
-                                    onCompleted: (pin) {
-                                      debugPrint('onCompleted: $pin');
-                                    },
-                                    onChanged: (value) {
-                                      debugPrint('onChanged: $value');
-                                    },
-                                    cursor: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          margin:
-                                              const EdgeInsets.only(bottom: 9),
-                                          width: 16,
-                                          height: 1,
-                                          color: focusedBorderColor,
+                              content: OutlinedButton.icon(
+                                onPressed: () {
+                                  if (enableButton!) {
+                                    Get.to(ListImImeiFound());
+                                    Navigator.of(Get.overlayContext!,
+                                            rootNavigator: true)
+                                        .pop();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          "Ma'lumotlar saqlandi.",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.grey.shade200,
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                    focusedPinTheme: defaultPinTheme.copyWith(
-                                      decoration:
-                                          defaultPinTheme.decoration!.copyWith(
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                            color: focusedBorderColor),
+                                        showCloseIcon: true,
+                                        closeIconColor: Colors.teal.shade800,
+                                        backgroundColor: Colors.teal.shade30,
                                       ),
-                                    ),
-                                    submittedPinTheme: defaultPinTheme.copyWith(
-                                      decoration:
-                                          defaultPinTheme.decoration!.copyWith(
-                                        color: fillColor,
-                                        borderRadius: BorderRadius.circular(8),
-                                        border: Border.all(
-                                            color: focusedBorderColor),
-                                      ),
-                                    ),
-                                    errorPinTheme:
-                                        defaultPinTheme.copyBorderWith(
-                                      border:
-                                          Border.all(color: Colors.redAccent),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      confirm: Container(
-                        height: 48,
-                        margin: EdgeInsets.only(bottom: 12),
-                        child: ElevatedButton.icon(
-                          onPressed: () async {
-                            focusNode.unfocus();
-                            formKey.currentState!.validate();
-                            // Get.off(ListImImeiFound());
-                            // Navigator.of(Get.overlayContext!,
-                            //         rootNavigator: true)
-                            //     .pop();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  "Qurilma, topilganlar ro'yxatiga qo'shildi",
+                                    );
+                                  }
+                                },
+                                icon: Icon(Icons.check_circle,
+                                    color: enableButton!
+                                        ? Colors.white
+                                        : Colors.black.withOpacity(.1)),
+                                label: Text(
+                                  "TASDIQLASH",
                                   style: TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey.shade200,
+                                    fontWeight: FontWeight.w600,
+                                    color: enableButton!
+                                        ? Colors.grey.shade100
+                                        : Colors.black.withOpacity(.1),
+                                    letterSpacing: .6,
                                   ),
                                 ),
-                                showCloseIcon: true,
-                                closeIconColor: Colors.teal.shade800,
-                                backgroundColor: Colors.teal.shade300,
+                                style: OutlinedButton.styleFrom(
+                                  // shadowColor: enableButton! ? Colors.deepPurpleAccent : Colors.transparent,
+                                  overlayColor: enableButton!
+                                      ? Colors.red.shade900
+                                      : Colors.transparent,
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 10),
+                                  backgroundColor: enableButton!
+                                      ? Colors.deepPurpleAccent
+                                      : Colors.black.withOpacity(.1),
+                                  elevation: 8,
+                                  side: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6)),
+                                ),
                               ),
                             );
                           },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: enableButton
-                                ? Colors.teal
-                                : Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          label: Text(
-                            "TASDIQLASH",
-                            style: TextStyle(
-                              color:Colors.grey.shade200,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: .5,
-                            ),
-                          ),
-                        ),
-                      ),
+                        );
+                      },
                     );
                   },
                   child: Stack(
