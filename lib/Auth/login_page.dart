@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
         SizedBox(width: 26),
         Container(
           width: 150,
-          child: TypeWriter.text(
+          child: Text(
             "IMEI - 102",
             style: TextStyle(
               color: Colors.grey.shade400,
@@ -78,7 +78,6 @@ class _LoginPageState extends State<LoginPage> {
               fontWeight: FontWeight.bold,
             ),
             textAlign: TextAlign.justify,
-            duration: const Duration(milliseconds: 300),
           ),
         ),
       ],

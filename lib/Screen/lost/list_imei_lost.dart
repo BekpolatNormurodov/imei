@@ -19,8 +19,10 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
 
   bool? enableButton;
   Timer? _timer;
-  int _secoundCount = 0;
-  int _minutCount = 3;
+  int _secoundCount = 60;
+  int _minutCount = 2;
+
+  bool codeSend = false;
 
   final options = LiveOptions(
     delay: Duration(milliseconds: 30),
@@ -108,10 +110,6 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
       ),
     );
 
-    if (_secoundCount == 0) {
-      _secoundCount = 59;
-      _minutCount -= 1;
-    }
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromRGBO(68, 68, 68, 1),
@@ -230,8 +228,9 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                     enableButton = false;
                     pinController.clear();
                     // _timer!.cancel();
-                    _secoundCount = 0;
-                    _minutCount = 3;
+                    _secoundCount = 60;
+                    _minutCount = 2;
+                    codeSend = false;
                     showDialog(
                       barrierColor: Colors.black.withOpacity(.8),
                       context: context,
@@ -278,40 +277,116 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                     ),
                                     textAlign: TextAlign.left,
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 8),
-                                    alignment: Alignment.centerRight,
-                                    child: OutlinedButton(
-                                      onPressed: () {
-                                        _timer = Timer.periodic(
-                                          Duration(seconds: 1),
-                                          (timer) {
-                                            this._secoundCount -= 1;
-                                            setState(
-                                              () {},
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Text(
-                                        "YUBORISH",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color:
-                                              Colors.deepPurpleAccent.shade700,
-                                          letterSpacing: .5,
-                                        ),
-                                      ),
-                                      style: OutlinedButton.styleFrom(
-                                        side: BorderSide(
-                                          color: Colors.deepPurpleAccent,
-                                          width: 1,
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(6)),
-                                      ),
-                                    ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(),
+                                      codeSend
+                                          ? Container(
+                                              margin: EdgeInsets.only(top: 20),
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.timer_outlined,
+                                                    color: Colors
+                                                        .deepPurple.shade900,
+                                                  ),
+                                                  SizedBox(width: 8),
+                                                  Text(
+                                                    _minutCount > -1
+                                                        ? (_secoundCount > 9
+                                                            ? "0$_minutCount:$_secoundCount"
+                                                            : "0$_minutCount:0$_secoundCount")
+                                                        : '',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        letterSpacing: .6,
+                                                        color: Colors.deepPurple
+                                                            .shade900),
+                                                  )
+                                                ],
+                                              ),
+                                            )
+                                          : Container(
+                                              margin: EdgeInsets.only(top: 20),
+                                            ),
+                                      codeSend
+                                          ? Container(
+                                              margin: EdgeInsets.only(
+                                                  top: 20, bottom: 2),
+                                              padding: EdgeInsets.symmetric(
+                                                  horizontal: 24, vertical: 12),
+                                              decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Colors.black
+                                                        .withOpacity(.2),
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(6)),
+                                              child: Text(
+                                                "YUBORISH",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.black
+                                                      .withOpacity(.2),
+                                                  letterSpacing: .5,
+                                                ),
+                                              ),
+                                            )
+                                          : Container(
+                                              margin: EdgeInsets.only(top: 18),
+                                              child: OutlinedButton(
+                                                onPressed: () {
+                                                  codeSend = true;
+                                                  _timer = Timer.periodic(
+                                             
+                                                    Duration(seconds: 1),
+                                                    (timer) {
+                                                      this._secoundCount -= 1;
+                                                      setState(
+                                                        () {
+                                                          if (_secoundCount ==
+                                                              -1) {
+                                                            _secoundCount = 59;
+                                                            _minutCount -= 1;
+                                                            setState(() {});
+                                                          }
+                                                          if (_minutCount < 0) {
+                                                            codeSend = false;
+                                                            _secoundCount = 60;
+                                                            _minutCount = 2;
+                                                            _timer!.cancel();
+                                                          }
+                                                        },
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: Text(
+                                                  "YUBORISH",
+                                                  style: TextStyle(
+                                                    fontSize: 12,
+                                                    color: Colors
+                                                        .deepPurpleAccent
+                                                        .shade700,
+                                                    letterSpacing: .5,
+                                                  ),
+                                                ),
+                                                style: OutlinedButton.styleFrom(
+                                                  side: BorderSide(
+                                                    color:
+                                                        Colors.deepPurpleAccent,
+                                                    width: 1,
+                                                  ),
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              6)),
+                                                ),
+                                              ),
+                                            ),
+                                    ],
                                   ),
                                   Container(
                                     margin:
@@ -400,25 +475,14 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                               content: OutlinedButton.icon(
                                 onPressed: () {
                                   if (enableButton!) {
-                                    Get.to(ListImImeiFound());
+                                    _timer!.cancel();
+                                    Get.off(ListImImeiFound());
                                     Navigator.of(Get.overlayContext!,
                                             rootNavigator: true)
                                         .pop();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          "Ma'lumotlar saqlandi.",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.grey.shade200,
-                                          ),
-                                        ),
-                                        showCloseIcon: true,
-                                        closeIconColor: Colors.teal.shade800,
-                                        backgroundColor: Colors.teal.shade30,
-                                      ),
-                                    );
+                                    Get.snackbar(imei[index],
+                                        "Topilganlar ro'yxatiga qo'shildi.",
+                                        backgroundColor: Colors.green);
                                   }
                                 },
                                 icon: Icon(Icons.check_circle,
