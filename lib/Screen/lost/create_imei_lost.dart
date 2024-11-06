@@ -80,7 +80,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
                           style: TextStyle(
                             fontSize: 16,
                             fontStyle: FontStyle.italic,
-                            color: Colors.teal.shade400,
+                            color: Colors.teal.shade300,
                             letterSpacing: 1,
                             fontWeight: FontWeight.w500,
                           ),

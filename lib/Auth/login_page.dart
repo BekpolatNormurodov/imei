@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Text(
             "IMEI - 102",
             style: TextStyle(
-              color: Colors.grey.shade400,
+              color: Colors.grey.shade300,
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
             ),
@@ -143,7 +143,9 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton(
       onPressed: () async {
         if (passwordController.text == usersPassword) {
-          Get.offAll(Hive.box('oper-data').isEmpty ? CreateOperData() : SelectionPage());
+          Get.offAll(Hive.box('oper-data').isEmpty
+              ? CreateOperData()
+              : SelectionPage());
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
@@ -181,7 +183,8 @@ class _LoginPageState extends State<LoginPage> {
         //   setState(() {});
         // }
         else {
-          Get.snackbar('Faild...', "Parol xato", backgroundColor: Colors.red.withOpacity(.8));
+          Get.snackbar('Faild...', "Parol xato",
+              backgroundColor: Colors.red.withOpacity(.8));
         }
       },
       style: ElevatedButton.styleFrom(

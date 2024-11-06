@@ -8,27 +8,19 @@ class CreateOperData extends StatefulWidget {
 }
 
 class _CreateOperDataState extends State<CreateOperData> {
-  TextEditingController? imeiController;
-  TextEditingController? simController;
-  TextEditingController? modelController;
-  TextEditingController? colorController;
-  TextEditingController? shortInfoController;
+  String violat = '?';
+  String tuman = '?';
+  String unvon = '?';
+
   TextEditingController? fullnameController;
-  TextEditingController? numberController;
-  TextEditingController? jshshirController;
-  TextEditingController? shakl1Controller;
+  TextEditingController? telController;
+  TextEditingController? unvonController;
 
   @override
   void initState() {
-    imeiController = TextEditingController();
-    simController = TextEditingController();
-    modelController = TextEditingController();
-    colorController = TextEditingController();
-    shortInfoController = TextEditingController();
+    unvonController = TextEditingController();
+    telController = TextEditingController();
     fullnameController = TextEditingController();
-    numberController = TextEditingController();
-    jshshirController = TextEditingController();
-    shakl1Controller = TextEditingController();
     super.initState();
   }
 
@@ -41,128 +33,127 @@ class _CreateOperDataState extends State<CreateOperData> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(68, 68, 68, 1),
         title: Text(
-          "Ro'yxatdan o'tish",
+          "Ro'yxatdan o'tish".toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize: 18,
-            color: Colors.grey.shade200,
+            fontSize: 16,
+            color: Colors.grey.shade300,
             letterSpacing: 1.5,
           ),
         ),
         centerTitle: true,
       ),
-      body: Container(
-        width: Get.width,
-        height: Get.height,
-        padding: EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 30),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            owner(),
-            Container(
-              width: Get.width,
-              height: 48,
-              child: ElevatedButton.icon(
-                onPressed: () async {
-                  Get.off(ListImImeiLost());
-                  // Get.snackbar(
-                  //   'Successful',
-                  //   "Ma'lumotlari kiritildi !!!",
-                  //   backgroundColor: Colors.green.shade800,
-                  //   maxWidth: double.infinity,
-                  //   margin: EdgeInsets.symmetric(horizontal: 0, vertical: 0)
-                  // );
-        
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        "Ma'lumotlar saqlandi.",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey.shade200,
+      body: SingleChildScrollView(
+        child: Container(
+          width: Get.width,
+          height: Get.height - 84,
+          padding: EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              oper(),
+              Container(
+                width: Get.width,
+                height: 48,
+                child: ElevatedButton.icon(
+                  onPressed: () async {
+                    Get.off(SelectionPage());
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          "Ma'lumotlar saqlandi.",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade300,
+                          ),
                         ),
+                        showCloseIcon: true,
+                        closeIconColor: Colors.teal.shade800,
+                        backgroundColor: Colors.teal.shade300,
                       ),
-                      showCloseIcon: true,
-                      closeIconColor: Colors.teal.shade800,
-                      backgroundColor: Colors.teal.shade300,
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
                   ),
-                ),
-                label: Text(
-                  "SAQLASH",
-                  style: TextStyle(
-                    color: Colors.grey.shade200,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: .5,
+                  label: Text(
+                    "SAQLASH",
+                    style: TextStyle(
+                      color: Colors.grey.shade300,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: .5,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  owner() {
+  oper() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          ":",
-          style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
+          "F.I.SH:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
+        SizedBox(height: 2),
         Container(
           height: 46,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
-            borderRadius: BorderRadius.circular(6.r),
-          ),
           child: TextFormField(
             controller: fullnameController,
-            cursorColor: Colors.grey.shade200,
+            cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
-            keyboardType: TextInputType.name,
+            keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 15, color: Colors.grey.shade200),
+            style: TextStyle(fontSize: 15, color: Colors.grey.shade300),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
-                left: 10,
-                right: 10,
-                top: 10,
+                right: 12,
+                top: 8,
               ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.person,
-                size: 24,
-                color: Colors.grey.shade200,
+              prefixIcon: Container(
+                width: 50,
+                margin: EdgeInsets.only(right: 12),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(.1),
+                  border: Border(right: BorderSide(color: Colors.grey)),
+                ),
+                child: Icon(
+                  Icons.person,
+                  size: 24,
+                  color: Colors.grey.shade300,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
               ),
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 18),
         Text(
-          ":",
-          style: TextStyle(color: Colors.grey.shade200),
+          "Tel:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 15),
         ),
+        SizedBox(height: 2),
         Container(
           height: 46,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
-            borderRadius: BorderRadius.circular(6.r),
-          ),
+         
           child: TextFormField(
             inputFormatters: [
               TextInputMask(
@@ -171,108 +162,269 @@ class _CreateOperDataState extends State<CreateOperData> {
                 maxPlaceHolders: 9,
               )
             ],
-            controller: numberController,
-            cursorColor: Colors.grey.shade200,
+            controller: telController,
+            cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
+            textInputAction: TextInputAction.done,
+            style: TextStyle(fontSize: 15, color: Colors.grey.shade300),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
-                left: 4,
-                right: 10,
-                top: 10,
+                right: 8,
               ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.phone,
-                size: 24,
-                color: Colors.grey.shade200,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              prefixIcon: Container(
+                width: 50,
+                margin: EdgeInsets.only(right: 6),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(.1),
+                  border: Border(right: BorderSide(color: Colors.grey)),
+                ),
+                child: Icon(
+                  Icons.phone,
+                  size: 24,
+                  color: Colors.grey.shade300,
+                ),
               ),
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 18),
         Text(
-          ":",
-          style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
+          "Ish joyi:",
+          style: TextStyle(color: Colors.grey.shade400),
         ),
+        SizedBox(height: 2),
         Container(
+          width: Get.width,
           height: 46,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang.",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
             ),
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: TextFormField(
-            inputFormatters: [
-              TextInputMask(
-                mask: '\\ 99999999999999',
-                placeholder: '_ ',
-                maxPlaceHolders: 14,
-              )
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+            ),
+            items: [
+              viloyatIIB("IIV"),
+              viloyatIIB("Toshkent shahar"),
+              viloyatIIB("Toshkent viloyati"),
+              viloyatIIB("Sirdaryo viloyati"),
+              viloyatIIB("Jizzax viloyati"),
+              viloyatIIB("Samarqand viloyati"),
+              viloyatIIB("Farg'ona viloyati"),
+              viloyatIIB("Namangan viloyati"),
+              viloyatIIB("Andijon viloyati"),
+              viloyatIIB("Qashqadaryo  viloyati"),
+              viloyatIIB("Surxandaryo viloyati"),
+              viloyatIIB("Buxoro viloyati"),
+              viloyatIIB("Navoiy viloyati"),
+              viloyatIIB("Xorazm viloyati"),
+              viloyatIIB("Qoraqalpog'iston Res."),
             ],
-            controller: jshshirController,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(
-                left: 4,
-                right: 10,
-                top: 10,
-              ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.document_scanner,
-                size: 22,
-                color: Colors.grey.shade200,
-              ),
-            ),
+            onChanged: (e) {
+              violat = e!;
+              setState(() {});
+            },
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 18),
         Text(
-          ":",
-          style: TextStyle(color: Colors.grey.shade200),
+          "Boshqarma",
+          style: TextStyle(color: Colors.grey.shade400),
         ),
+        SizedBox(height: 2),
+        Container(
+          width: Get.width,
+          height: 46,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang.",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+            ),
+            items: [
+              tumanIIB("Navoiy viloyati IIB"),
+              tumanIIB("Navoiy shahar IIB"),
+              tumanIIB("Karmana tumani IIB"),
+              tumanIIB("Navbahor tumani IIB"),
+              tumanIIB("Konimex tumani IIB"),
+              tumanIIB("Qiziltepa tumani IIB"),
+              tumanIIB("Xatirchi tumani IIB"),
+              tumanIIB("Zarafshon shahar IIB"),
+              tumanIIB("Uchquduq tumani IIB"),
+              tumanIIB("Nurota tumani IIB"),
+              tumanIIB("Tomdi tumani IIB"),
+              tumanIIB("G'azg'on tumani IIB"),
+            ],
+            onChanged: (e) {
+              tuman = e!;
+              setState(() {});
+            },
+          ),
+        ),
+        SizedBox(height: 18),
+        Text(
+          "Lavozim:",
+          style: TextStyle(color: Colors.grey.shade400),
+        ),
+        SizedBox(height: 2),
         Container(
           height: 46,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
-            borderRadius: BorderRadius.circular(6.r),
-          ),
           child: TextFormField(
-            controller: shakl1Controller,
-            cursorColor: Colors.grey.shade200,
+            controller: unvonController,
+            cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.done,
             style: TextStyle(
               fontSize: 14,
-              color: Colors.grey.shade200,
+              color: Colors.grey.shade300,
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 left: 12,
-                right: 10,
-                top: 10,
+                right: 8,
+                top: 8,
               ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.discount,
-                size: 22,
-                color: Colors.grey.shade200,
+               focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              prefixIcon: Container(
+                width: 50,
+                margin: EdgeInsets.only(right: 12),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(.1),
+                  border: Border(right: BorderSide(color: Colors.grey)),
+                ),
+                child: Icon(
+                  Icons.workspace_premium_outlined,
+                  size: 24,
+                  color: Colors.grey.shade300,
+                ),
               ),
             ),
+          ),
+        ),
+        SizedBox(height: 16),
+        Text(
+          "Unvon:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+        ),
+        SizedBox(height: 2),
+        Container(
+          width: Get.width,
+          height: 46,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang.",
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey,
+              ),
+            ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+            ),
+            items: [
+              unvonIIB("Safdor"),
+              unvonIIB("Kichik serjant"),
+              unvonIIB("Serjant"),
+              unvonIIB("Katta serjant"),
+              unvonIIB("Leytenant"),
+              unvonIIB("Katta leytenant"),
+              unvonIIB("Kapitan"),
+              unvonIIB("Mayor"),
+              unvonIIB("Podpolkovnik"),
+              unvonIIB("Polkovnik"),
+            ],
+            onChanged: (e) {
+              violat = e!;
+              setState(() {});
+            },
           ),
         ),
       ],
     );
   }
+
+  DropdownMenuItem viloyatIIB(viloyat) => DropdownMenuItem(
+        child: Text(
+          viloyat.toUpperCase(),
+          style: TextStyle(fontSize: 12.8, color: Colors.grey.shade300),
+        ),
+        value: viloyat,
+        onTap: () {},
+      );
+  DropdownMenuItem tumanIIB(tuman) => DropdownMenuItem(
+        child: Text(
+          tuman.toUpperCase(),
+          style: TextStyle(fontSize: 12.8, color: Colors.grey.shade300),
+        ),
+        value: tuman,
+        onTap: () {},
+      );
+
+  DropdownMenuItem unvonIIB(unvon) => DropdownMenuItem(
+        child: Text(
+          unvon.toUpperCase(),
+          style: TextStyle(fontSize: 12.8, color: Colors.grey.shade300),
+        ),
+        value: unvon,
+        onTap: () {},
+      );
 }

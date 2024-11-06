@@ -79,7 +79,7 @@ class _SelectionPageState extends State<SelectionPage> {
           child: Text(
             "IMEI - 102",
             style: TextStyle(
-              color: Colors.grey.shade400,
+              color: Colors.grey.shade300,
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
             ),
