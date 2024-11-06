@@ -16,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   bool enableEmail = false;
   bool enablePassword = false;
   bool showPassword = true;
-  // bool hasToken = false;
+  bool hasToken = false;
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +143,7 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton(
       onPressed: () async {
         if (passwordController.text == usersPassword) {
-          // Get.offAll(Hive.box('data').isEmpty ? CreateSettings() : NavigatorBar());
-          Get.off(SelectionPage());
+          Get.offAll(Hive.box('oper-data').isEmpty ? CreateOperData() : SelectionPage());
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(

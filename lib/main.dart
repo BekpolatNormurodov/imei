@@ -1,8 +1,8 @@
 import 'package:imei/library.dart';
 
 main(List<String> args) async {
-  // await Hive.initFlutter();
-  // await Hive.openBox('data');
+  await Hive.initFlutter();
+  await Hive.openBox('oper-data');
   runApp(
     // MultiProvider(
     //   providers: [
@@ -45,6 +45,6 @@ class _MyAppState extends State<MyApp> {
           ),
         );
       },
-    );
+    );  
   }
 }
