@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: () async {
         if (passwordController.text == usersPassword) {
           Get.offAll(Hive.box('oper-data').isEmpty
-              ? CreateOperData()
+              ? AccountCreate()
               : SelectionPage());
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

@@ -24,17 +24,23 @@ class _SelectionPageState extends State<SelectionPage> {
                 Row(
                   children: [
                     _box(
-                        "create-imei.png",
-                        "YO'QOLGAN",
-                        FractionallySizedBox(
-                          widthFactor: 1,
-                          child: ListImImeiLost(),
-                        ),
-                        86.0,
-                        0.0),
+                      "create-imei.png",
+                      "YO'QOLGANLAR",
+                      FractionallySizedBox(
+                        widthFactor: 1,
+                        child: ListImImeiLost(),
+                      ),
+                      86.0,
+                      0.0,
+                    ),
                     SizedBox(width: 14),
-                    _box("check-imei.png", "TOPILGAN", ListImImeiFound(), 60.0,
-                        12.0),
+                    _box(
+                      "check-imei.png",
+                      "TOPILGANLAR",
+                      ListImImeiFound(),
+                      60.0,
+                      12.0,
+                    ),
                   ],
                 ),
                 SizedBox(height: 14),
@@ -43,8 +49,7 @@ class _SelectionPageState extends State<SelectionPage> {
                     _box("search.png", "TEKSHIRISH", ListImImeiLost(), 56.0,
                         12.0),
                     SizedBox(width: 14),
-                    _box("settings.png", "SOZLAMALAR", CreateImeiLost(), 50.0,
-                        16.0),
+                    _box("account.png", "ACCOUNT", AccountPage(), 60.0, 16.0),
                   ],
                 ),
               ],
@@ -112,7 +117,7 @@ class _SelectionPageState extends State<SelectionPage> {
                 title,
                 style: TextStyle(
                   color: Colors.grey.shade200,
-                  fontSize: 15,
+                  fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
               ),

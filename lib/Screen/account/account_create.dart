@@ -1,13 +1,13 @@
 import 'package:imei/library.dart';
 
-class CreateOperData extends StatefulWidget {
-  const CreateOperData({Key? key}) : super(key: key);
+class AccountCreate extends StatefulWidget {
+  const AccountCreate({Key? key}) : super(key: key);
 
   @override
-  State<CreateOperData> createState() => _CreateOperDataState();
+  State<AccountCreate> createState() => _AccountCreateState();
 }
 
-class _CreateOperDataState extends State<CreateOperData> {
+class _AccountCreateState extends State<AccountCreate> {
   String violat = '?';
   String tuman = '?';
   String unvon = '?';
@@ -114,8 +114,9 @@ class _CreateOperDataState extends State<CreateOperData> {
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.text,
+            textCapitalization: TextCapitalization.characters,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 15, color: Colors.grey.shade300),
+            style: TextStyle(fontSize: 12, color: Colors.grey.shade300),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 right: 12,
