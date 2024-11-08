@@ -116,7 +116,7 @@ class _AccountCreateState extends State<AccountCreate> {
             keyboardType: TextInputType.text,
             textCapitalization: TextCapitalization.characters,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 12, color: Colors.grey.shade300),
+            style: TextStyle(fontSize: 13, color: Colors.grey.shade300),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 right: 12,
@@ -315,9 +315,10 @@ class _AccountCreateState extends State<AccountCreate> {
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.text,
+            textCapitalization: TextCapitalization.characters,
             textInputAction: TextInputAction.done,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 13,
               color: Colors.grey.shade300,
             ),
             decoration: InputDecoration(

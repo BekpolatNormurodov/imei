@@ -18,9 +18,10 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   void initState() {
-    unvonController = TextEditingController(text: "MAYOR");
-    fullnameController = TextEditingController(text: "Normurodov Bekpolat Ergash o'g'li");
-    telController = TextEditingController();
+    fullnameController =
+        TextEditingController(text: "NORMURODOV BEKPOLAT O'G'LI");
+    telController = TextEditingController(text: '(94) 679-22-20');
+    unvonController = TextEditingController(text: "KATTA MUTAXASSIS");
     super.initState();
   }
 
@@ -33,7 +34,7 @@ class _AccountPageState extends State<AccountPage> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(68, 68, 68, 1),
         leading: IconButton(
-          onPressed: () {},
+          onPressed: ()=> Get.back(),
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
         title: Text(
@@ -46,12 +47,26 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ),
         centerTitle: true,
+        actions: [
+          Container(
+            margin: EdgeInsets.only(left: 36, right: 18),
+            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.teal, width: 1.4),
+              borderRadius: BorderRadius.circular(3),
+            ),
+            child: Text(
+              "A-123456",
+              style: TextStyle(color: Colors.grey.shade300, fontSize: 13, fontWeight: FontWeight.w600, letterSpacing: .5),
+            ),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
           width: Get.width,
           height: Get.height - 84,
-          padding: EdgeInsets.only(left: 18, right: 18, top: 10, bottom: 24),
+          padding: EdgeInsets.only(left: 18, right: 18, top: 12, bottom: 20), 
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -119,7 +134,8 @@ class _AccountPageState extends State<AccountPage> {
             cursorWidth: 1,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 15, color: Colors.grey.shade300),
+            style: TextStyle(
+                fontSize: 14, color: Colors.grey.shade300, wordSpacing: 2),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 right: 12,
@@ -127,7 +143,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               prefixIcon: Container(
                 width: 50,
-                margin: EdgeInsets.only(right: 12),
+                margin: EdgeInsets.only(right: 14),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(.1),
                   border: Border(right: BorderSide(color: Colors.grey)),
@@ -185,7 +201,7 @@ class _AccountPageState extends State<AccountPage> {
               ),
               prefixIcon: Container(
                 width: 50,
-                margin: EdgeInsets.only(right: 6),
+                margin: EdgeInsets.only(right: 8),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(.1),
                   border: Border(right: BorderSide(color: Colors.grey)),
@@ -211,10 +227,10 @@ class _AccountPageState extends State<AccountPage> {
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
-              "Tanlang.",
+              "NAVOIY VILOYATI",
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey,
+                color: Colors.grey.shade300,
               ),
             ),
             iconEnabledColor: Colors.grey.shade400,
@@ -265,10 +281,10 @@ class _AccountPageState extends State<AccountPage> {
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
-              "Tanlang.",
+              "NAVOIY VILOYATI IIB",
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey,
+                color: Colors.grey.shade300,
               ),
             ),
             iconEnabledColor: Colors.grey.shade400,
@@ -321,6 +337,7 @@ class _AccountPageState extends State<AccountPage> {
             style: TextStyle(
               fontSize: 14,
               color: Colors.grey.shade300,
+              fontWeight: FontWeight.w500,
             ),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
@@ -364,10 +381,11 @@ class _AccountPageState extends State<AccountPage> {
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
-              "Tanlang.",
+              "LEYTENANT",
               style: TextStyle(
                 fontSize: 14,
-                color: Colors.grey,
+                color: Colors.grey.shade300,
+                letterSpacing: .5,
               ),
             ),
             iconEnabledColor: Colors.grey.shade400,
@@ -408,7 +426,7 @@ class _AccountPageState extends State<AccountPage> {
   DropdownMenuItem viloyatIIB(viloyat) => DropdownMenuItem(
         child: Text(
           viloyat.toUpperCase(),
-          style: TextStyle(fontSize: 12.8, color: Colors.grey.shade300),
+          style: TextStyle(fontSize: 13, color: Colors.grey.shade300),
         ),
         value: viloyat,
         onTap: () {},
@@ -416,7 +434,7 @@ class _AccountPageState extends State<AccountPage> {
   DropdownMenuItem tumanIIB(tuman) => DropdownMenuItem(
         child: Text(
           tuman.toUpperCase(),
-          style: TextStyle(fontSize: 12.8, color: Colors.grey.shade300),
+          style: TextStyle(fontSize: 13, color: Colors.grey.shade300),
         ),
         value: tuman,
         onTap: () {},
@@ -425,7 +443,7 @@ class _AccountPageState extends State<AccountPage> {
   DropdownMenuItem unvonIIB(unvon) => DropdownMenuItem(
         child: Text(
           unvon.toUpperCase(),
-          style: TextStyle(fontSize: 12.8, color: Colors.grey.shade300),
+          style: TextStyle(fontSize: 13, color: Colors.grey.shade300),
         ),
         value: unvon,
         onTap: () {},
