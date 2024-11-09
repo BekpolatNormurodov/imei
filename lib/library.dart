@@ -28,6 +28,8 @@ export 'package:imei/Screen/account/account_create.dart';
 export 'package:imei/Screen/account/account_page.dart';
 export 'package:imei/Screen/check/imei_input.dart';
 export 'package:imei/Screen/check/imei_output.dart';
+export 'package:imei/Screen/check/imei_edit.dart';
+
 
 
 

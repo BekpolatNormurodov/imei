@@ -542,7 +542,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                         Card(
                           margin:
                               EdgeInsets.symmetric(horizontal: 0, vertical: 6),
-                          color: Colors.grey.shade200,
+                          color: Colors.grey.shade300,
                           child: ListTile(
                             leading: Image.asset("assets/icons/phone.png",
                                 width: 36),
@@ -551,7 +551,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                               child: Text(
                                 imei[index],
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 15,
                                   color: Colors.black,
                                   letterSpacing: 1,
                                   fontWeight: FontWeight.w500,

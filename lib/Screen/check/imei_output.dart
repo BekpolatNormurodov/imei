@@ -96,7 +96,7 @@ class _ImeiOutputState extends State<ImeiOutput> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: ()=>Get.off(ImeiEdit()),
             icon: Container(
               padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
