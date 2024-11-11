@@ -31,7 +31,6 @@ class _ImeiInputState extends State<ImeiInput> {
               Container(),
               Container(
                 margin: EdgeInsets.only(top: 160, bottom: 60),
-                height: 48,
                 child: TextFormField(
                   controller: imeiController,
                   cursorColor: Colors.grey.shade200,
@@ -50,9 +49,8 @@ class _ImeiInputState extends State<ImeiInput> {
                   decoration: InputDecoration(
                     label: Text(" IMEI", style: TextStyle(color: Colors.grey.shade400),),
                     contentPadding: EdgeInsets.only(
-                      left: 10,
+                      left: 8,
                       right: 10,
-                      top: 8,
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),

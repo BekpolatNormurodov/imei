@@ -335,7 +335,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -360,7 +360,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 10,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -377,7 +377,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -402,7 +402,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -419,7 +419,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -437,7 +437,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -454,7 +454,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
               border: Border.all(color: Colors.grey.shade200),
               borderRadius: BorderRadius.circular(6.r)),
@@ -469,7 +469,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -486,7 +486,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -504,7 +504,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -528,7 +528,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -546,7 +546,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 10,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -563,7 +563,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -588,7 +588,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -605,7 +605,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -630,7 +630,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(
@@ -647,7 +647,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
           style: TextStyle(color: Colors.grey.shade200),
         ),
         Container(
-          height: 46,
+          height: 48,
           decoration: BoxDecoration(
             border: Border.all(
               color: Colors.grey.shade200,
@@ -668,7 +668,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
-                top: 10,
+                top: 12,
               ),
               border: InputBorder.none,
               suffixIcon: Icon(

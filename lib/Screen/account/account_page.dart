@@ -41,7 +41,7 @@ class _AccountPageState extends State<AccountPage> {
           "Account".toUpperCase(),
           style: TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize: 16,
+            fontSize: 14,
             color: Colors.grey.shade300,
             letterSpacing: 1.5,
           ),
@@ -49,7 +49,7 @@ class _AccountPageState extends State<AccountPage> {
         centerTitle: true,
         actions: [
           Container(
-            margin: EdgeInsets.only(left: 36, right: 18),
+            margin: EdgeInsets.only(left: 36, right: 14),
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: BoxDecoration(
               border: Border.all(color: Colors.teal, width: 1.4),
@@ -66,7 +66,7 @@ class _AccountPageState extends State<AccountPage> {
         child: Container(
           width: Get.width,
           height: Get.height - 84,
-          padding: EdgeInsets.only(left: 18, right: 18, top: 12, bottom: 20), 
+          padding: EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 24), 
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -127,7 +127,6 @@ class _AccountPageState extends State<AccountPage> {
         ),
         SizedBox(height: 2),
         Container(
-          height: 46,
           child: TextFormField(
             controller: fullnameController,
             cursorColor: Colors.grey.shade300,
@@ -139,7 +138,6 @@ class _AccountPageState extends State<AccountPage> {
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 right: 12,
-                top: 8,
               ),
               prefixIcon: Container(
                 width: 50,
@@ -165,14 +163,13 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
         ),
-        SizedBox(height: 18),
+        SizedBox(height: 14),
         Text(
           "Tel:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 15),
         ),
         SizedBox(height: 2),
         Container(
-          height: 46,
           child: TextFormField(
             inputFormatters: [
               TextInputMask(
@@ -215,7 +212,7 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
         ),
-        SizedBox(height: 18),
+        SizedBox(height: 14),
         Text(
           "Ish joyi:",
           style: TextStyle(color: Colors.grey.shade400),
@@ -223,7 +220,6 @@ class _AccountPageState extends State<AccountPage> {
         SizedBox(height: 2),
         Container(
           width: Get.width,
-          height: 46,
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
@@ -236,7 +232,7 @@ class _AccountPageState extends State<AccountPage> {
             iconEnabledColor: Colors.grey.shade400,
             dropdownColor: Color.fromRGBO(80, 80, 80, 1),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey.shade300),
@@ -269,7 +265,7 @@ class _AccountPageState extends State<AccountPage> {
             },
           ),
         ),
-        SizedBox(height: 18),
+        SizedBox(height: 14),
         Text(
           "Boshqarma",
           style: TextStyle(color: Colors.grey.shade400),
@@ -277,7 +273,6 @@ class _AccountPageState extends State<AccountPage> {
         SizedBox(height: 2),
         Container(
           width: Get.width,
-          height: 46,
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
@@ -290,7 +285,7 @@ class _AccountPageState extends State<AccountPage> {
             iconEnabledColor: Colors.grey.shade400,
             dropdownColor: Color.fromRGBO(80, 80, 80, 1),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey.shade300),
@@ -320,14 +315,13 @@ class _AccountPageState extends State<AccountPage> {
             },
           ),
         ),
-        SizedBox(height: 18),
+        SizedBox(height: 14),
         Text(
           "Lavozim:",
           style: TextStyle(color: Colors.grey.shade400),
         ),
         SizedBox(height: 2),
         Container(
-          height: 46,
           child: TextFormField(
             controller: unvonController,
             cursorColor: Colors.grey.shade300,
@@ -343,7 +337,6 @@ class _AccountPageState extends State<AccountPage> {
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 8,
-                top: 8,
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
@@ -369,7 +362,7 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
         ),
-        SizedBox(height: 16),
+        SizedBox(height: 14),
         Text(
           "Unvon:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
@@ -377,7 +370,6 @@ class _AccountPageState extends State<AccountPage> {
         SizedBox(height: 2),
         Container(
           width: Get.width,
-          height: 46,
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
@@ -391,7 +383,7 @@ class _AccountPageState extends State<AccountPage> {
             iconEnabledColor: Colors.grey.shade400,
             dropdownColor: Color.fromRGBO(80, 80, 80, 1),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 16, right: 16),
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey.shade300),

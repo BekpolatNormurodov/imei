@@ -542,7 +542,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                         Card(
                           margin:
                               EdgeInsets.symmetric(horizontal: 0, vertical: 6),
-                          color: Colors.grey.shade300,
+                          color: Colors.grey.shade200,
                           child: ListTile(
                             leading: Image.asset("assets/icons/phone.png",
                                 width: 36),

@@ -8,20 +8,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  // String adminPassword = 'bek1995admin';
-  String username = 'kali';
-  String usersPassword = '1234';
+  TextEditingController emailController = TextEditingController();
+  TextEditingController jetonController = TextEditingController();
+  String email = 'kali';
+  String jeton = 'A-123456';
   bool enableEmail = false;
-  bool enablePassword = false;
-  bool showPassword = true;
+  bool enableJeton = false;
+  bool showJeton = true;
   bool hasToken = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(39, 39, 39, 1),
+      backgroundColor: Color.fromRGBO(68, 68, 68, 1),
       body: _page(),
     );
   }
@@ -38,9 +37,9 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               _icon(),
               SizedBox(height: 100),
-              _inputField("E-mail", usernameController),
+              _inputField("E-mail", emailController),
               SizedBox(height: 20),
-              _inputField("Password", passwordController),
+              _inputField("Jeton raqam", jetonController),
               SizedBox(height: 40),
               _loginBtn(),
             ],
@@ -98,16 +97,27 @@ class _LoginPageState extends State<LoginPage> {
       onChanged: (e) {
         setState(() {
           if (e.isNotEmpty)
-            enablePassword = true;
+            enableJeton = true;
           else
-            enablePassword = false;
+            enableJeton = false;
         });
       },
-      style: TextStyle(
-          color: Colors.grey.shade200,
-          letterSpacing: label == "Password" ? 2 : 1),
+      cursorColor: Colors.deepPurpleAccent,
+      style: TextStyle(color: Colors.grey.shade200),
       controller: controller,
       textInputAction: TextInputAction.next,
+      textCapitalization: label == "Jeton raqam"
+          ? TextCapitalization.characters
+          : TextCapitalization.none,
+      inputFormatters: label == "Jeton raqam"
+          ? [
+              TextInputMask(
+                mask: 'A-999999',
+                placeholder: '_ ',
+                maxPlaceHolders: 9,
+              )
+            ]
+          : [],
       decoration: InputDecoration(
         label: Text(
           label,
@@ -115,41 +125,26 @@ class _LoginPageState extends State<LoginPage> {
         ),
         enabledBorder: border,
         focusedBorder: focusedBorder,
-        suffixIcon: label == "Password"
-            ? IconButton(
-                onPressed: () {
-                  setState(() {
-                    showPassword = !showPassword;
-                  });
-                },
-                icon: Icon(
-                  showPassword ? Icons.remove_red_eye : Icons.visibility_off,
-                  color: Colors.grey,
-                  size: 24,
-                ),
-              )
-            : Icon(
-                Icons.mail,
-                size: 24,
-                color: Colors.grey,
-              ),
+        // suffixIcon: label == "Jeton raqam" ? Icon(
+        //   Icons.mail,
+        //   size: 24,
+        //   color: Colors.grey,
+        // ) : Image.asset("assets/icons/jeton.png"),
       ),
-      obscureText: label == "Password" ? showPassword : false,
-      obscuringCharacter: '*',
     );
   }
 
   Widget _loginBtn() {
     return ElevatedButton(
       onPressed: () async {
-        if (passwordController.text == usersPassword) {
+        if (jetonController.text == jeton) {
           Get.offAll(Hive.box('oper-data').isEmpty
               ? AccountCreate()
               : SelectionPage());
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text(
-                "Parol to'g'ri",
+                "To'g'ri",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
@@ -162,10 +157,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
           );
           // var response = await WorkersPost().workersPost(
-          //   username: usernameController.text,
+          //   email: emailController.text,
           //   admin: false.toString(),
           // );
-          // Constant.username = response['username'];
+          // Constant.email = response['email'];
           // Constant.admin = false;
           // setState(() {});
         }
@@ -175,15 +170,15 @@ class _LoginPageState extends State<LoginPage> {
         //       backgroundColor: Colors.green.withOpacity(.8));
 
         //   var response = await WorkersPost().workersPost(
-        //     username: usernameController.text,
+        //     email: emailController.text,
         //     admin: true.toString(),
         //   );
-        //   Constant.username = response['username'];
+        //   Constant.email = response['email'];`
         //   Constant.admin = true;
         //   setState(() {});
         // }
         else {
-          Get.snackbar('Faild...', "Parol xato",
+          Get.snackbar('Faild...', "Jeton raqami xato",
               backgroundColor: Colors.red.withOpacity(.8));
         }
       },
@@ -192,8 +187,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(10),
         ),
         backgroundColor:
-            enablePassword ? Colors.teal : Colors.white.withOpacity(.1),
-        foregroundColor: Colors.grey,
+            enableJeton ? Colors.teal : Colors.white.withOpacity(.2),
         padding: EdgeInsets.only(top: 16, bottom: 12),
       ),
       child: SizedBox(
@@ -203,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18,
-            color: enablePassword ? Colors.grey.shade200 : Colors.grey.shade700,
+            color: enableJeton ? Colors.grey.shade200 : Colors.grey,
             fontWeight: FontWeight.w700,
             letterSpacing: 1,
           ),
