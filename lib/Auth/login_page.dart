@@ -125,11 +125,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
         enabledBorder: border,
         focusedBorder: focusedBorder,
-        // suffixIcon: label == "Jeton raqam" ? Icon(
-        //   Icons.mail,
-        //   size: 24,
-        //   color: Colors.grey,
-        // ) : Image.asset("assets/icons/jeton.png"),
+        suffixIcon: label != "Jeton raqam" ? Icon(
+          Icons.mail,
+          size: 24,
+          color: Colors.grey,
+        ) : Image.asset("assets/icons/jeton.png", width: 10,),
       ),
     );
   }
