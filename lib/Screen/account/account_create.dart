@@ -8,6 +8,8 @@ class AccountCreate extends StatefulWidget {
 }
 
 class _AccountCreateState extends State<AccountCreate> {
+  final controller = InputController();
+
   String violat = '?';
   String tuman = '?';
   String unvon = '?';
@@ -58,6 +60,20 @@ class _AccountCreateState extends State<AccountCreate> {
                 child: ElevatedButton.icon(
                   onPressed: () async {
                     Get.off(SelectionPage());
+                    screenLockCreate(
+                      context: context,
+                      inputController: controller,
+                      onConfirmed: (matchedText) {
+                        print(matchedText);
+                        Get.back();
+                      },
+                      footer: TextButton(
+                        onPressed: () {
+                          controller.unsetConfirmed();
+                        },
+                        child: const Text('Qayta kiritish'),
+                      ),
+                    );
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(
@@ -319,7 +335,7 @@ class _AccountCreateState extends State<AccountCreate> {
                 left: 12,
                 right: 8,
               ),
-               focusedBorder: OutlineInputBorder(
+              focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey.shade300),
               ),

@@ -8,6 +8,7 @@ class SelectionPage extends StatefulWidget {
 }
 
 class _SelectionPageState extends State<SelectionPage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +47,13 @@ class _SelectionPageState extends State<SelectionPage> {
                 SizedBox(height: 14),
                 Row(
                   children: [
-                    _box("search.png", "TEKSHIRISH", ImeiInput(), 56.0, 12.0,),
+                    _box(
+                      "search.png",
+                      "TEKSHIRISH",
+                      ImeiInput(),
+                      56.0,
+                      12.0,
+                    ),
                     SizedBox(width: 14),
                     _box("account.png", "ACCOUNT", AccountPage(), 60.0, 16.0),
                   ],

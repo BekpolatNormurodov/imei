@@ -12,9 +12,11 @@ export 'dart:async';
 export 'package:flutter/foundation.dart';
 export 'package:flutter/services.dart';
 export 'package:pinput/pinput.dart';
+export 'package:flutter_screen_lock/flutter_screen_lock.dart';
+export 'package:swipeable_button_view/swipeable_button_view.dart';
 
 // main
-export 'package:imei/intro_page.dart';
+export 'package:imei/Auth/lock_page.dart';
 
 // Screen
 export 'package:hive_flutter/hive_flutter.dart';
@@ -29,6 +31,7 @@ export 'package:imei/Screen/account/account_page.dart';
 export 'package:imei/Screen/check/imei_input.dart';
 export 'package:imei/Screen/check/imei_output.dart';
 export 'package:imei/Screen/check/imei_edit.dart';
+
 
 
 

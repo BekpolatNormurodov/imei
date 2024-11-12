@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
             // theme: ThemeData(
             //   textTheme: GoogleFonts.slabo13pxTextTheme(),
             // ),
-            home: IntroPage(),
+            home: LockPage(),
           ),
         );
       },
