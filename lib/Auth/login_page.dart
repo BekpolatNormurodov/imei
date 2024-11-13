@@ -17,15 +17,70 @@ class _LoginPageState extends State<LoginPage> {
   bool showJeton = true;
   bool hasToken = false;
 
+// Gmail code
+  late final SmsRetriever smsRetriever;
+  late final TextEditingController pinController;
+  late final FocusNode focusNode;
+  late final GlobalKey<FormState> formKey;
+
+  bool? enableButton;
+  Timer? _timer;
+  int _secoundCount = 60;
+  int _minutCount = 2;
+  bool codeSend = false;
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(68, 68, 68, 1),
-      body: _page(),
+  void initState() {
+    super.initState();
+    if (kIsWeb) {
+      BrowserContextMenu.disableContextMenu();
+    }
+    formKey = GlobalKey<FormState>();
+    pinController = TextEditingController();
+    focusNode = FocusNode();
+
+    /// In case you need an SMS autofill feature
+    smsRetriever = SmsRetrieverImpl(
+      SmartAuth(),
     );
   }
 
-  Widget _page() {
+  @override
+  void dispose() {
+    pinController.dispose();
+    focusNode.dispose();
+
+    _timer!.cancel();
+    setState(() {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Color focusedBorderColor = Colors.deepPurpleAccent.shade700;
+    const fillColor = Color.fromRGBO(243, 246, 249, 0);
+    Color borderColor = Colors.deepPurpleAccent.withOpacity(.4);
+
+    final defaultPinTheme = PinTheme(
+      width: 34,
+      height: 34,
+      textStyle: const TextStyle(
+        fontSize: 16,
+        color: Color.fromARGB(255, 24, 10, 63),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: borderColor),
+      ),
+    );
+
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(68, 68, 68, 1),
+      body: _page(defaultPinTheme, focusedBorderColor, fillColor),
+    );
+  }
+
+  Widget _page(defaultPinTheme, focusedBorderColor, fillColor) {
     return Container(
       alignment: Alignment.bottomCenter,
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 60),
@@ -41,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 20),
               _inputField("Jeton raqam", jetonController),
               SizedBox(height: 40),
-              _loginBtn(),
+              _loginBtn(defaultPinTheme, focusedBorderColor, fillColor),
             ],
           ),
         ),
@@ -125,62 +180,281 @@ class _LoginPageState extends State<LoginPage> {
         ),
         enabledBorder: border,
         focusedBorder: focusedBorder,
-        suffixIcon: label != "Jeton raqam" ? Icon(
-          Icons.mail,
-          size: 26,
-          color: Colors.grey,
-        ) : Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Image.asset("assets/icons/jeton.png", width: 20),
-        ),
+        suffixIcon: label != "Jeton raqam"
+            ? Icon(
+                Icons.mail,
+                size: 26,
+                color: Colors.grey,
+              )
+            : Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: Image.asset("assets/icons/jeton.png", width: 20),
+              ),
       ),
     );
   }
 
-  Widget _loginBtn() {
+  Widget _loginBtn(defaultPinTheme, focusedBorderColor, fillColor) {
     return ElevatedButton(
       onPressed: () async {
-        if (jetonController.text == jeton) {
-          Get.offAll(Hive.box('oper-data').isEmpty
-              ? AccountCreate()
-              : SelectionPage());
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                "To'g'ri",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.grey.shade200,
-                ),
-              ),
-              showCloseIcon: true,
-              closeIconColor: Colors.teal.shade800,
-              backgroundColor: Colors.teal.shade300,
-            ),
+        if (emailController.text == email) {
+          enableButton = false;
+          pinController.clear();
+          _secoundCount = 60;
+          _minutCount = 2;
+          codeSend = false;
+          showDialog(
+            barrierColor: Colors.black.withOpacity(.8),
+            context: context,
+            builder: (
+              context,
+            ) {
+              return StatefulBuilder(
+                builder: (context, StateSetter setState) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                    scrollable: true,
+                    elevation: 10,
+                    iconPadding: EdgeInsets.zero,
+                    icon: Container(
+                      height: 80,
+                      margin: EdgeInsets.only(top: 12, bottom: 10),
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.vertical(top: Radius.circular(10))),
+                      child: Image.asset("assets/icons/check-account.png"),
+                    ),
+                    titlePadding:
+                        EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                    title: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '* Gmailga yuborilgan kodni kiriting.',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black.withOpacity(.6),
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          "bekpolatdev1995@gmail.com",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.left,
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 50),
+                          alignment: Alignment.center,
+                          child: Form(
+                            key: formKey,
+                            child: Directionality(
+                              textDirection: TextDirection.ltr,
+                              child: Pinput(
+                                length: 6,
+                                smsRetriever: smsRetriever,
+                                controller: pinController,
+                                focusNode: focusNode,
+                                defaultPinTheme: defaultPinTheme,
+                                separatorBuilder: (index) =>
+                                    const SizedBox(width: 8),
+                                validator: (value) {
+                                  enableButton =
+                                      value! == '222222' ? true : false;
+                                  setState(() {});
+                                  print(enableButton);
+                                  return value == '222222' ? null : 'Kod xato!';
+                                },
+                                hapticFeedbackType:
+                                    HapticFeedbackType.lightImpact,
+                                onCompleted: (pin) {
+                                  debugPrint('onCompleted: $pin');
+                                },
+                                onChanged: (value) {
+                                  debugPrint('onChanged: $value');
+                                },
+                                cursor: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.only(bottom: 9),
+                                      width: 16,
+                                      height: 1,
+                                      color: focusedBorderColor,
+                                    ),
+                                  ],
+                                ),
+                                focusedPinTheme: defaultPinTheme.copyWith(
+                                  decoration:
+                                      defaultPinTheme.decoration!.copyWith(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        color: focusedBorderColor, width: .8),
+                                  ),
+                                ),
+                                submittedPinTheme: defaultPinTheme.copyWith(
+                                  decoration:
+                                      defaultPinTheme.decoration!.copyWith(
+                                    color: fillColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border:
+                                        Border.all(color: focusedBorderColor),
+                                  ),
+                                ),
+                                errorPinTheme: defaultPinTheme.copyBorderWith(
+                                  border: Border.all(color: Colors.redAccent),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: Get.width,
+                          height: 60,
+                          alignment: Alignment.center,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              codeSend
+                                  ? Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Icon(
+                                          Icons.timer_outlined,
+                                          color: Colors.deepPurple.shade900,
+                                          size: 20,
+                                        ),
+                                        SizedBox(width: 8),
+                                        Text(
+                                          _minutCount > -1
+                                              ? (_secoundCount > 9
+                                                  ? "0$_minutCount:$_secoundCount"
+                                                  : "0$_minutCount:0$_secoundCount")
+                                              : '',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            letterSpacing: .6,
+                                            color: Colors.deepPurple.shade900,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : Container(),
+                              codeSend
+                                  ? Container()
+                                  : TextButton.icon(
+                                      onPressed: () {
+                                        codeSend = true;
+                                        _timer = Timer.periodic(
+                                          Duration(seconds: 1),
+                                          (timer) {
+                                            this._secoundCount -= 1;
+                                            setState(
+                                              () {
+                                                if (_secoundCount == -1) {
+                                                  _secoundCount = 59;
+                                                  _minutCount -= 1;
+                                                  setState(() {});
+                                                }
+                                                if (_minutCount < 0) {
+                                                  codeSend = false;
+                                                  _secoundCount = 60;
+                                                  _minutCount = 2;
+                                                  _timer!.cancel();
+                                                }
+                                              },
+                                            );
+                                          },
+                                        );
+                                      },
+                                      icon: Icon(Icons.refresh,
+                                          color: Colors.deepPurple.shade900,
+                                          size: 20),
+                                      label: Text(
+                                        "Kod yuborish",
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: Colors.deepPurple.shade900,
+                                          letterSpacing: .5,
+                                          decoration: TextDecoration.underline,
+                                          decorationColor:
+                                              Colors.deepPurple.shade900,
+                                          decorationThickness: 2,
+                                        ),
+                                      ),
+                                      style: OutlinedButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 4),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    content: Container(
+                      height: 44,
+                      margin: EdgeInsets.only(top: 20),
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          if (enableButton!) {
+                            _timer!.cancel();
+                            Get.off(AccountCreate());
+                            Navigator.of(Get.overlayContext!,
+                                    rootNavigator: true)
+                                .pop();
+                            Get.snackbar("", "Tori",
+                                backgroundColor: Colors.green);
+                          }
+                        },
+                        icon: Icon(Icons.check_circle,
+                            color: enableButton!
+                                ? Colors.white
+                                : Colors.black.withOpacity(.1)),
+                        label: Text(
+                          "Tasdiqlash".toUpperCase(),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: enableButton!
+                                ? Colors.grey.shade100
+                                : Colors.black.withOpacity(.1),
+                            letterSpacing: .6,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          // shadowColor: enableButton! ? Colors.deepPurpleAccent : Colors.transparent,
+                          overlayColor: enableButton!
+                              ? Colors.red.shade900
+                              : Colors.transparent,
+                          backgroundColor: enableButton!
+                              ? Colors.deepPurpleAccent
+                              : Colors.black.withOpacity(.1),
+                          elevation: 8,
+                          side: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6)),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
           );
-          // var response = await WorkersPost().workersPost(
-          //   email: emailController.text,
-          //   admin: false.toString(),
-          // );
-          // Constant.email = response['email'];
-          // Constant.admin = false;
-          // setState(() {});
-        }
-        //  else if (passwordController.text == adminPassword) {
-        //   Get.offAll(SearchPage());
-        //   Get.snackbar('Successful !!!', 'Welcome to Admin Panel',
-        //       backgroundColor: Colors.green.withOpacity(.8));
-
-        //   var response = await WorkersPost().workersPost(
-        //     email: emailController.text,
-        //     admin: true.toString(),
-        //   );
-        //   Constant.email = response['email'];`
-        //   Constant.admin = true;
-        //   setState(() {});
-        // }
-        else {
+        } else {
           Get.snackbar('Faild...', "Jeton raqami xato",
               backgroundColor: Colors.red.withOpacity(.8));
         }
@@ -196,7 +470,7 @@ class _LoginPageState extends State<LoginPage> {
       child: SizedBox(
         width: double.infinity,
         child: Text(
-          "Kirish",
+          "KIRISH",
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 18,

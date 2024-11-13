@@ -63,6 +63,8 @@ class _AccountCreateState extends State<AccountCreate> {
                     screenLockCreate(
                       context: context,
                       inputController: controller,
+                      title: Text("Ekranga Pin-kod yaratish."),
+                      confirmTitle: Text("Pin-kodni tasdiqlang."),
                       onConfirmed: (matchedText) {
                         print(matchedText);
                         Get.back();

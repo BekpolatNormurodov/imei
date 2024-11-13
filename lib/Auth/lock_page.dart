@@ -85,7 +85,7 @@ class _LockPageState extends State<LockPage> with TickerProviderStateMixin {
                 onFinish: () async {
                   screenLock(
                     onUnlocked:() => Get.off(LoginPage()),
-                    title: Text("Iltimos kodni kiriting."),
+                    title: Text("Iltimos Pin-kodni kiriting."),
                     context: context,
                     correctString: '1234',
                     maxRetries: 3,
