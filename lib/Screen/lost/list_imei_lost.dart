@@ -580,7 +580,83 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal,
-        onPressed: () => Get.off(CreateImeiLost()),
+        onPressed: () {
+          showModalBottomSheet(
+            barrierColor: Colors.black.withOpacity(.5),
+            context: context,
+            builder: (builder) {
+              return StatefulBuilder(
+                builder: (context, setState) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(10)),
+                      color: Color.fromRGBO(48, 48, 48, 1),
+                    ),
+                    height: 240,
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Card(
+                          color: Color.fromRGBO(68, 68, 68, 1),
+                          child: GestureDetector(
+                            onTap: ()=>Get.off(CreateImeiLost()),
+                            child: Container(
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.edit_document,
+                                  color: Colors.grey.shade200,
+                                ),
+                                title: Text(
+                                  "Ariza".toUpperCase(),
+                                  style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+                                ),
+                                trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey,),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          color: Color.fromRGBO(68, 68, 68, 1),
+                          child: Container(
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.edit_document,
+                                color: Colors.grey.shade200,
+                              ),
+                              title: Text(
+                                "Jinoyat".toUpperCase(),
+                                style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+                              ),
+                              trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey,),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          color: Color.fromRGBO(68, 68, 68, 1),
+                          child: Container(
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.edit_document,
+                                color: Colors.grey.shade200,
+                              ),
+                              title: Text(
+                                "TYJ".toUpperCase(),
+                                style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+                              ),
+                              trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey,),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          );
+        },
         child: Icon(
           Icons.add,
           size: 30,

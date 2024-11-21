@@ -96,7 +96,9 @@ class _ImeiOutputState extends State<ImeiOutput> {
         ),
         actions: [
           IconButton(
-            onPressed: ()=>Get.off(ImeiEdit()),
+            onPressed: () {
+              // Get.off(ImeiEdit());
+            },
             icon: Container(
               padding: EdgeInsets.all(4),
               decoration: BoxDecoration(
@@ -104,7 +106,7 @@ class _ImeiOutputState extends State<ImeiOutput> {
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Icon(
-                Icons.edit,
+                Icons.comment,
                 color: Colors.tealAccent.shade700,
                 size: 22,
               ),
