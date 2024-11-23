@@ -34,6 +34,7 @@ class _AccountCreateState extends State<AccountCreate> {
       backgroundColor: Color.fromRGBO(68, 68, 68, 1),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(68, 68, 68, 1),
+        leading: Container(),
         title: Text(
           "Ro'yxatdan o'tish".toUpperCase(),
           style: TextStyle(

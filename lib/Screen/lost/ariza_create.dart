@@ -1,13 +1,13 @@
 import 'package:imei/library.dart';
 
-class CreateImeiLost extends StatefulWidget {
-  const CreateImeiLost({Key? key}) : super(key: key);
+class ArizaCreate extends StatefulWidget {
+  const ArizaCreate({Key? key}) : super(key: key);
 
   @override
-  State<CreateImeiLost> createState() => _CreateImeiLostState();
+  State<ArizaCreate> createState() => _ArizaCreateState();
 }
 
-class _CreateImeiLostState extends State<CreateImeiLost> {
+class _ArizaCreateState extends State<ArizaCreate> {
   TextEditingController? imeiController;
   TextEditingController? simController;
   TextEditingController? modelController;
@@ -58,15 +58,15 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
                         onPressed: () => Get.back(),
                         icon: Icon(
                           Icons.arrow_back,
-                          color: Colors.grey.shade200,
+                          color: Colors.grey.shade300,
                         ),
                       ),
                       Text(
-                        "TELEFON",
+                        "ARIZA",
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 18,
-                          color: Colors.grey.shade200,
+                          color: Colors.grey.shade300,
                           letterSpacing: 1.5,
                         ),
                       ),
@@ -332,14 +332,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
       children: [
         Text(
           "IMEI:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -357,6 +354,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               )
             ],
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 10,
                 right: 10,
@@ -366,7 +371,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.qr_code_scanner_outlined,
                 size: 26,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -374,14 +379,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 12),
         Text(
           "Oxirgi ishlagan SIM:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -399,6 +401,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             textInputAction: TextInputAction.next,
             style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
@@ -408,7 +418,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.sim_card_sharp,
                 size: 24,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -416,14 +426,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 12),
         Text(
           "Modeli:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -434,6 +441,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             textInputAction: TextInputAction.next,
             style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
@@ -443,7 +458,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.smartphone,
                 size: 24,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -451,13 +466,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 12),
         Text(
           "Rangi:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey),
         ),
         Container(
           height: 48,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade200),
-              borderRadius: BorderRadius.circular(6.r)),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.r)),
           child: TextFormField(
             controller: colorController,
             cursorColor: Colors.grey.shade200,
@@ -466,6 +479,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             textInputAction: TextInputAction.next,
             style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
@@ -475,7 +496,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.color_lens_outlined,
                 size: 24,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -483,14 +504,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 12),
         Text(
           "Holat haqida ma'lumot:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -501,6 +519,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             textInputAction: TextInputAction.next,
             style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
@@ -510,7 +536,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.info_outline,
                 size: 24,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -525,14 +551,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
       children: [
         Text(
           "F.I.SH:",
-          style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -543,6 +566,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             textInputAction: TextInputAction.next,
             style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 10,
                 right: 10,
@@ -552,7 +583,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.person,
                 size: 24,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -560,14 +591,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 16),
         Text(
           "Tel:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -585,6 +613,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             textInputAction: TextInputAction.next,
             style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
@@ -594,7 +630,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.phone,
                 size: 24,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -602,14 +638,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 16),
         Text(
           "JSHSHIR:",
-          style: TextStyle(color: Colors.grey.shade200, fontSize: 13),
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -627,6 +660,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
             textInputAction: TextInputAction.next,
             style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 4,
                 right: 10,
@@ -636,7 +677,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.document_scanner,
                 size: 22,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),
@@ -644,14 +685,11 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
         SizedBox(height: 16),
         Text(
           "Shakl1 №:",
-          style: TextStyle(color: Colors.grey.shade200),
+          style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
           height: 48,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey.shade200,
-            ),
             borderRadius: BorderRadius.circular(6.r),
           ),
           child: TextFormField(
@@ -665,6 +703,14 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               color: Colors.grey.shade200,
             ),
             decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
               contentPadding: EdgeInsets.only(
                 left: 12,
                 right: 10,
@@ -674,7 +720,7 @@ class _CreateImeiLostState extends State<CreateImeiLost> {
               suffixIcon: Icon(
                 Icons.discount,
                 size: 22,
-                color: Colors.grey.shade200,
+                color: Colors.grey.shade400,
               ),
             ),
           ),

@@ -593,7 +593,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                           BorderRadius.vertical(top: Radius.circular(10)),
                       color: Color.fromRGBO(48, 48, 48, 1),
                     ),
-                    height: 240,
+                    height: 300,
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -601,7 +601,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                         Card(
                           color: Color.fromRGBO(68, 68, 68, 1),
                           child: GestureDetector(
-                            onTap: ()=>Get.off(CreateImeiLost()),
+                            onTap: () => Get.off(ArizaCreate()),
                             child: Container(
                               child: ListTile(
                                 leading: Icon(
@@ -610,26 +610,41 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                 ),
                                 title: Text(
                                   "Ariza".toUpperCase(),
-                                  style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 14),
                                 ),
-                                trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey,),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 20,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                           ),
                         ),
                         Card(
                           color: Color.fromRGBO(68, 68, 68, 1),
-                          child: Container(
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.edit_document,
-                                color: Colors.grey.shade200,
+                          child: GestureDetector(
+                            onTap: () => Get.off(JinoyatCreate()),
+                            child: Container(
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.edit_document,
+                                  color: Colors.grey.shade200,
+                                ),
+                                title: Text(
+                                  "Jinoyat".toUpperCase(),
+                                  style: TextStyle(
+                                      color: Colors.grey.shade200,
+                                      fontSize: 14),
+                                ),
+                                trailing: Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 20,
+                                  color: Colors.grey,
+                                ),
                               ),
-                              title: Text(
-                                "Jinoyat".toUpperCase(),
-                                style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
-                              ),
-                              trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey,),
                             ),
                           ),
                         ),
@@ -643,9 +658,35 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                               ),
                               title: Text(
                                 "TYJ".toUpperCase(),
-                                style: TextStyle(color: Colors.grey.shade200, fontSize: 14),
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 14),
                               ),
-                              trailing: Icon(Icons.arrow_forward_ios, size: 20, color: Colors.grey,),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 20,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Card(
+                          color: Color.fromRGBO(68, 68, 68, 1),
+                          child: Container(
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.edit_document,
+                                color: Colors.grey.shade200,
+                              ),
+                              title: Text(
+                                "Qidiruv".toUpperCase(),
+                                style: TextStyle(
+                                    color: Colors.grey.shade200, fontSize: 14),
+                              ),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios,
+                                size: 20,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         ),
