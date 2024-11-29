@@ -8,11 +8,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController telController = TextEditingController();
   TextEditingController jetonController = TextEditingController();
-  String email = 'kali';
+  String tel = "(94)679-22-20";
   String jeton = 'A-123456';
-  bool enableEmail = false;
+  bool enabletel = false;
   bool enableJeton = false;
   bool showJeton = true;
   bool hasToken = false;
@@ -57,15 +57,15 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    Color focusedBorderColor = Colors.deepPurpleAccent.shade700;
+    Color focusedBorderColor = Colors.deepPurple.shade800;
     const fillColor = Color.fromRGBO(243, 246, 249, 0);
     Color borderColor = Colors.deepPurpleAccent.withOpacity(.4);
 
     final defaultPinTheme = PinTheme(
-      width: 34,
-      height: 34,
+      width: 39,
+      height: 39,
       textStyle: const TextStyle(
-        fontSize: 16,
+        fontSize: 18,
         color: Color.fromARGB(255, 24, 10, 63),
       ),
       decoration: BoxDecoration(
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               _icon(),
               SizedBox(height: 100),
-              _inputField("E-mail", emailController),
+              _inputField("Tel", telController),
               SizedBox(height: 20),
               _inputField("Jeton raqam", jetonController),
               SizedBox(height: 40),
@@ -156,11 +156,13 @@ class _LoginPageState extends State<LoginPage> {
           else
             enableJeton = false;
         });
+        print(e);
       },
       cursorColor: Colors.deepPurpleAccent,
       style: TextStyle(color: Colors.grey.shade200),
       controller: controller,
       textInputAction: TextInputAction.next,
+      keyboardType:( (label == "Jeton raqam") && jetonController.text.isEmpty) ? TextInputType.name : TextInputType.phone,
       textCapitalization: label == "Jeton raqam"
           ? TextCapitalization.characters
           : TextCapitalization.none,
@@ -172,7 +174,13 @@ class _LoginPageState extends State<LoginPage> {
                 maxPlaceHolders: 9,
               )
             ]
-          : [],
+          : [
+              TextInputMask(
+                mask: '\\ (99) 999-99-99',
+                placeholder: '_ ',
+                maxPlaceHolders: 9,
+              )
+            ],
       decoration: InputDecoration(
         label: Text(
           label,
@@ -182,9 +190,9 @@ class _LoginPageState extends State<LoginPage> {
         focusedBorder: focusedBorder,
         suffixIcon: label != "Jeton raqam"
             ? Icon(
-                Icons.mail,
+                Icons.phone,
                 size: 26,
-                color: Colors.grey,
+                color: Colors.grey.shade400,
               )
             : Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -197,7 +205,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBtn(defaultPinTheme, focusedBorderColor, fillColor) {
     return ElevatedButton(
       onPressed: () async {
-        if (emailController.text == email) {
+        if (telController.text.split(' ').join() == tel) {
           enableButton = false;
           pinController.clear();
           _secoundCount = 60;
@@ -231,15 +239,15 @@ class _LoginPageState extends State<LoginPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '* Gmailga yuborilgan kodni kiriting.',
+                          '* Tasdiqlash kodni kiriting.',
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 15,
                             color: Colors.black.withOpacity(.6),
                           ),
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          "bekpolatdev1995@gmail.com",
+                          "  (94) 679-22-20",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -254,19 +262,19 @@ class _LoginPageState extends State<LoginPage> {
                             child: Directionality(
                               textDirection: TextDirection.ltr,
                               child: Pinput(
-                                length: 6,
+                                length: 5,
                                 smsRetriever: smsRetriever,
                                 controller: pinController,
                                 focusNode: focusNode,
                                 defaultPinTheme: defaultPinTheme,
                                 separatorBuilder: (index) =>
-                                    const SizedBox(width: 8),
+                                    const SizedBox(width: 10),
                                 validator: (value) {
                                   enableButton =
-                                      value! == '222222' ? true : false;
+                                      value! == '22222' ? true : false;
                                   setState(() {});
                                   print(enableButton);
-                                  return value == '222222' ? null : 'Kod xato!';
+                                  return value == '22222' ? null : 'Kod xato!';
                                 },
                                 hapticFeedbackType:
                                     HapticFeedbackType.lightImpact,
@@ -372,18 +380,18 @@ class _LoginPageState extends State<LoginPage> {
                                           },
                                         );
                                       },
-                                      icon: Icon(Icons.refresh,
-                                          color: Colors.deepPurple.shade900,
-                                          size: 20),
+                                      icon: Icon(Icons.double_arrow,
+                                          color: Colors.deepPurple.shade700,
+                                          size: 22),
                                       label: Text(
-                                        "Kod yuborish",
+                                        "Kod yuborish ",
                                         style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.deepPurple.shade900,
+                                          fontSize: 14,
+                                          color: Colors.deepPurple.shade700,
                                           letterSpacing: .5,
                                           decoration: TextDecoration.underline,
                                           decorationColor:
-                                              Colors.deepPurple.shade900,
+                                              Colors.deepPurple.shade700,
                                           decorationThickness: 2,
                                         ),
                                       ),
@@ -402,7 +410,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     content: Container(
-                      height: 44,
+                      height: 46,
                       margin: EdgeInsets.only(top: 20),
                       child: OutlinedButton.icon(
                         onPressed: () {

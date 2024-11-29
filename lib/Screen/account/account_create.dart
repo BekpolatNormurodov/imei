@@ -165,55 +165,6 @@ class _AccountCreateState extends State<AccountCreate> {
         ),
         SizedBox(height: 14),
         Text(
-          "Tel:",
-          style: TextStyle(color: Colors.grey.shade400, fontSize: 15),
-        ),
-        SizedBox(height: 2),
-        Container(
-          child: TextFormField(
-            inputFormatters: [
-              TextInputMask(
-                mask: '\\ (99) 999-99-99',
-                placeholder: '_ ',
-                maxPlaceHolders: 9,
-              )
-            ],
-            controller: telController,
-            cursorColor: Colors.grey.shade300,
-            cursorWidth: 1,
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.done,
-            style: TextStyle(fontSize: 15, color: Colors.grey.shade300),
-            decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(
-                right: 8,
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: BorderSide(color: Colors.grey.shade300),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: BorderSide(color: Colors.grey),
-              ),
-              prefixIcon: Container(
-                width: 50,
-                margin: EdgeInsets.only(right: 6),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(.1),
-                  border: Border(right: BorderSide(color: Colors.grey)),
-                ),
-                child: Icon(
-                  Icons.phone,
-                  size: 24,
-                  color: Colors.grey.shade300,
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: 14),
-        Text(
           "Ish joyi:",
           style: TextStyle(color: Colors.grey.shade400),
         ),
