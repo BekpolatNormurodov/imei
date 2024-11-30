@@ -8,22 +8,32 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  String violat = '?';
-  String tuman = '?';
-  String unvon = '?';
+  AccountProvider? provider;
 
-  TextEditingController? fullnameController;
-  TextEditingController? telController;
-  TextEditingController? unvonController;
+  String fullname = Hive.box('data').get('fullname');
+  String violat = Hive.box('data').get('violat');
+  String tuman = Hive.box('data').get('tuman');
+  String lavozim = Hive.box('data').get('lavozim');
+  String unvon = Hive.box('data').get('unvon');
 
   @override
   void initState() {
-    fullnameController =
-        TextEditingController(text: "NORMURODOV BEKPOLAT O'G'LI");
-    telController = TextEditingController(text: '(94) 679-22-20');
-    unvonController = TextEditingController(text: "KATTA MUTAXASSIS");
+    provider = context.read<AccountProvider>();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      provider!.getData();
+    });
+    provider?.addListener(() {
+      setState(() {});
+    });
     super.initState();
   }
+
+  // @override
+  // void setState(VoidCallback fn) {
+  //   if (mounted) {
+  //     super.setState(fn);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +44,7 @@ class _AccountPageState extends State<AccountPage> {
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(68, 68, 68, 1),
         leading: IconButton(
-          onPressed: ()=> Get.back(),
+          onPressed: () => Get.back(),
           icon: Icon(Icons.arrow_back, color: Colors.white),
         ),
         title: Text(
@@ -57,63 +67,89 @@ class _AccountPageState extends State<AccountPage> {
             ),
             child: Text(
               "A-123456",
-              style: TextStyle(color: Colors.grey.shade300, fontSize: 13, fontWeight: FontWeight.w600, letterSpacing: .5),
+              style: TextStyle(
+                  color: Colors.grey.shade300,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: .5),
             ),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: Get.width,
-          height: Get.height - 84,
-          padding: EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 24), 
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              oper(),
-              Container(
-                width: Get.width,
-                height: 48,
-                child: ElevatedButton.icon(
-                  onPressed: () async {
-                    Get.off(SelectionPage());
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          "Ma'lumotlar saqlandi.",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.grey.shade300,
-                          ),
+      body: provider!.state == AccountState.intial
+          ? Container()
+          : provider!.state == AccountState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.green.shade200,
+                    backgroundColor: Colors.green.shade800,
+                    strokeWidth: 20.w,
+                  ),
+                )
+              : provider!.state == AccountState.error
+                  ? Center(
+                      child: Text(
+                        "Malumotlar mavjud emas!!!",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
                         ),
-                        showCloseIcon: true,
-                        closeIconColor: Colors.teal.shade800,
-                        backgroundColor: Colors.teal.shade300,
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.teal,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                    )
+                  : SingleChildScrollView(
+                      child: Container(
+                        width: Get.width,
+                        height: Get.height - 84,
+                        padding: EdgeInsets.only(
+                            left: 14, right: 14, top: 10, bottom: 24),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            oper(),
+                            Container(
+                              width: Get.width,
+                              height: 48,
+                              child: ElevatedButton.icon(
+                                onPressed: () async {
+                                  Get.off(SelectionPage());
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Ma'lumotlar saqlandi.",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.grey.shade300,
+                                        ),
+                                      ),
+                                      showCloseIcon: true,
+                                      closeIconColor: Colors.teal.shade800,
+                                      backgroundColor: Colors.teal.shade300,
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.teal,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                label: Text(
+                                  "SAQLASH",
+                                  style: TextStyle(
+                                    color: Colors.grey.shade300,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: .5,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                  label: Text(
-                    "SAQLASH",
-                    style: TextStyle(
-                      color: Colors.grey.shade300,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: .5,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 
@@ -128,7 +164,11 @@ class _AccountPageState extends State<AccountPage> {
         SizedBox(height: 2),
         Container(
           child: TextFormField(
-            controller: fullnameController,
+            controller: TextEditingController(
+              text: provider!.state == AccountState.success
+                  ? provider!.data[1].fio
+                  : fullname,
+            ),
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.text,
@@ -178,7 +218,11 @@ class _AccountPageState extends State<AccountPage> {
                 maxPlaceHolders: 9,
               )
             ],
-            controller: telController,
+            controller: TextEditingController(
+              text: provider!.state == AccountState.success
+                  ? "+998 (94) 679-22-20"
+                  : '',
+            ),
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.number,
@@ -223,7 +267,9 @@ class _AccountPageState extends State<AccountPage> {
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
-              "NAVOIY VILOYATI",
+              provider!.state == AccountState.success
+                  ? provider!.data[1].region!.toUpperCase()
+                  : violat,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey.shade300,
@@ -276,7 +322,9 @@ class _AccountPageState extends State<AccountPage> {
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
-              "NAVOIY VILOYATI IIB",
+              provider!.state == AccountState.success
+                  ? provider!.data[1].boshqarma!.toUpperCase()
+                  : tuman,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey.shade300,
@@ -323,7 +371,10 @@ class _AccountPageState extends State<AccountPage> {
         SizedBox(height: 2),
         Container(
           child: TextFormField(
-            controller: unvonController,
+            controller: TextEditingController(
+                text: provider!.state == AccountState.success
+                    ? provider!.data[1].lavozim
+                    : lavozim),
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.text,
@@ -373,7 +424,9 @@ class _AccountPageState extends State<AccountPage> {
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
-              "LEYTENANT",
+              provider!.state == AccountState.success
+                  ? provider!.data[1].unvon!.toUpperCase()
+                  : unvon,
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey.shade300,
@@ -406,7 +459,7 @@ class _AccountPageState extends State<AccountPage> {
               unvonIIB("Polkovnik"),
             ],
             onChanged: (e) {
-              violat = e!;
+              unvon = e!;
               setState(() {});
             },
           ),

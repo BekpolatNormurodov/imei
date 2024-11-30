@@ -16,11 +16,11 @@ class _AccountCreateState extends State<AccountCreate> {
 
   TextEditingController? fullnameController;
   TextEditingController? telController;
-  TextEditingController? unvonController;
+  TextEditingController? lavozimController;
 
   @override
   void initState() {
-    unvonController = TextEditingController();
+    lavozimController = TextEditingController();
     telController = TextEditingController();
     fullnameController = TextEditingController();
     super.initState();
@@ -60,6 +60,19 @@ class _AccountCreateState extends State<AccountCreate> {
                 height: 50,
                 child: ElevatedButton.icon(
                   onPressed: () async {
+                    await AccountPost().accountPost(
+                      fio: fullnameController!.text,
+                      region: violat,
+                      boshqarma: tuman,
+                      lavozim: lavozimController!.text,
+                      unvon: unvon,
+                    );
+                    await Hive.box('data')
+                        .put('fullname', fullnameController!.text);
+                    await Hive.box('data').put('violat', violat);
+                    await Hive.box('data').put('tuman', tuman);
+                    await Hive.box('data').put('lavozim', lavozimController!.text);
+                    await Hive.box('data').put('unvon', unvon);
                     Get.off(SelectionPage());
                     screenLockCreate(
                       context: context,
@@ -274,7 +287,7 @@ class _AccountCreateState extends State<AccountCreate> {
         SizedBox(height: 2),
         Container(
           child: TextFormField(
-            controller: unvonController,
+            controller: lavozimController,
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.text,
@@ -356,7 +369,7 @@ class _AccountCreateState extends State<AccountCreate> {
               unvonIIB("Polkovnik"),
             ],
             onChanged: (e) {
-              violat = e!;
+              unvon = e!;
               setState(() {});
             },
           ),

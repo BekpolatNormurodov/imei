@@ -2,21 +2,18 @@ import 'package:imei/library.dart';
 
 main(List<String> args) async {
   await Hive.initFlutter();
-  await Hive.openBox('oper-data');
+  await Hive.openBox('data');
   runApp(
-    // MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider<UnSignedProvider>(
-    //       create: (context) => UnSignedProvider(),
-    //     ),
-    //     ChangeNotifierProvider<SignedProvider>(
-    //       create: (context) => SignedProvider(),
-    //     ),
-    //   ],
-    //   child: MyApp(),
-    // ),
-    MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AccountProvider>(
+          create: (context) => AccountProvider(),
+        ),
+      ],
+      child: MyApp(),
+    ),
   );
+  MyApp();
 }
 
 class MyApp extends StatefulWidget {
@@ -45,6 +42,6 @@ class _MyAppState extends State<MyApp> {
           ),
         );
       },
-    );  
+    );
   }
 }
