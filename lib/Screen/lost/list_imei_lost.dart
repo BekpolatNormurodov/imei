@@ -223,7 +223,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                     tabs: [
                       TabItem(title: 'Ariza', count: 6),
                       TabItem(title: 'Jinoyat', count: 3),
-                      TabItem(title: 'TYJ', count: 2),
+                      TabItem(title: 'SHSH', count: 2),
                       TabItem(title: 'Qidiruv', count: 4),
                     ],
                   ),
@@ -323,7 +323,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                     color: Colors.grey.shade200,
                                   ),
                                   title: Text(
-                                    "TYJ".toUpperCase(),
+                                    "Shubxali shaxslar".toUpperCase(),
                                     style: TextStyle(
                                         color: Colors.grey.shade200,
                                         fontSize: 14),

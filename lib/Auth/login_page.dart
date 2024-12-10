@@ -162,7 +162,9 @@ class _LoginPageState extends State<LoginPage> {
       style: TextStyle(color: Colors.grey.shade200),
       controller: controller,
       textInputAction: TextInputAction.next,
-      keyboardType:( (label == "Jeton raqam") && jetonController.text.isEmpty) ? TextInputType.name : TextInputType.phone,
+      keyboardType: ((label == "Jeton raqam") && jetonController.text.isEmpty)
+          ? TextInputType.name
+          : TextInputType.phone,
       textCapitalization: label == "Jeton raqam"
           ? TextCapitalization.characters
           : TextCapitalization.none,
@@ -205,7 +207,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBtn(defaultPinTheme, focusedBorderColor, fillColor) {
     return ElevatedButton(
       onPressed: () async {
-        if (telController.text.split(' ').join() == tel) {
+        if (true) {
+          // if (telController.text.split(' ').join() == tel) {
+          await Hive.box('data').put('phone', telController.text);
+          await Hive.box('data').put('jeton', jetonController.text);
           enableButton = false;
           pinController.clear();
           _secoundCount = 60;
@@ -247,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
                           textAlign: TextAlign.left,
                         ),
                         Text(
-                          "  (94) 679-22-20",
+                          Hive.box('data').get('phone'),
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w500,

@@ -60,13 +60,13 @@ class _AccountCreateState extends State<AccountCreate> {
                 height: 50,
                 child: ElevatedButton.icon(
                   onPressed: () async {
-                    await AccountPost().accountPost(
-                      fio: fullnameController!.text,
-                      region: violat,
-                      boshqarma: tuman,
-                      lavozim: lavozimController!.text,
-                      unvon: unvon,
-                    );
+                    // await AccountPost().accountPost(
+                    //   fio: fullnameController!.text,
+                    //   region: violat,
+                    //   boshqarma: tuman,
+                    //   lavozim: lavozimController!.text,
+                    //   unvon: unvon,
+                    // );
                     await Hive.box('data')
                         .put('fullname', fullnameController!.text);
                     await Hive.box('data').put('violat', violat);

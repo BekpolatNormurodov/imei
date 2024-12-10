@@ -64,7 +64,7 @@ class _TYJCreateState extends State<TYJCreate> {
                         ),
                       ),
                       Text(
-                        "TYJ".toUpperCase(),
+                        "Shubxali shaxslar".toUpperCase(),
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,
@@ -138,48 +138,7 @@ class _TYJCreateState extends State<TYJCreate> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 48,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: TextFormField(
-            controller: shakl1Controller,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade200,
-              letterSpacing: 1,
-            ),
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: BorderSide(color: Colors.grey.shade300),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: BorderSide(color: Colors.grey),
-              ),
-              border: InputBorder.none,
-              hintText: "TYJ raqami",
-              hintStyle: TextStyle(color: Colors.grey),
-              contentPadding: EdgeInsets.only(
-                left: 12,
-                right: 10,
-              ),
-              // suffixIcon: Icon(
-              //   Icons.discount,
-              //   size: 22,
-              //   color: Colors.grey.shade200,
-              // ),
-            ),
-          ),
-        ),
-        SizedBox(height: 14),
-        Container(
+         Container(
           height: 48,
           decoration: BoxDecoration(
            
@@ -199,7 +158,7 @@ class _TYJCreateState extends State<TYJCreate> {
                 right: 10,
               ),
               border: InputBorder.none,
-              hintText: "Shartli nomi",
+              hintText: "F.I.SH",
               hintStyle: TextStyle(color: Colors.grey),
                focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(6),

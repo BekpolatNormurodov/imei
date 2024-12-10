@@ -10,6 +10,8 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   AccountProvider? provider;
 
+  String phone = Hive.box('data').get('phone');
+  String jeton = Hive.box('data').get('jeton');
   String fullname = Hive.box('data').get('fullname');
   String violat = Hive.box('data').get('violat');
   String tuman = Hive.box('data').get('tuman');
@@ -66,7 +68,7 @@ class _AccountPageState extends State<AccountPage> {
               borderRadius: BorderRadius.circular(3),
             ),
             child: Text(
-              "A-123456",
+              jeton,
               style: TextStyle(
                   color: Colors.grey.shade300,
                   fontSize: 13,
@@ -76,28 +78,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ],
       ),
-      body: provider!.state == AccountState.intial
-          ? Container()
-          : provider!.state == AccountState.waiting
-              ? Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.green.shade200,
-                    backgroundColor: Colors.green.shade800,
-                    strokeWidth: 20.w,
-                  ),
-                )
-              : provider!.state == AccountState.error
-                  ? Center(
-                      child: Text(
-                        "Malumotlar mavjud emas!!!",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  : SingleChildScrollView(
+      body: SingleChildScrollView(
                       child: Container(
                         width: Get.width,
                         height: Get.height - 84,
@@ -219,9 +200,8 @@ class _AccountPageState extends State<AccountPage> {
               )
             ],
             controller: TextEditingController(
-              text: provider!.state == AccountState.success
-                  ? "+998 (94) 679-22-20"
-                  : '',
+              text: phone
+               ,
             ),
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
