@@ -69,8 +69,9 @@ class _LockPageState extends State<LockPage> with TickerProviderStateMixin {
                 ),
                 buttonWidget: Container(
                   child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.black.withOpacity(.6),
+                    Icons.lock_outlined,
+                    color: Colors.deepPurpleAccent.shade700,
+                    size: 30,
                   ),
                 ),
                 activeColor: Colors.black.withOpacity(.2),
@@ -84,10 +85,10 @@ class _LockPageState extends State<LockPage> with TickerProviderStateMixin {
                 },
                 onFinish: () async {
                   screenLock(
-                    onUnlocked:() => Get.off(LoginPage()),
+                    onUnlocked:() => Get.off(Hive.box('data').get('lock').isNotEmpty ? SelectionPage() : LoginPage()),
                     title: Text("Iltimos Pin-kodni kiriting."),
                     context: context,
-                    correctString: '1234',
+                    correctString: Hive.box('data').get('lock'),
                     maxRetries: 3,
                     retryDelay: const Duration(seconds: 10),
                     delayBuilder: (context, delay) => Text(

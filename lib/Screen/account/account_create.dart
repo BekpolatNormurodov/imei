@@ -79,8 +79,8 @@ class _AccountCreateState extends State<AccountCreate> {
                       inputController: controller,
                       title: Text("Ekranga Pin-kod yaratish."),
                       confirmTitle: Text("Pin-kodni tasdiqlang."),
-                      onConfirmed: (matchedText) {
-                        print(matchedText);
+                      onConfirmed: (matchedText)async {
+                        await Hive.box('data').put('lock', matchedText);
                         Get.back();
                       },
                       footer: TextButton(

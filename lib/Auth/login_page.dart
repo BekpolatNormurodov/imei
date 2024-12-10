@@ -10,8 +10,6 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController telController = TextEditingController();
   TextEditingController jetonController = TextEditingController();
-  String tel = "(94)679-22-20";
-  String jeton = 'A-123456';
   bool enabletel = false;
   bool enableJeton = false;
   bool showJeton = true;
@@ -467,10 +465,11 @@ class _LoginPageState extends State<LoginPage> {
               );
             },
           );
-        } else {
-          Get.snackbar('Faild...', "Jeton raqami xato",
-              backgroundColor: Colors.red.withOpacity(.8));
         }
+        // else {
+        //   Get.snackbar('Faild...', "Jeton raqami xato",
+        //       backgroundColor: Colors.red.withOpacity(.8));
+        // }
       },
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(

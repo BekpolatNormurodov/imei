@@ -38,7 +38,9 @@ class _MyAppState extends State<MyApp> {
             // theme: ThemeData(
             //   textTheme: GoogleFonts.slabo13pxTextTheme(),
             // ),
-            home: LockPage(),
+            home: Hive.box('data').isNotEmpty ? LockPage() : LoginPage(),
+
+
           ),
         );
       },
