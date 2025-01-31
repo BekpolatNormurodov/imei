@@ -154,7 +154,6 @@ class _LoginPageState extends State<LoginPage> {
           else
             enableJeton = false;
         });
-        print(e);
       },
       cursorColor: Colors.deepPurpleAccent,
       style: TextStyle(color: Colors.grey.shade200),
@@ -205,10 +204,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBtn(defaultPinTheme, focusedBorderColor, fillColor) {
     return ElevatedButton(
       onPressed: () async {
+ print(telController.text.split('-').join().split('(').join().split(')').join().split(' ').join());
+          var dataService = await AuthorizationPost().authorizationPost(
+    phone: telController.text.split('-').join().split('(').join().split(')').join().split(' ').join().toString(), 
+    jton: jetonController.text
+  );
         if (true) {
           // if (telController.text.split(' ').join() == tel) {
-          await Hive.box('data').put('phone', telController.text);
-          await Hive.box('data').put('jeton', jetonController.text);
+
+          // await Hive.box('data').put('phone', telController.text);
+          // await Hive.box('data').put('jeton', jetonController.text);
           enableButton = false;
           pinController.clear();
           _secoundCount = 60;
@@ -494,4 +499,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-}
+}                                                  

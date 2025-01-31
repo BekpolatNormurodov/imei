@@ -42,5 +42,7 @@ export 'package:imei/Api/account/account_model.dart';
 export 'package:imei/Api/account/account_post.dart';
 export 'package:imei/Api/account/account_service.dart';
 export 'package:imei/Api/account/account_provider.dart';
+export 'package:imei/Api/authorization/authorization_post.dart';
+
 
 
