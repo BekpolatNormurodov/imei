@@ -17,14 +17,12 @@ class AuthorizationPost {
     });
 
     http.StreamedResponse response = await request.send();
-      print(response.statusCode);
-    if (response.statusCode == 201) {
+    if (response.statusCode >= 200 || response.statusCode < 300) {
       var data = await response.stream.bytesToString();
       await Hive.box('token').put(
         'token',
-        jsonDecode(data)["refresh"]
+        jsonDecode(data)["access"]
       );
-      print("object");
       // print(Hive.box("token").get("token"));
       return jsonDecode(data);
     }
