@@ -74,7 +74,7 @@ class _ImeiInputState extends State<ImeiInput> {
                   height: 48,
                   child: ElevatedButton.icon(
                     onPressed: () async {
-                      Get.off(ImeiOutput());
+                      // Get.off(ImeiOutput());
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(

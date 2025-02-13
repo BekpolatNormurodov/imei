@@ -1,7 +1,8 @@
 import 'package:imei/library.dart';
 
 class ImeiOutput extends StatefulWidget {
-  ImeiOutput({super.key});
+  Data? data;
+  ImeiOutput(this.data);
 
   @override
   State<ImeiOutput> createState() => _ImeiOutputState();
@@ -66,7 +67,6 @@ class _ImeiOutputState extends State<ImeiOutput> {
         border: Border.all(color: borderColor),
       ),
     );
-
     return Scaffold(
       backgroundColor: Color.fromRGBO(68, 68, 68, 1),
       appBar: AppBar(
@@ -140,12 +140,12 @@ class _ImeiOutputState extends State<ImeiOutput> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _box("IMEI:", "123456789012345"),
-                        _box("Oxirgi ishlagan SIM:", "+998 (94) 679-22-20"),
-                        _box("Modeli:", "Iphone 16 ProMax"),
-                        _box("Rangi:", "Yashil"),
+                        _box("IMEI:", widget.data!.imei),
+                        _box("Oxirgi ishlagan SIM:", widget.data!.lastSimcard),
+                        _box("Modeli:", widget.data!.model),
+                        _box("Rangi:", widget.data!.color),
                         _box("Holat haqida ma'lumot:",
-                            "Avtobusda tushurib qoldirilgan"),
+                            widget.data!.status),
                         Container(
                           margin: EdgeInsets.only(top: 40),
                           child: Text(
@@ -160,10 +160,10 @@ class _ImeiOutputState extends State<ImeiOutput> {
                             textAlign: TextAlign.start,
                           ),
                         ),
-                        _box("F.I.SH:", "Normurodov Bekpolat Ergash o'g'li"),
-                        _box("Tel:", "+998 (88) 847-19-95"),
-                        _box("JSHSHIR:", "12345678901234"),
-                        _box("Shakl1 №:", "1234"),
+                        _box("F.I.SH:", "${widget.data!.owner!.lastName} ${widget.data!.owner!.firstName} ${widget.data!.owner!.fatherName}"),
+                        _box("Tel:", widget.data!.owner!.phoneNumber),
+                        _box("JSHSHIR:",widget.data!.owner!.jshir),
+                        _box("Shakl1 №:", widget.data!.owner!.jshir),
                       ],
                     ),
                   ),

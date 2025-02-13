@@ -49,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
     focusNode.dispose();
 
     _timer!.cancel();
-    setState(() {});
     super.dispose();
   }
 
@@ -154,7 +153,6 @@ class _LoginPageState extends State<LoginPage> {
           else
             enableJeton = false;
         });
-        print(e);
       },
       cursorColor: Colors.deepPurpleAccent,
       style: TextStyle(color: Colors.grey.shade200),
@@ -205,8 +203,19 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBtn(defaultPinTheme, focusedBorderColor, fillColor) {
     return ElevatedButton(
       onPressed: () async {
-        if (true) {
-          // if (telController.text.split(' ').join() == tel) {
+        var dataService = await AuthorizationPost().authorizationPost(
+            phone: telController.text
+                .split('-')
+                .join()
+                .split('(')
+                .join()
+                .split(')')
+                .join()
+                .split(' ')
+                .join()
+                .toString(),
+            jton: jetonController.text.toString());
+        if (dataService['access'] == Hive.box("token").get("token")) {
           await Hive.box('data').put('phone', telController.text);
           await Hive.box('data').put('jeton', jetonController.text);
           enableButton = false;
@@ -276,7 +285,6 @@ class _LoginPageState extends State<LoginPage> {
                                   enableButton =
                                       value! == '22222' ? true : false;
                                   setState(() {});
-                                  print(enableButton);
                                   return value == '22222' ? null : 'Kod xato!';
                                 },
                                 hapticFeedbackType:

@@ -272,7 +272,7 @@ class _ImeiEditState extends State<ImeiEdit> {
                                 height: 48,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
-                                    Get.off(ImeiOutput());
+                                    // Get.off(ImeiOutput());
                                     // Get.snackbar(
                                     //   'Successful',
                                     //   "Ma'lumotlari kiritildi !!!",

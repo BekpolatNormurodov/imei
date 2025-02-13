@@ -3,11 +3,15 @@ import 'package:imei/library.dart';
 main(List<String> args) async {
   await Hive.initFlutter();
   await Hive.openBox('data');
+  await Hive.openBox('token');
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider<AccountProvider>(
           create: (context) => AccountProvider(),
+        ),
+        ChangeNotifierProvider<ArizaProvider>(
+          create: (context) => ArizaProvider(),
         ),
       ],
       child: MyApp(),
@@ -38,7 +42,8 @@ class _MyAppState extends State<MyApp> {
             // theme: ThemeData(
             //   textTheme: GoogleFonts.slabo13pxTextTheme(),
             // ),
-            home: Hive.box('data').isNotEmpty ? LockPage() : LoginPage(),
+            home: LoginPage(),
+            //  home: Hive.box('data').isNotEmpty ? LockPage() : LoginPage(),
 
 
           ),

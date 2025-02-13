@@ -9,7 +9,7 @@ class AccountProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<AccountModel> data = [];
+  AccountModel? data;
 
   Future getData() async {
     set(AccountState.waiting);

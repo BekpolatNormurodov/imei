@@ -12,11 +12,11 @@ class _AccountPageState extends State<AccountPage> {
 
   String phone = Hive.box('data').get('phone');
   String jeton = Hive.box('data').get('jeton');
-  String fullname = Hive.box('data').get('fullname');
-  String violat = Hive.box('data').get('violat');
-  String tuman = Hive.box('data').get('tuman');
-  String lavozim = Hive.box('data').get('lavozim');
-  String unvon = Hive.box('data').get('unvon');
+  String fullname = "NORMURODOV BEKPOLAT ERGASH O'G'LI";
+  String violat = "NAVOIY VILOYATI";
+  String tuman = "XATIRCHI TUMANI IIB";
+  String lavozim = "IIV TQD JQX TTIB YETAKCHI MUTAXASSISI";
+  String unvon = "LEYTENANT";
 
   @override
   void initState() {
@@ -30,12 +30,12 @@ class _AccountPageState extends State<AccountPage> {
     super.initState();
   }
 
-  // @override
-  // void setState(VoidCallback fn) {
-  //   if (mounted) {
-  //     super.setState(fn);
-  //   }
-  // }
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,58 +79,57 @@ class _AccountPageState extends State<AccountPage> {
         ],
       ),
       body: SingleChildScrollView(
-                      child: Container(
-                        width: Get.width,
-                        height: Get.height - 84,
-                        padding: EdgeInsets.only(
-                            left: 14, right: 14, top: 10, bottom: 24),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            oper(),
-                            Container(
-                              width: Get.width,
-                              height: 48,
-                              child: ElevatedButton.icon(
-                                onPressed: () async {
-                                  Get.off(SelectionPage());
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        "Ma'lumotlar saqlandi.",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.grey.shade300,
-                                        ),
-                                      ),
-                                      showCloseIcon: true,
-                                      closeIconColor: Colors.teal.shade800,
-                                      backgroundColor: Colors.teal.shade300,
-                                    ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.teal,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                label: Text(
-                                  "SAQLASH",
-                                  style: TextStyle(
-                                    color: Colors.grey.shade300,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: .5,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+        child: Container(
+          width: Get.width,
+          height: Get.height - 84,
+          padding: EdgeInsets.only(left: 14, right: 14, top: 10, bottom: 24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              oper(),
+              Container(
+                width: Get.width,
+                height: 48,
+                child: ElevatedButton.icon(
+                  onPressed: () async {
+                    Get.off(SelectionPage());
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          "Ma'lumotlar saqlandi.",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey.shade300,
+                          ),
                         ),
+                        showCloseIcon: true,
+                        closeIconColor: Colors.teal.shade800,
+                        backgroundColor: Colors.teal.shade300,
                       ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
                     ),
+                  ),
+                  label: Text(
+                    "SAQLASH",
+                    style: TextStyle(
+                      color: Colors.grey.shade300,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: .5,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -147,15 +146,15 @@ class _AccountPageState extends State<AccountPage> {
           child: TextFormField(
             controller: TextEditingController(
               text: provider!.state == AccountState.success
-                  ? provider!.data[1].fio
-                  : fullname,
+                  ? "${provider!.data!.results![0].lastName} ${provider!.data!.results![0].firstName} ${provider!.data!.results![0].fatherName}"
+                  : "?",
             ),
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             style: TextStyle(
-                fontSize: 14, color: Colors.grey.shade300, wordSpacing: 2),
+                fontSize: 15, color: Colors.grey.shade300),
             decoration: InputDecoration(
               contentPadding: EdgeInsets.only(
                 right: 12,
@@ -200,8 +199,7 @@ class _AccountPageState extends State<AccountPage> {
               )
             ],
             controller: TextEditingController(
-              text: phone
-               ,
+              text: phone,
             ),
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
@@ -248,8 +246,8 @@ class _AccountPageState extends State<AccountPage> {
             focusColor: Colors.transparent,
             hint: Text(
               provider!.state == AccountState.success
-                  ? provider!.data[1].region!.toUpperCase()
-                  : violat,
+                  ? provider!.data!.results![0].boshqarma!.name!.toUpperCase()
+                  : "?",
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey.shade300,
@@ -303,8 +301,8 @@ class _AccountPageState extends State<AccountPage> {
             focusColor: Colors.transparent,
             hint: Text(
               provider!.state == AccountState.success
-                  ? provider!.data[1].boshqarma!.toUpperCase()
-                  : tuman,
+                  ? provider!.data!.results![0].bolim!.name!.toUpperCase()
+                  : "?",
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey.shade300,
@@ -353,8 +351,8 @@ class _AccountPageState extends State<AccountPage> {
           child: TextFormField(
             controller: TextEditingController(
                 text: provider!.state == AccountState.success
-                    ? provider!.data[1].lavozim
-                    : lavozim),
+                    ? provider!.data!.results![0].lavozimi 
+                    : "?"),
             cursorColor: Colors.grey.shade300,
             cursorWidth: 1,
             keyboardType: TextInputType.text,
@@ -405,8 +403,8 @@ class _AccountPageState extends State<AccountPage> {
             focusColor: Colors.transparent,
             hint: Text(
               provider!.state == AccountState.success
-                  ? provider!.data[1].unvon!.toUpperCase()
-                  : unvon,
+                  ? provider!.data!.results![0].unvon!.name!.toUpperCase()
+                  : "?",
               style: TextStyle(
                 fontSize: 14,
                 color: Colors.grey.shade300,

@@ -62,8 +62,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     "4444444444444",
   ];
 
-  // SignedProvider? provider;
-  // Timer? _timer;
+  ArizaProvider? arizaProvider;
 
   @override
   void setState(VoidCallback fn) {
@@ -87,16 +86,16 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
       SmartAuth(),
     );
 
-    // provider = context.read<SignedProvider>();
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-    //   provider!.getData();
-    //   _timer = Timer.periodic(Duration(seconds: 10), (timer) {
-    //     provider!.getData();
-    //   });
-    // });
-    // provider?.addListener(() {
-    //   setState(() {});
-    // });
+    arizaProvider = context.read<ArizaProvider>();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      arizaProvider!.getData();
+      _timer = Timer.periodic(Duration(seconds: 10), (timer) {
+        arizaProvider!.getData();
+      });
+    });
+    arizaProvider?.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -233,10 +232,10 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
             Expanded(
               child: TabBarView(
                 children: [
-                  imeiList(imei1, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(imei2, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(imei3, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(imei4, defaultPinTheme, focusedBorderColor, fillColor),
+                  imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+                  imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+                  imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+                  imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
                  ],
               ),
             )
@@ -380,13 +379,13 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     );
   }
 
-  imeiList(imei, defaultPinTheme, focusedBorderColor, fillColor) {
+  imeiList(List<Data>? data, defaultPinTheme, focusedBorderColor, fillColor) {
     return Container(
       width: double.infinity,
       height: double.infinity,
       child: LiveList.options(
         options: options,
-        itemCount: imei.length,
+        itemCount: data!.length,
         padding: EdgeInsets.only(top: 10, bottom: 10),
         itemBuilder: (
           BuildContext context,
@@ -407,7 +406,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(ImeiOutput());
+                  Get.to(ImeiOutput(data[index]));
                 },
                 child: Dismissible(
                   direction: DismissDirection.endToStart,
@@ -435,7 +434,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  key: ValueKey<String>(imei[index]),
+                  key: ValueKey<String>(data[index].imei!),
                   onDismissed: (DismissDirection direction) {
                     enableButton = false;
                     pinController.clear();
@@ -691,7 +690,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                     Navigator.of(Get.overlayContext!,
                                             rootNavigator: true)
                                         .pop();
-                                    Get.snackbar(imei[index],
+                                    Get.snackbar(data[index].imei!,
                                         "Topilganlar ro'yxatiga qo'shildi.",
                                         backgroundColor: Colors.green);
                                   }
@@ -746,7 +745,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                           leading:
                               Image.asset("assets/icons/phone.png", width: 36),
                           title: Text(
-                            imei[index],
+                            data[index].imei!,
                             style: TextStyle(
                               fontSize: 15,
                               color: Colors.black,
