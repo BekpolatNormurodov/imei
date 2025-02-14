@@ -34,7 +34,7 @@ export 'package:imei/Screen/check/imei_input.dart';
 export 'package:imei/Screen/check/imei_output.dart';
 export 'package:imei/Screen/check/imei_edit.dart';
 export 'package:imei/Screen/lost/create/jinoyat_create.dart';
-export 'package:imei/Screen/lost/create/tyj_create.dart';
+export 'package:imei/Screen/lost/create/blacklist_create.dart';
 export 'package:imei/Screen/lost/create/qidiruv_create.dart';
 
 // API
@@ -46,3 +46,5 @@ export 'package:imei/Api/authorization/authorization_post.dart';
 export 'package:imei/Api/ariza/ariza_model.dart';
 export 'package:imei/Api/ariza/ariza_service.dart';
 export 'package:imei/Api/ariza/ariza_provider.dart';
+export 'package:imei/Api/ariza/ariza_post.dart';
+

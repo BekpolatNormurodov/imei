@@ -8,7 +8,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-    final controller = InputController();
+  final controller = InputController();
   TextEditingController telController = TextEditingController();
   TextEditingController jetonController = TextEditingController();
   bool enabletel = false;
@@ -433,24 +433,10 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           if (enableButton!) {
                             _timer!.cancel();
+                            Navigator.of(Get.overlayContext!,
+                                    rootNavigator: true)
+                                .pop();
                             Get.offAll(AccountCreate());
-                            // screenLockCreate(
-                            //   useBlur: false,
-                            //   context: context,
-                            //   inputController: controller,
-                            //   title: Text("Ekranga Pin-kod yaratish."),
-                            //   confirmTitle: Text("Pin-kodni tasdiqlang."),
-                            //   onConfirmed: (matchedText) async {
-                            //     await Hive.box('data').put('lock', matchedText);
-                            //     Get.back();
-                            //   },
-                            //   footer: TextButton(
-                            //     onPressed: () {
-                            //       controller.unsetConfirmed();
-                            //     },
-                            //     child: const Text('Qayta kiritish'),
-                            //   ),
-                            // );
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -466,13 +452,6 @@ class _LoginPageState extends State<LoginPage> {
                                 backgroundColor: Colors.teal.shade300,
                               ),
                             );
-
-                            // Get.off(AccountCreate());
-                            // Navigator.of(Get.overlayContext!,
-                            //         rootNavigator: true)
-                            //     .pop();
-                            // Get.snackbar("", "Tori",
-                            //     backgroundColor: Colors.green);
                           }
                         },
                         icon: Icon(Icons.check_circle,
@@ -543,5 +522,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-

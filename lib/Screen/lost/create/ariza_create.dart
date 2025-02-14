@@ -272,6 +272,18 @@ class _ArizaCreateState extends State<ArizaCreate> {
                                 height: 48,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
+                                await AccountPost().accountPost(
+                                      imei: imeiController!.text,
+                                      last_simcard: simController!.text,
+                                      model: modelController!.text,
+                                      color: colorController!.text,
+                                      jshir: jshshirController!.text,
+                                      phone_number: simController!.text,
+                                      fish: fullnameController!.text,
+                                    );
+                                    // if (dataService['status']) {
+                                    //   Get.off(ListImImeiLost());
+                                    // }
                                     Get.off(ListImImeiLost());
                                     // Get.snackbar(
                                     //   'Successful',

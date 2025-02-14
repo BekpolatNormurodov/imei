@@ -59,12 +59,6 @@ class _AccountCreateState extends State<AccountCreate> {
                 height: 50,
                 child: ElevatedButton.icon(
                   onPressed: () async {
-                    // await Hive.box('data')
-                    //     .put('fullname', fullnameController!.text);
-                    // await Hive.box('data').put('violat', violat);
-                    // await Hive.box('data').put('tuman', tuman);
-                    // await Hive.box('data').put('lavozim', lavozimController!.text);
-                    // await Hive.box('data').put('unvon', unvon);
                     Get.offAll(SelectionPage());
                     screenLockCreate(                                                                                                                                                                     
                       context: context,

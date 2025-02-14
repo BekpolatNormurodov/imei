@@ -1,13 +1,13 @@
 import 'package:imei/library.dart';
 
-class TYJCreate extends StatefulWidget {
-  const TYJCreate({Key? key}) : super(key: key);
+class BlackListCreate extends StatefulWidget {
+  const BlackListCreate({Key? key}) : super(key: key);
 
   @override
-  State<TYJCreate> createState() => _TYJCreateState();
+  State<BlackListCreate> createState() => _BlackListCreateState();
 }
 
-class _TYJCreateState extends State<TYJCreate> {
+class _BlackListCreateState extends State<BlackListCreate> {
   TextEditingController? shortInfoController;
   TextEditingController? fullnameController;
   TextEditingController? jshshirController;
@@ -64,7 +64,7 @@ class _TYJCreateState extends State<TYJCreate> {
                         ),
                       ),
                       Text(
-                        "Shubxali shaxslar".toUpperCase(),
+                        "Qora Ro'yxat".toUpperCase(),
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 16,

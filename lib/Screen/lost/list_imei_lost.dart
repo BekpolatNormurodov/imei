@@ -203,7 +203,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
                 child: Container(
-                  height: 42,
+                  height: 0,
                   margin: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -221,9 +221,9 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                     unselectedLabelColor: Colors.black54,
                     tabs: [
                       TabItem(title: 'Ariza', count: 6),
-                      TabItem(title: 'Jinoyat', count: 3),
-                      TabItem(title: 'SHSH', count: 2),
-                      TabItem(title: 'Qidiruv', count: 4),
+                      // TabItem(title: 'Jinoyat', count: 3),
+                      // TabItem(title: 'SHSH', count: 2),
+                      // TabItem(title: 'Qidiruv', count: 4),
                     ],
                   ),
                 ),
@@ -233,9 +233,9 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
               child: TabBarView(
                 children: [
                   imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
                  ],
               ),
             )
@@ -244,130 +244,131 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal,
           onPressed: () {
-            showModalBottomSheet(
-              barrierColor: Colors.black.withOpacity(.5),
-              context: context,
-              builder: (builder) {
-                return StatefulBuilder(
-                  builder: (context, setState) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(10)),
-                        color: Color.fromRGBO(48, 48, 48, 1),
-                      ),
-                      height: 300,
-                      padding: EdgeInsets.symmetric(horizontal: 8),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Card(
-                            color: Color.fromRGBO(68, 68, 68, 1),
-                            child: GestureDetector(
-                              onTap: () => Get.off(ArizaCreate()),
-                              child: Container(
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.edit_document,
-                                    color: Colors.grey.shade200,
-                                  ),
-                                  title: Text(
-                                    "Ariza".toUpperCase(),
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 14),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 20,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Card(
-                            color: Color.fromRGBO(68, 68, 68, 1),
-                            child: GestureDetector(
-                              onTap: () => Get.off(JinoyatCreate()),
-                              child: Container(
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.edit_document,
-                                    color: Colors.grey.shade200,
-                                  ),
-                                  title: Text(
-                                    "Jinoyat".toUpperCase(),
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 14),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 20,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Card(
-                            color: Color.fromRGBO(68, 68, 68, 1),
-                            child: GestureDetector(
-                              onTap: () => Get.off(TYJCreate()),
-                              child: Container(
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.edit_document,
-                                    color: Colors.grey.shade200,
-                                  ),
-                                  title: Text(
-                                    "Shubxali shaxslar".toUpperCase(),
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 14),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 20,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Card(
-                            color: Color.fromRGBO(68, 68, 68, 1),
-                            child: GestureDetector(
-                              onTap: () => Get.off(QidiruvCreate()),
-                              child: Container(
-                                child: ListTile(
-                                  leading: Icon(
-                                    Icons.edit_document,
-                                    color: Colors.grey.shade200,
-                                  ),
-                                  title: Text(
-                                    "Qidiruv".toUpperCase(),
-                                    style: TextStyle(
-                                        color: Colors.grey.shade200,
-                                        fontSize: 14),
-                                  ),
-                                  trailing: Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 20,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              },
-            );
+           Get.to(ArizaCreate());
+          // showModalBottomSheet(
+          //     barrierColor: Colors.black.withOpacity(.5),
+          //     context: context,
+          //     builder: (builder) {
+          //       return StatefulBuilder(
+          //         builder: (context, setState) {
+          //           return Container(
+          //             decoration: BoxDecoration(
+          //               borderRadius:
+          //                   BorderRadius.vertical(top: Radius.circular(10)),
+          //               color: Color.fromRGBO(48, 48, 48, 1),
+          //             ),
+          //             height: 300,
+          //             padding: EdgeInsets.symmetric(horizontal: 8),
+          //             child: Column(
+          //               mainAxisAlignment: MainAxisAlignment.center,
+          //               children: [
+          //                 Card(
+          //                   color: Color.fromRGBO(68, 68, 68, 1),
+          //                   child: GestureDetector(
+          //                     onTap: () => Get.off(ArizaCreate()),
+          //                     child: Container(
+          //                       child: ListTile(
+          //                         leading: Icon(
+          //                           Icons.edit_document,
+          //                           color: Colors.grey.shade200,
+          //                         ),
+          //                         title: Text(
+          //                           "Ariza".toUpperCase(),
+          //                           style: TextStyle(
+          //                               color: Colors.grey.shade200,
+          //                               fontSize: 14),
+          //                         ),
+          //                         trailing: Icon(
+          //                           Icons.arrow_forward_ios,
+          //                           size: 20,
+          //                           color: Colors.grey,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //                 Card(
+          //                   color: Color.fromRGBO(68, 68, 68, 1),
+          //                   child: GestureDetector(
+          //                     onTap: () => Get.off(JinoyatCreate()),
+          //                     child: Container(
+          //                       child: ListTile(
+          //                         leading: Icon(
+          //                           Icons.edit_document,
+          //                           color: Colors.grey.shade200,
+          //                         ),
+          //                         title: Text(
+          //                           "Jinoyat".toUpperCase(),
+          //                           style: TextStyle(
+          //                               color: Colors.grey.shade200,
+          //                               fontSize: 14),
+          //                         ),
+          //                         trailing: Icon(
+          //                           Icons.arrow_forward_ios,
+          //                           size: 20,
+          //                           color: Colors.grey,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //                 Card(
+          //                   color: Color.fromRGBO(68, 68, 68, 1),
+          //                   child: GestureDetector(
+          //                     onTap: () => Get.off(TYJCreate()),
+          //                     child: Container(
+          //                       child: ListTile(
+          //                         leading: Icon(
+          //                           Icons.edit_document,
+          //                           color: Colors.grey.shade200,
+          //                         ),
+          //                         title: Text(
+          //                           "Shubxali shaxslar".toUpperCase(),
+          //                           style: TextStyle(
+          //                               color: Colors.grey.shade200,
+          //                               fontSize: 14),
+          //                         ),
+          //                         trailing: Icon(
+          //                           Icons.arrow_forward_ios,
+          //                           size: 20,
+          //                           color: Colors.grey,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //                 Card(
+          //                   color: Color.fromRGBO(68, 68, 68, 1),
+          //                   child: GestureDetector(
+          //                     onTap: () => Get.off(QidiruvCreate()),
+          //                     child: Container(
+          //                       child: ListTile(
+          //                         leading: Icon(
+          //                           Icons.edit_document,
+          //                           color: Colors.grey.shade200,
+          //                         ),
+          //                         title: Text(
+          //                           "Qidiruv".toUpperCase(),
+          //                           style: TextStyle(
+          //                               color: Colors.grey.shade200,
+          //                               fontSize: 14),
+          //                         ),
+          //                         trailing: Icon(
+          //                           Icons.arrow_forward_ios,
+          //                           size: 20,
+          //                           color: Colors.grey,
+          //                         ),
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ),
+          //               ],
+          //             ),
+          //           );
+          //         },
+          //       );
+          //     },
+          //   );
           },
           child: Icon(
             Icons.add,
@@ -380,18 +381,19 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
   }
 
   imeiList(List<Data>? data, defaultPinTheme, focusedBorderColor, fillColor) {
-    return Container(
+    data = data!.reversed.toList();
+    return  Container(
       width: double.infinity,
       height: double.infinity,
       child: LiveList.options(
         options: options,
-        itemCount: data!.length,
+        itemCount: data.length,
         padding: EdgeInsets.only(top: 10, bottom: 10),
         itemBuilder: (
           BuildContext context,
           int index,
           Animation<double> animation,
-        ) =>
+        ) => data![index].status == "yaratildi" ?
             FadeTransition(
           opacity: Tween<double>(
             begin: 0,
@@ -406,7 +408,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(ImeiOutput(data[index]));
+                  Get.to(ImeiOutput(data![index]));
                 },
                 child: Dismissible(
                   direction: DismissDirection.endToStart,
@@ -690,7 +692,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                     Navigator.of(Get.overlayContext!,
                                             rootNavigator: true)
                                         .pop();
-                                    Get.snackbar(data[index].imei!,
+                                    Get.snackbar(data![index].imei!,
                                         "Topilganlar ro'yxatiga qo'shildi.",
                                         backgroundColor: Colors.green);
                                   }
@@ -769,7 +771,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
               ),
             ),
           ),
-        ),
+        ) : Container(),
       ),
     );
   }
