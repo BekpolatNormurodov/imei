@@ -24,7 +24,8 @@ class AuthorizationPost {
         jsonDecode(data)["access"]
       );
       print(Hive.box("token").get("token"));
-      
+
+      // print(Hive.box("token").get("token"));
       return jsonDecode(data);
     }
   }

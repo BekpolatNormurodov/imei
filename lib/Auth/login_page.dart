@@ -8,6 +8,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+    final controller = InputController();
   TextEditingController telController = TextEditingController();
   TextEditingController jetonController = TextEditingController();
   bool enabletel = false;
@@ -218,6 +219,10 @@ class _LoginPageState extends State<LoginPage> {
         if (dataService['access'] == Hive.box("token").get("token")) {
           await Hive.box('data').put('phone', telController.text);
           await Hive.box('data').put('jeton', jetonController.text);
+          // if (telController.text.split(' ').join() == tel) {
+
+          // await Hive.box('data').put('phone', telController.text);
+          // await Hive.box('data').put('jeton', jetonController.text);
           enableButton = false;
           pinController.clear();
           _secoundCount = 60;
@@ -285,6 +290,7 @@ class _LoginPageState extends State<LoginPage> {
                                   enableButton =
                                       value! == '22222' ? true : false;
                                   setState(() {});
+                                  // print(enableButton);
                                   return value == '22222' ? null : 'Kod xato!';
                                 },
                                 hapticFeedbackType:
@@ -427,12 +433,46 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           if (enableButton!) {
                             _timer!.cancel();
-                            Get.off(AccountCreate());
-                            Navigator.of(Get.overlayContext!,
-                                    rootNavigator: true)
-                                .pop();
-                            Get.snackbar("", "Tori",
-                                backgroundColor: Colors.green);
+                            Get.offAll(AccountCreate());
+                            // screenLockCreate(
+                            //   useBlur: false,
+                            //   context: context,
+                            //   inputController: controller,
+                            //   title: Text("Ekranga Pin-kod yaratish."),
+                            //   confirmTitle: Text("Pin-kodni tasdiqlang."),
+                            //   onConfirmed: (matchedText) async {
+                            //     await Hive.box('data').put('lock', matchedText);
+                            //     Get.back();
+                            //   },
+                            //   footer: TextButton(
+                            //     onPressed: () {
+                            //       controller.unsetConfirmed();
+                            //     },
+                            //     child: const Text('Qayta kiritish'),
+                            //   ),
+                            // );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Ma'lumotlar saqlandi.",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.grey.shade300,
+                                  ),
+                                ),
+                                showCloseIcon: true,
+                                closeIconColor: Colors.teal.shade800,
+                                backgroundColor: Colors.teal.shade300,
+                              ),
+                            );
+
+                            // Get.off(AccountCreate());
+                            // Navigator.of(Get.overlayContext!,
+                            //         rootNavigator: true)
+                            //     .pop();
+                            // Get.snackbar("", "Tori",
+                            //     backgroundColor: Colors.green);
                           }
                         },
                         icon: Icon(Icons.check_circle,
@@ -503,3 +543,5 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
+
