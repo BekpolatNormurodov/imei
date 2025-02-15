@@ -244,7 +244,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal,
           onPressed: () {
-           Get.to(ArizaCreate());
+           Get.to(LostCreate());
           // showModalBottomSheet(
           //     barrierColor: Colors.black.withOpacity(.5),
           //     context: context,

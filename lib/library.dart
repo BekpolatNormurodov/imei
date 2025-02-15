@@ -25,7 +25,7 @@ export 'package:hive_flutter/hive_flutter.dart';
 export 'package:imei/Auth/login_page.dart';
 export 'package:imei/Package/animated_search_bar.dart';
 export 'package:imei/Screen/selection_page.dart';
-export 'package:imei/Screen/lost/create/ariza_create.dart';
+export 'package:imei/Screen/create/ariza_create.dart';
 export 'package:imei/Screen/found/list_imei_found.dart';
 export 'package:imei/Screen/lost/list_imei_lost.dart';
 export 'package:imei/Screen/account/account_create.dart';
@@ -33,9 +33,11 @@ export 'package:imei/Screen/account/account_page.dart';
 export 'package:imei/Screen/check/imei_input.dart';
 export 'package:imei/Screen/check/imei_output.dart';
 export 'package:imei/Screen/check/imei_edit.dart';
-export 'package:imei/Screen/lost/create/jinoyat_create.dart';
-export 'package:imei/Screen/lost/create/blacklist_create.dart';
-export 'package:imei/Screen/lost/create/qidiruv_create.dart';
+export 'package:imei/Screen/create/jinoyat_create.dart';
+export 'package:imei/Screen/create/blacklist_create.dart';
+export 'package:imei/Screen/create/qidiruv_create.dart';
+export 'package:imei/Screen/create/lost_create.dart';
+
 
 // API
 export 'package:imei/Api/account/account_model.dart';

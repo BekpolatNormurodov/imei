@@ -34,7 +34,6 @@ class AccountPost {
     });
 
     http.StreamedResponse response = await request.send();
-    print("${response.statusCode}  =============");
     if (response.statusCode == 201) {
       var data = await response.stream.bytesToString();
       return jsonDecode(data);
