@@ -76,7 +76,7 @@ class _LostCreateState extends State<LostCreate> {
                           "Yoqolgan buyumni xisobga qo'yish".toUpperCase(),
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              fontSize: 16,
+                              fontSize: 12,
                               color: Colors.grey.shade300,
                               letterSpacing: 1,
                               shadows: [
@@ -96,7 +96,7 @@ class _LostCreateState extends State<LostCreate> {
                       ? Text(
                           "* Qurilma egasining ma'lumotlari.",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 12,
                             fontStyle: FontStyle.italic,
                             color: Colors.teal.shade300,
                             letterSpacing: 1,
@@ -747,11 +747,11 @@ class _LostCreateState extends State<LostCreate> {
           child: DropdownButtonFormField(
             focusColor: Colors.transparent,
             hint: Text(
-              "Uyali telefon apparati".toUpperCase(),
+              "Tanlang...",
               style: TextStyle(
                 fontSize: 13,
-                color: Colors.grey.shade400,
-                letterSpacing: .5,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
               ),
             ),
             iconEnabledColor: Colors.grey.shade400,
@@ -778,6 +778,163 @@ class _LostCreateState extends State<LostCreate> {
           ),
         ),
         SizedBox(height: 12),
+       
+         Text(
+          "Tegishlilik:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+        ),
+        SizedBox(height: 2),
+        Container(
+          width: Get.width,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang...",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
+              ),
+            ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+            ),
+            items: [
+              rangiFunc("Jismoniy shaxs"),
+            ],
+            onChanged: (e) {
+              rangi = e!;
+              setState(() {});
+            },
+          ),
+        ),
+         SizedBox(height: 12),
+           Text(
+          "Xususiyatlari:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+        ),
+        SizedBox(height: 2),
+        Container(
+          width: Get.width,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang...",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
+              ),
+            ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+            ),
+            items: [
+              rangiFunc("Ekrani singan"),
+            ],
+            onChanged: (e) {
+              rangi = e!;
+              setState(() {});
+            },
+          ),
+        ),
+         SizedBox(height: 12),
+         Text(
+          "Ishlab chiqarilgan yili:",
+          style: TextStyle(color: Colors.grey),
+        ),
+        Container(
+          height: 48,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.r)),
+          child: TextFormField(
+            controller: zavodController,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              contentPadding: EdgeInsets.only(
+                left: 12,
+                right: 10,
+                top: 12,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.color_lens_outlined,
+                size: 24,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 12),
+        Text(
+          "Buyum foto surati",
+          style: TextStyle(color: Colors.grey),
+        ),
+        Container(
+          height: 48,
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.r)),
+          child: TextFormField(
+            controller: zavodController,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              contentPadding: EdgeInsets.only(
+                left: 12,
+                right: 10,
+                top: 12,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.color_lens_outlined,
+                size: 24,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 12),
         ],
     );
   }
@@ -786,8 +943,168 @@ class _LostCreateState extends State<LostCreate> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+          Text(
+          "Xisobga qo'yish sababi:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+        ),
+        SizedBox(height: 2),
+        Container(
+          width: Get.width,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang...",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
+              ),
+            ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+            ),
+            items: [
+              rangiFunc("Ekrani singan"),
+            ],
+            onChanged: (e) {
+              rangi = e!;
+              setState(() {});
+            },
+          ),
+        ),
+         SizedBox(height: 12),
+           Text(
+          "Xisob turi:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
+        ),
+        SizedBox(height: 2),
+        Container(
+          width: Get.width,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang...",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
+              ),
+            ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+            ),
+            items: [
+              rangiFunc("Ekrani singan"),
+            ],
+            onChanged: (e) {
+              rangi = e!;
+              setState(() {});
+            },
+          ),
+        ),
+         SizedBox(height: 12),
         Text(
-          "F.I.SH:",
+          "Xujjat raqami (22387/2024):",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
+        ),
+        Container(
+          height: 48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: TextFormField(
+            controller: fullnameController,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              contentPadding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 12,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.person,
+                size: 24,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 12),
+        Text(
+          "Xujjat yurutilgan sanasi:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
+        ),
+        Container(
+          height: 48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: TextFormField(
+            controller: fullnameController,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              contentPadding: EdgeInsets.only(
+                left: 10,
+                right: 10,
+                top: 12,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.person,
+                size: 24,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 12),
+        Text(
+          "Tashkilot:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
         ),
         Container(
@@ -825,31 +1142,28 @@ class _LostCreateState extends State<LostCreate> {
             ),
           ),
         ),
-        SizedBox(height: 16),
-        Text(
-          "Tel:",
-          style: TextStyle(color: Colors.grey.shade400),
+        SizedBox(height: 12),
+          Text(
+          "Xudud:",
+          style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
+        SizedBox(height: 2),
         Container(
-          height: 48,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: TextFormField(
-            inputFormatters: [
-              TextInputMask(
-                mask: '\\ (99) 999-99-99',
-                placeholder: '_ ',
-                maxPlaceHolders: 9,
-              )
-            ],
-            controller: numberController,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
+          width: Get.width,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang...",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
+              ),
+            ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey.shade300),
@@ -858,70 +1172,19 @@ class _LostCreateState extends State<LostCreate> {
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey),
               ),
-              contentPadding: EdgeInsets.only(
-                left: 4,
-                right: 10,
-                top: 12,
-              ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.phone,
-                size: 24,
-                color: Colors.grey.shade400,
-              ),
             ),
-          ),
-        ),
-        SizedBox(height: 16),
-        Text(
-          "JSHSHIR:",
-          style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
-        ),
-        Container(
-          height: 48,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: TextFormField(
-            inputFormatters: [
-              TextInputMask(
-                mask: '\\ 99999999999999',
-                placeholder: '_ ',
-                maxPlaceHolders: 14,
-              )
+            items: [
+              rangiFunc("Ekrani singan"),
             ],
-            controller: jshshirController,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.number,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade200),
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: BorderSide(color: Colors.grey.shade300),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(6),
-                borderSide: BorderSide(color: Colors.grey),
-              ),
-              contentPadding: EdgeInsets.only(
-                left: 4,
-                right: 10,
-                top: 12,
-              ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.document_scanner,
-                size: 22,
-                color: Colors.grey.shade400,
-              ),
-            ),
+            onChanged: (e) {
+              rangi = e!;
+              setState(() {});
+            },
           ),
         ),
-        SizedBox(height: 16),
+         SizedBox(height: 12),
         Text(
-          "Shakl1 №:",
+          "Organ:",
           style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
@@ -933,7 +1196,7 @@ class _LostCreateState extends State<LostCreate> {
             controller: shakl1Controller,
             cursorColor: Colors.grey.shade200,
             cursorWidth: 1,
-            keyboardType: TextInputType.number,
+            keyboardType: TextInputType.name,
             textInputAction: TextInputAction.next,
             style: TextStyle(
               fontSize: 14,
@@ -962,6 +1225,136 @@ class _LostCreateState extends State<LostCreate> {
             ),
           ),
         ),
+         SizedBox(height: 12),
+        Text(
+          "Modda:",
+          style: TextStyle(color: Colors.grey.shade400),
+        ),
+        Container(
+          height: 48, 
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: TextFormField(
+            controller: shakl1Controller,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey.shade200,
+            ),
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              contentPadding: EdgeInsets.only(
+                left: 12,
+                right: 10,
+                top: 12,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.discount,
+                size: 22,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ),
+         SizedBox(height: 12),
+        Text(
+          "Qism:",
+          style: TextStyle(color: Colors.grey.shade400),
+        ),
+        Container(
+          height: 48, 
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: TextFormField(
+            controller: shakl1Controller,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.phone,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey.shade200,
+            ),
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              contentPadding: EdgeInsets.only(
+                left: 12,
+                right: 10,
+                top: 12,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.discount,
+                size: 22,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ),
+         SizedBox(height: 12),
+        Text(
+          "Band:",
+          style: TextStyle(color: Colors.grey.shade400),
+        ),
+        Container(
+          height: 48, 
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(6.r),
+          ),
+          child: TextFormField(
+            controller: shakl1Controller,
+            cursorColor: Colors.grey.shade200,
+            cursorWidth: 1,
+            keyboardType: TextInputType.name,
+            textInputAction: TextInputAction.next,
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey.shade200,
+            ),
+            decoration: InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey.shade300),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(6),
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              contentPadding: EdgeInsets.only(
+                left: 12,
+                right: 10,
+                top: 12,
+              ),
+              border: InputBorder.none,
+              suffixIcon: Icon(
+                Icons.discount,
+                size: 22,
+                color: Colors.grey.shade400,
+              ),
+            ),
+          ),
+        ),
+         SizedBox(height: 16),
       ],
     );
   }
