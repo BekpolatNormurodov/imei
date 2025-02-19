@@ -49,4 +49,8 @@ export 'package:imei/Api/ariza/ariza_model.dart';
 export 'package:imei/Api/ariza/ariza_service.dart';
 export 'package:imei/Api/ariza/ariza_provider.dart';
 export 'package:imei/Api/ariza/ariza_post.dart';
+export 'package:imei/Api/its/its_provider.dart';
+export 'package:imei/Api/its/its_model.dart';
+
+
 

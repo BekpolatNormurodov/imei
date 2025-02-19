@@ -10,8 +10,11 @@ main(List<String> args) async {
         ChangeNotifierProvider<AccountProvider>(
           create: (context) => AccountProvider(),
         ),
-        ChangeNotifierProvider<ArizaProvider>(
-          create: (context) => ArizaProvider(),
+        // ChangeNotifierProvider<ArizaProvider>(
+        //   create: (context) => ArizaProvider(),
+        // ),
+         ChangeNotifierProvider<ITSProvider>(
+          create: (context) => ITSProvider(),
         ),
       ],
       child: MyApp(),
@@ -44,8 +47,6 @@ class _MyAppState extends State<MyApp> {
             // ),
             home: LoginPage(),
             //  home: Hive.box('data').isNotEmpty ? LockPage() : LoginPage(),
-
-
           ),
         );
       },

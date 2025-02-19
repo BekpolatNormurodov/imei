@@ -1,3 +1,5 @@
+import 'package:imei/Api/its/its_post.dart';
+import 'package:imei/Screen/exel/import_excel.dart';
 import 'package:imei/library.dart';
 
 class LostCreate extends StatefulWidget {
@@ -11,7 +13,7 @@ class _LostCreateState extends State<LostCreate> {
   String unvon = "";
   String nomlanish = "";
   String rusumi = "";
-   String rangi = "";
+  String rangi = "";
 
   TextEditingController? imeiController;
   TextEditingController? seriaController;
@@ -71,12 +73,12 @@ class _LostCreateState extends State<LostCreate> {
                         ),
                       ),
                       Container(
-                        width: Get.width - 130.w,
+                        width: Get.width - 160.w,
                         child: Text(
                           "Yoqolgan buyumni xisobga qo'yish".toUpperCase(),
                           style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              fontSize: 12,
+                              fontSize: 14,
                               color: Colors.grey.shade300,
                               letterSpacing: 1,
                               shadows: [
@@ -88,23 +90,12 @@ class _LostCreateState extends State<LostCreate> {
                           textAlign: TextAlign.center,
                         ),
                       ),
-                      Container(width: 30),
+                      Container(
+                        child: IconButton(onPressed: ()=>ImportExcel(), icon: Icon(Icons.cloud_download , color: Colors.white, size: 36,)),
+                      ),
                     ],
                   ),
                   SizedBox(height: page == 2 ? 10.h : 0),
-                  page == 2
-                      ? Text(
-                          "* Qurilma egasining ma'lumotlari.",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.teal.shade300,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w500,
-                          ),
-                          textAlign: TextAlign.start,
-                        )
-                      : Container(),
                   SizedBox(height: 14.h),
                   page == 1 ? imei() : owner()
                 ],
@@ -290,14 +281,9 @@ class _LostCreateState extends State<LostCreate> {
                                 height: 48,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
-                                    await AccountPost().accountPost(
+                                    await ITSPost().itsPost(
                                       imei: imeiController!.text,
-                                      last_simcard: simController!.text,
                                       model: modelController!.text,
-                                      color: zavodController!.text,
-                                      jshir: jshshirController!.text,
-                                      phone_number: simController!.text,
-                                      fish: fullnameController!.text,
                                     );
                                     // if (dataService['status']) {
                                     //   Get.off(ListImImeiLost());
@@ -737,7 +723,7 @@ class _LostCreateState extends State<LostCreate> {
           ),
         ),
         SizedBox(height: 12),
-         Text(
+        Text(
           "Rangi:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
@@ -778,8 +764,7 @@ class _LostCreateState extends State<LostCreate> {
           ),
         ),
         SizedBox(height: 12),
-       
-         Text(
+        Text(
           "Tegishlilik:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
@@ -818,8 +803,8 @@ class _LostCreateState extends State<LostCreate> {
             },
           ),
         ),
-         SizedBox(height: 12),
-           Text(
+        SizedBox(height: 12),
+        Text(
           "Xususiyatlari:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
@@ -858,8 +843,8 @@ class _LostCreateState extends State<LostCreate> {
             },
           ),
         ),
-         SizedBox(height: 12),
-         Text(
+        SizedBox(height: 12),
+        Text(
           "Ishlab chiqarilgan yili:",
           style: TextStyle(color: Colors.grey),
         ),
@@ -935,7 +920,7 @@ class _LostCreateState extends State<LostCreate> {
           ),
         ),
         SizedBox(height: 12),
-        ],
+      ],
     );
   }
 
@@ -943,7 +928,7 @@ class _LostCreateState extends State<LostCreate> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-          Text(
+        Text(
           "Xisobga qo'yish sababi:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
@@ -982,8 +967,8 @@ class _LostCreateState extends State<LostCreate> {
             },
           ),
         ),
-         SizedBox(height: 12),
-           Text(
+        SizedBox(height: 12),
+        Text(
           "Xisob turi:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
@@ -1022,7 +1007,7 @@ class _LostCreateState extends State<LostCreate> {
             },
           ),
         ),
-         SizedBox(height: 12),
+        SizedBox(height: 12),
         Text(
           "Xujjat raqami (22387/2024):",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 13),
@@ -1143,7 +1128,7 @@ class _LostCreateState extends State<LostCreate> {
           ),
         ),
         SizedBox(height: 12),
-          Text(
+        Text(
           "Xudud:",
           style: TextStyle(color: Colors.grey.shade400, fontSize: 14),
         ),
@@ -1182,13 +1167,13 @@ class _LostCreateState extends State<LostCreate> {
             },
           ),
         ),
-         SizedBox(height: 12),
+        SizedBox(height: 12),
         Text(
           "Organ:",
           style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
-          height: 48, 
+          height: 48,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6.r),
           ),
@@ -1225,27 +1210,28 @@ class _LostCreateState extends State<LostCreate> {
             ),
           ),
         ),
-         SizedBox(height: 12),
+        SizedBox(height: 12),
         Text(
           "Modda:",
           style: TextStyle(color: Colors.grey.shade400),
         ),
+        SizedBox(height: 2),
         Container(
-          height: 48, 
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: TextFormField(
-            controller: shakl1Controller,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade200,
+          width: Get.width,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang...",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
+              ),
             ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey.shade300),
@@ -1254,41 +1240,38 @@ class _LostCreateState extends State<LostCreate> {
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey),
               ),
-              contentPadding: EdgeInsets.only(
-                left: 12,
-                right: 10,
-                top: 12,
-              ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.discount,
-                size: 22,
-                color: Colors.grey.shade400,
-              ),
             ),
+            items: [
+              rangiFunc("168"),
+            ],
+            onChanged: (e) {
+              rangi = e!;
+              setState(() {});
+            },
           ),
         ),
-         SizedBox(height: 12),
+        SizedBox(height: 12),
         Text(
           "Qism:",
           style: TextStyle(color: Colors.grey.shade400),
         ),
+        SizedBox(height: 2),
         Container(
-          height: 48, 
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.r),
-          ),
-          child: TextFormField(
-            controller: shakl1Controller,
-            cursorColor: Colors.grey.shade200,
-            cursorWidth: 1,
-            keyboardType: TextInputType.phone,
-            textInputAction: TextInputAction.next,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade200,
+          width: Get.width,
+          child: DropdownButtonFormField(
+            focusColor: Colors.transparent,
+            hint: Text(
+              "Tanlang...",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.grey.shade600,
+                letterSpacing: .8,
+              ),
             ),
+            iconEnabledColor: Colors.grey.shade400,
+            dropdownColor: Color.fromRGBO(80, 80, 80, 1),
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.only(left: 14, right: 14),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey.shade300),
@@ -1297,27 +1280,23 @@ class _LostCreateState extends State<LostCreate> {
                 borderRadius: BorderRadius.circular(6),
                 borderSide: BorderSide(color: Colors.grey),
               ),
-              contentPadding: EdgeInsets.only(
-                left: 12,
-                right: 10,
-                top: 12,
-              ),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.discount,
-                size: 22,
-                color: Colors.grey.shade400,
-              ),
             ),
+            items: [
+              rangiFunc("3-qismi"),
+            ],
+            onChanged: (e) {
+              rangi = e!;
+              setState(() {});
+            },
           ),
         ),
-         SizedBox(height: 12),
+        SizedBox(height: 12),
         Text(
           "Band:",
           style: TextStyle(color: Colors.grey.shade400),
         ),
         Container(
-          height: 48, 
+          height: 48,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6.r),
           ),
@@ -1354,7 +1333,7 @@ class _LostCreateState extends State<LostCreate> {
             ),
           ),
         ),
-         SizedBox(height: 16),
+        SizedBox(height: 16),
       ],
     );
   }
@@ -1383,7 +1362,7 @@ class _LostCreateState extends State<LostCreate> {
         value: rusumi,
         onTap: () {},
       );
-      DropdownMenuItem rangiFunc(rangi) => DropdownMenuItem(
+  DropdownMenuItem rangiFunc(rangi) => DropdownMenuItem(
         child: Text(
           rangi.toUpperCase(),
           style: TextStyle(fontSize: 13, color: Colors.grey.shade300),

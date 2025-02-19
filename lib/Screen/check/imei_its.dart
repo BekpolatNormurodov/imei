@@ -1,14 +1,14 @@
-import 'package:imei/Screen/check/imei_its.dart';
 import 'package:imei/library.dart';
 
-class ListImImeiLost extends StatefulWidget {
-  ListImImeiLost({super.key});
+class ImeiITS extends StatefulWidget {
+  DeviceData? data;
+  ImeiITS(this.data);
 
   @override
-  State<ListImImeiLost> createState() => _ListImImeiLostState();
+  State<ImeiITS> createState() => _ImeiITSState();
 }
 
-class _ListImImeiLostState extends State<ListImImeiLost> {
+class _ImeiITSState extends State<ImeiITS> {
   late final SmsRetriever smsRetriever;
   late final TextEditingController pinController;
   late final FocusNode focusNode;
@@ -20,58 +20,9 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
   int _minutCount = 2;
 
   bool codeSend = false;
-  int selectIndex = 1;
-
-  final options = LiveOptions(
-    delay: Duration(milliseconds: 30),
-    showItemInterval: Duration(milliseconds: 40),
-    showItemDuration: Duration(milliseconds: 300),
-    visibleFraction: 0.05,
-    reAnimateOnVisibility: false,
-  );
-
-  // ArizaProvider? arizaProvider;
-  ITSProvider? itsProvider;
-
-
-  @override
-  void setState(VoidCallback fn) {
-    if (mounted) {
-      super.setState(fn);
-    }
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   if (kIsWeb) {
-  //     BrowserContextMenu.disableContextMenu();
-  //   }
-  //   formKey = GlobalKey<FormState>();
-  //   pinController = TextEditingController();
-  //   focusNode = FocusNode();
-
-  //   /// In case you need an SMS autofill feature
-  //   smsRetriever = SmsRetrieverImpl(
-  //     SmartAuth(),
-  //   );
-
-  //   arizaProvider = context.read<ArizaProvider>();
-  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-  //     arizaProvider!.getData();
-  //     _timer = Timer.periodic(Duration(seconds: 10), (timer) {
-  //       arizaProvider!.getData();
-  //     });
-  //   });
-  //   arizaProvider?.addListener(() {
-  //     setState(() {});
-  //   });
-  // }
-
 
   @override
   void initState() {
-    super.initState();
     if (kIsWeb) {
       BrowserContextMenu.disableContextMenu();
     }
@@ -83,17 +34,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     smsRetriever = SmsRetrieverImpl(
       SmartAuth(),
     );
-
-    itsProvider = context.read<ITSProvider>();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      itsProvider!.getData();
-      _timer = Timer.periodic(Duration(seconds: 10), (timer) {
-        itsProvider!.getData();
-      });
-    });
-    itsProvider?.addListener(() {
-      setState(() {});
-    });
+    super.initState();
   }
 
   @override
@@ -103,7 +44,6 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     }
     pinController.dispose();
     focusNode.dispose();
-
     _timer!.cancel();
     setState(() {});
     super.dispose();
@@ -127,318 +67,113 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
         border: Border.all(color: borderColor),
       ),
     );
-
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
+    return Scaffold(
+      backgroundColor: Color.fromRGBO(68, 68, 68, 1),
+      appBar: AppBar(
         backgroundColor: Color.fromRGBO(68, 68, 68, 1),
-        appBar: AppBar(
-          backgroundColor: Colors.teal,
-          leading: IconButton(
-            onPressed: () => Get.offAll(SelectionPage()),
+        leading: IconButton(
+            onPressed: () => Get.back(),
             icon: Icon(
               Icons.arrow_back,
-              color: Colors.grey.shade200,
+              color: Colors.grey.shade300,
+            )),
+        title: Text(
+          "Qurilma Ma'lumotlari".toUpperCase(),
+          style: TextStyle(
+            color: Colors.grey.shade200,
+            fontSize: 15,
+            wordSpacing: 2,
+            letterSpacing: .5,
+            fontWeight: FontWeight.w600,
+            shadows: [
+              BoxShadow(
+                offset: Offset(1, 1),
+                color: Colors.black,
+                blurRadius: 8,
+              )
+            ],
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Get.off(ImeiEdit());
+            },
+            icon: Container(
+              padding: EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.tealAccent.shade700),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: Icon(
+                Icons.comment,
+                color: Colors.tealAccent.shade700,
+                size: 22,
+              ),
             ),
           ),
-          title: AnimatedSearchBar(
-              label: "YO'QOLGAN QURILMALAR",
-              controller: TextEditingController(),
-              closeIcon: Icon(
-                Icons.close,
-                color: Colors.grey.shade200,
-                key: ValueKey('close'),
-              ),
-              searchIcon: Icon(
-                Icons.search,
-                color: Colors.grey.shade200,
-                key: ValueKey('search'),
-              ),
-              labelStyle: TextStyle(
-                color: Colors.grey.shade200,
-                fontSize: 15,
-                wordSpacing: 2,
-                letterSpacing: .5,
-                fontWeight: FontWeight.w600,
-                shadows: [
-                  BoxShadow(
-                    offset: Offset(1, 1),
-                    color: Colors.black,
-                    blurRadius: 8,
-                  )
-                ],
-              ),
-              searchStyle:
-                  const TextStyle(color: Colors.white, letterSpacing: 1),
-              cursorColor: Colors.white,
-              textInputAction: TextInputAction.done,
-              searchDecoration: const InputDecoration(
-                hintText: 'Search',
-                alignLabelWithHint: true,
-                fillColor: Colors.white,
-                focusColor: Colors.white,
-                hintStyle: TextStyle(color: Colors.white70),
-                border: InputBorder.none,
-              ),
-              onChanged: (value) {
-                debugPrint('value on Change');
-                setState(() {
-                  // searchText = value;
-                });
-              },
-              onFieldSubmitted: (value) {
-                debugPrint('value on Field Submitted');
-                setState(() {
-                  // searchText = value;
-                });
-              }),
-        ),
-        body: Column(
-          children: [
-            PreferredSize(
-              preferredSize: const Size.fromHeight(40),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
+          SizedBox(width: 8),
+        ],
+        centerTitle: true,
+      ),
+      body: Container(
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Material(
+                color: Color.fromRGBO(68, 68, 68, 1),
+                borderRadius: BorderRadius.circular(8),
+                elevation: 2,
                 child: Container(
-                  height: 0,
-                  margin: EdgeInsets.symmetric(horizontal: 6, vertical: 12),
+                  width: Get.width - 28,
+                  height: Get.height - 210,
+                  margin: EdgeInsets.only(top: 10),
+                  padding: EdgeInsets.only(left: 20, right: 10, top: 12),
                   decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    color: Colors.teal.shade200,
+                    color: Color.fromRGBO(80, 80, 80, 1),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  child: TabBar(
-                    labelPadding: EdgeInsets.zero,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    dividerColor: Colors.transparent,
-                    indicator: BoxDecoration(
-                      color: Colors.teal.shade600,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _box("IMEI:", widget.data!.imei),
+                        _box("IMEI:", widget.data!.imei),
+                        _box("Modeli:", widget.data!.model),
+                        _box("IMEI:", widget.data!.imei),
+                        Container(
+                          margin: EdgeInsets.only(top: 40),
+                          child: Text(
+                            "* Qurilma egasining ma'lumotlari.",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.tealAccent.shade700,
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                        ),
+                        _box("IMEI:", widget.data!.imei),
+                        _box("IMEI:", widget.data!.imei),
+                        _box("Modeli:", widget.data!.model),
+                       _box("IMEI:", widget.data!.imei),
+                      
+                      ],
                     ),
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.black54,
-                    tabs: [
-                      TabItem(title: 'Ariza', count: 6),
-                      // TabItem(title: 'Jinoyat', count: 3),
-                      // TabItem(title: 'SHSH', count: 2),
-                      // TabItem(title: 'Qidiruv', count: 4),
-                    ],
                   ),
                 ),
               ),
-            ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  // imeiList(arizaProvider!.data!.data!, defaultPinTheme, focusedBorderColor, fillColor),
-                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(itsProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                 ],
-              ),
-            )
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.teal,
-          onPressed: () {
-           Get.to(LostCreate());
-          // showModalBottomSheet(
-          //     barrierColor: Colors.black.withOpacity(.5),
-          //     context: context,
-          //     builder: (builder) {
-          //       return StatefulBuilder(
-          //         builder: (context, setState) {
-          //           return Container(
-          //             decoration: BoxDecoration(
-          //               borderRadius:
-          //                   BorderRadius.vertical(top: Radius.circular(10)),
-          //               color: Color.fromRGBO(48, 48, 48, 1),
-          //             ),
-          //             height: 300,
-          //             padding: EdgeInsets.symmetric(horizontal: 8),
-          //             child: Column(
-          //               mainAxisAlignment: MainAxisAlignment.center,
-          //               children: [
-          //                 Card(
-          //                   color: Color.fromRGBO(68, 68, 68, 1),
-          //                   child: GestureDetector(
-          //                     onTap: () => Get.off(ArizaCreate()),
-          //                     child: Container(
-          //                       child: ListTile(
-          //                         leading: Icon(
-          //                           Icons.edit_document,
-          //                           color: Colors.grey.shade200,
-          //                         ),
-          //                         title: Text(
-          //                           "Ariza".toUpperCase(),
-          //                           style: TextStyle(
-          //                               color: Colors.grey.shade200,
-          //                               fontSize: 14),
-          //                         ),
-          //                         trailing: Icon(
-          //                           Icons.arrow_forward_ios,
-          //                           size: 20,
-          //                           color: Colors.grey,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 Card(
-          //                   color: Color.fromRGBO(68, 68, 68, 1),
-          //                   child: GestureDetector(
-          //                     onTap: () => Get.off(JinoyatCreate()),
-          //                     child: Container(
-          //                       child: ListTile(
-          //                         leading: Icon(
-          //                           Icons.edit_document,
-          //                           color: Colors.grey.shade200,
-          //                         ),
-          //                         title: Text(
-          //                           "Jinoyat".toUpperCase(),
-          //                           style: TextStyle(
-          //                               color: Colors.grey.shade200,
-          //                               fontSize: 14),
-          //                         ),
-          //                         trailing: Icon(
-          //                           Icons.arrow_forward_ios,
-          //                           size: 20,
-          //                           color: Colors.grey,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 Card(
-          //                   color: Color.fromRGBO(68, 68, 68, 1),
-          //                   child: GestureDetector(
-          //                     onTap: () => Get.off(TYJCreate()),
-          //                     child: Container(
-          //                       child: ListTile(
-          //                         leading: Icon(
-          //                           Icons.edit_document,
-          //                           color: Colors.grey.shade200,
-          //                         ),
-          //                         title: Text(
-          //                           "Shubxali shaxslar".toUpperCase(),
-          //                           style: TextStyle(
-          //                               color: Colors.grey.shade200,
-          //                               fontSize: 14),
-          //                         ),
-          //                         trailing: Icon(
-          //                           Icons.arrow_forward_ios,
-          //                           size: 20,
-          //                           color: Colors.grey,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 Card(
-          //                   color: Color.fromRGBO(68, 68, 68, 1),
-          //                   child: GestureDetector(
-          //                     onTap: () => Get.off(QidiruvCreate()),
-          //                     child: Container(
-          //                       child: ListTile(
-          //                         leading: Icon(
-          //                           Icons.edit_document,
-          //                           color: Colors.grey.shade200,
-          //                         ),
-          //                         title: Text(
-          //                           "Qidiruv".toUpperCase(),
-          //                           style: TextStyle(
-          //                               color: Colors.grey.shade200,
-          //                               fontSize: 14),
-          //                         ),
-          //                         trailing: Icon(
-          //                           Icons.arrow_forward_ios,
-          //                           size: 20,
-          //                           color: Colors.grey,
-          //                         ),
-          //                       ),
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ),
-          //           );
-          //         },
-          //       );
-          //     },
-          //   );
-          },
-          child: Icon(
-            Icons.add,
-            size: 30,
-            color: Colors.grey.shade200,
-          ),
-        ),
-      ),
-    );
-  }
-
-  imeiList(List<DeviceData>? data, defaultPinTheme, focusedBorderColor, fillColor) {
-    // data = data!.reversed.toList();
-    // print(data!.length);
-    return  Container(
-      width: double.infinity,
-      height: double.infinity,
-      child: LiveList.options(
-        options: options,
-        itemCount: data!.length,
-        padding: EdgeInsets.only(top: 10, bottom: 10),
-        itemBuilder: (
-          BuildContext context,
-          int index,
-          Animation<double> animation,
-        // ) => data![index].status == "yaratildi" ?
-        )=> true ?
-            FadeTransition(
-          opacity: Tween<double>(
-            begin: 0,
-            end: 1,
-          ).animate(animation),
-          child: SlideTransition(
-            position: Tween<Offset>(
-              begin: Offset(0, -0.1),
-              end: Offset.zero,
-            ).animate(animation),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(ImeiITS(data[index]));
-                },
-                child: Dismissible(
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 0, vertical: 6),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        // Icon(Icons.keyboard_double_arrow_left, color: Colors.lightBlueAccent),
-                        Text(
-                          "Topildi",
-                          style: TextStyle(
-                              color: Colors.tealAccent,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(width: 10),
-                        Icon(Icons.check_circle_outline,
-                            color: Colors.tealAccent, size: 26),
-                        SizedBox(width: 20),
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.teal.shade600,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  key: ValueKey<String>(data[index].imei!),
-                  onDismissed: (DismissDirection direction) {
+              Container(
+                width: Get.width - 32,
+                height: 48,
+                margin: EdgeInsets.only(bottom: 16),
+                child: ElevatedButton.icon(
+                  onPressed: () async {
                     enableButton = false;
                     pinController.clear();
                     // _timer!.cancel();
@@ -693,7 +428,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                                     Navigator.of(Get.overlayContext!,
                                             rootNavigator: true)
                                         .pop();
-                                    Get.snackbar(data[index].imei!,
+                                    Get.snackbar("12345678901234",
                                         "Topilganlar ro'yxatiga qo'shildi.",
                                         backgroundColor: Colors.green);
                                   }
@@ -738,115 +473,51 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                       },
                     );
                   },
-                  child: Stack(
-                    children: [
-                      Card(
-                        margin:
-                            EdgeInsets.symmetric(horizontal: 0, vertical: 6),
-                        color: Colors.grey.shade200,
-                        child: ListTile(
-                          leading:
-                              Image.asset("assets/icons/phone.png", width: 36),
-                          title: Text(
-                            data[index].imei!,
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.black,
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 9,
-                        bottom: 9,
-                        child: Text(
-                          "22:19",
-                          style: TextStyle(fontSize: 11, color: Colors.black45),
-                        ),
-                      )
-                    ],
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
+                  label: Text(
+                    "TOPILDI",
+                    style: TextStyle(
+                      color: Colors.grey.shade300,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: .5,
+                    ),
+                  ),
+                  icon: Icon(Icons.check_circle, color: Colors.grey.shade200),
                 ),
               ),
-            ),
+            ],
           ),
-        ) : Container(),
+        ),
       ),
     );
   }
-}
 
-class SmsRetrieverImpl implements SmsRetriever {
-  const SmsRetrieverImpl(this.smartAuth);
-
-  final SmartAuth smartAuth;
-
-  @override
-  Future<void> dispose() {
-    return smartAuth.removeSmsListener();
-  }
-
-  @override
-  Future<String?> getSmsCode() async {
-    final signature = await smartAuth.getAppSignature();
-    debugPrint('App Signature: $signature');
-    final res = await smartAuth.getSmsCode(
-      useUserConsentApi: true,
-    );
-    if (res.succeed && res.codeFound) {
-      return res.code!;
-    }
-    return null;
-  }
-
-  @override
-  bool get listenForMultipleSms => false;
-}
-
-class TabItem extends StatelessWidget {
-  final String title;
-  final int count;
-
-  const TabItem({
-    super.key,
-    required this.title,
-    required this.count,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Tab(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+  Widget _box(request, response) {
+    return Container(
+      margin: EdgeInsets.only(top: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            request,
+            style: TextStyle(
+                color: Colors.grey, fontSize: 15, fontWeight: FontWeight.w500),
           ),
-          count > 0
-              ? Container(
-                  margin: const EdgeInsetsDirectional.only(start: 5),
-                  padding: const EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.green.shade600,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      count > 9 ? "9+" : count.toString(),
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                      ),
-                    ),
-                  ),
-                )
-              : const SizedBox(width: 0, height: 0),
+          Text(
+            response,
+            style: TextStyle(
+                color: Colors.grey.shade300,
+                fontSize: 15,
+                fontWeight: FontWeight.w500),
+          ),
         ],
-      ),  
+      ),
     );
   }
 }
