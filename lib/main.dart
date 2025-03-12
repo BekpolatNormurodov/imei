@@ -1,3 +1,4 @@
+import 'package:imei/Screen/exel/get_excel.dart';
 import 'package:imei/library.dart';
 
 main(List<String> args) async {
@@ -45,7 +46,7 @@ class _MyAppState extends State<MyApp> {
             // theme: ThemeData(
             //   textTheme: GoogleFonts.slabo13pxTextTheme(),
             // ),
-            home: LoginPage(),
+            home: GetExcel(),
             //  home: Hive.box('data').isNotEmpty ? LockPage() : LoginPage(),
           ),
         );

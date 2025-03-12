@@ -204,6 +204,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBtn(defaultPinTheme, focusedBorderColor, fillColor) {
     return ElevatedButton(
       onPressed: () async {
+        print("object");
         var dataService = await AuthorizationPost().authorizationPost(
             phone: telController.text
                 .split('-')

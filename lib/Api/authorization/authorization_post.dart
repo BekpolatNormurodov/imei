@@ -6,24 +6,25 @@ class AuthorizationPost {
     required String phone,
     required String jton,
   }) async {
-    var request = await http.MultipartRequest(
-      'post',
-      Uri.parse('http://imei.yacdem.uz/api/v1/token/'),
+    var response = await http.post(
+      Uri.parse('https://imei.yacdem.uz/api/v1/token/'),
+      body: jsonEncode({'username': phone,
+      'password': jton,})
     );
 
-    request.fields.addAll({
-      'username': phone,
-      'password': jton,
-    });
+    // request.fields.addAll({
+    //   'username': phone,
+    //   'password': jton,
+    // });
 
-    http.StreamedResponse response = await request.send();
+    // http.StreamedResponse response = await request.send();
+      print(response.statusCode);
     if (response.statusCode >= 200 || response.statusCode < 300) {
-      var data = await response.stream.bytesToString();
+      var data =  response.body;
       await Hive.box('token').put(
         'token',
         jsonDecode(data)["access"]
       );
-      print(Hive.box("token").get("token"));
 
       // print(Hive.box("token").get("token"));
       return jsonDecode(data);
