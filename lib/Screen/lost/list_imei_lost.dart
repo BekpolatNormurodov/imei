@@ -1,4 +1,3 @@
-import 'package:imei/Screen/check/imei_its.dart';
 import 'package:imei/library.dart';
 
 class ListImImeiLost extends StatefulWidget {
@@ -30,8 +29,8 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     reAnimateOnVisibility: false,
   );
 
-  // ArizaProvider? arizaProvider;
-  ITSProvider? itsProvider;
+  ArizaProvider? arizaProvider;
+  // ITSProvider? itsProvider;
 
 
   @override
@@ -40,34 +39,6 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
       super.setState(fn);
     }
   }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   if (kIsWeb) {
-  //     BrowserContextMenu.disableContextMenu();
-  //   }
-  //   formKey = GlobalKey<FormState>();
-  //   pinController = TextEditingController();
-  //   focusNode = FocusNode();
-
-  //   /// In case you need an SMS autofill feature
-  //   smsRetriever = SmsRetrieverImpl(
-  //     SmartAuth(),
-  //   );
-
-  //   arizaProvider = context.read<ArizaProvider>();
-  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-  //     arizaProvider!.getData();
-  //     _timer = Timer.periodic(Duration(seconds: 10), (timer) {
-  //       arizaProvider!.getData();
-  //     });
-  //   });
-  //   arizaProvider?.addListener(() {
-  //     setState(() {});
-  //   });
-  // }
-
 
   @override
   void initState() {
@@ -84,17 +55,45 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
       SmartAuth(),
     );
 
-    itsProvider = context.read<ITSProvider>();
+    arizaProvider = context.read<ArizaProvider>();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      itsProvider!.getData();
+      arizaProvider!.getData();
       _timer = Timer.periodic(Duration(seconds: 10), (timer) {
-        itsProvider!.getData();
+        arizaProvider!.getData();
       });
     });
-    itsProvider?.addListener(() {
+    arizaProvider?.addListener(() {
       setState(() {});
     });
   }
+
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   if (kIsWeb) {
+  //     BrowserContextMenu.disableContextMenu();
+  //   }
+  //   formKey = GlobalKey<FormState>();
+  //   pinController = TextEditingController();
+  //   focusNode = FocusNode();
+
+  //   /// In case you need an SMS autofill feature
+  //   smsRetriever = SmsRetrieverImpl(
+  //     SmartAuth(),
+  //   );
+
+  //   itsProvider = context.read<ITSProvider>();
+  //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+  //     itsProvider!.getData();
+  //     _timer = Timer.periodic(Duration(seconds: 10), (timer) {
+  //       itsProvider!.getData();
+  //     });
+  //   });
+  //   itsProvider?.addListener(() {
+  //     setState(() {});
+  //   });
+  // }
 
   @override
   void dispose() {
@@ -207,37 +206,37 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
                     color: Colors.teal.shade200,
                   ),
-                  child: TabBar(
-                    labelPadding: EdgeInsets.zero,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    dividerColor: Colors.transparent,
-                    indicator: BoxDecoration(
-                      color: Colors.teal.shade600,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    labelColor: Colors.white,
-                    unselectedLabelColor: Colors.black54,
-                    tabs: [
-                      TabItem(title: 'Ariza', count: 6),
-                      // TabItem(title: 'Jinoyat', count: 3),
-                      // TabItem(title: 'SHSH', count: 2),
-                      // TabItem(title: 'Qidiruv', count: 4),
-                    ],
-                  ),
+                  // child: TabBar(
+                  //   labelPadding: EdgeInsets.zero,
+                  //   indicatorSize: TabBarIndicatorSize.tab,
+                  //   dividerColor: Colors.transparent,
+                  //   indicator: BoxDecoration(
+                  //     color: Colors.teal.shade600,
+                  //     borderRadius: BorderRadius.all(Radius.circular(10)),
+                  //   ),
+                  //   labelColor: Colors.white,
+                  //   unselectedLabelColor: Colors.black54,
+                  //   tabs: [
+                  //     // TabItem(title: 'Ariza', count: 6),
+                  //     // TabItem(title: 'Jinoyat', count: 3),
+                  //     // TabItem(title: 'SHSH', count: 2),
+                  //     // TabItem(title: 'Qidiruv', count: 4),
+                  //   ],
+                  // ),
                 ),
               ),
             ),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  // imeiList(arizaProvider!.data!.data!, defaultPinTheme, focusedBorderColor, fillColor),
-                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                  imeiList(itsProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
-                 ],
-              ),
-            )
+            // Expanded(
+            //   child: TabBarView(
+            //     children: [
+            //       // imeiList(arizaProvider!.data!.data!, defaultPinTheme, focusedBorderColor, fillColor),
+            //       // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+            //       // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+            //       // imeiList(arizaProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+            //       // imeiList(itsProvider!.data!.data, defaultPinTheme, focusedBorderColor, fillColor),
+            //      ],
+            //   ),
+            // )
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -379,7 +378,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
     );
   }
 
-  imeiList(List<DeviceData>? data, defaultPinTheme, focusedBorderColor, fillColor) {
+  imeiList(List<Data>? data, defaultPinTheme, focusedBorderColor, fillColor) {
     // data = data!.reversed.toList();
     // print(data!.length);
     return  Container(
@@ -409,7 +408,7 @@ class _ListImImeiLostState extends State<ListImImeiLost> {
               padding: EdgeInsets.symmetric(horizontal: 12),
               child: GestureDetector(
                 onTap: () {
-                  Get.to(ImeiITS(data[index]));
+                  // Get.to(ImeiITS(data[index]));
                 },
                 child: Dismissible(
                   direction: DismissDirection.endToStart,

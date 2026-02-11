@@ -281,10 +281,10 @@ class _LostCreateState extends State<LostCreate> {
                                 height: 48,
                                 child: ElevatedButton.icon(
                                   onPressed: () async {
-                                    await ITSPost().itsPost(
-                                      imei: imeiController!.text,
-                                      model: modelController!.text,
-                                    );
+                                    // await ITSPost().itsPost(
+                                    //   imei: imeiController!.text,
+                                    //   model: modelController!.text,
+                                    // );
                                     // if (dataService['status']) {
                                     //   Get.off(ListImImeiLost());
                                     // }
