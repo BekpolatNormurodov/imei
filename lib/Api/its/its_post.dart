@@ -10,7 +10,7 @@ class ITSPost {
   }) async {
     var request = await http.MultipartRequest(
       'post',
-      Uri.parse('http://imei.yacdem.uz/api/v1/lostdeviceregister/'),
+      Uri.parse('http://bekpolatnormurodov.uz/imeiApi/api/v1/lostdeviceregister/'),
     );
 
     request.fields.addAll({

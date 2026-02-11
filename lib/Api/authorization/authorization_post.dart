@@ -7,7 +7,7 @@ class AuthorizationPost {
     required String jton,
   }) async {
     var response = await http.post(
-      Uri.parse('https://imei.yacdem.uz/api/v1/token/'),
+      Uri.parse('https://bekpolatnormurodov.uz/imeiApi/api/v1/token/'),
       body: jsonEncode({'username': phone,
       'password': jton,})
     );

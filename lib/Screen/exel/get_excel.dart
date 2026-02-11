@@ -12,7 +12,7 @@ class GetExcel extends StatefulWidget {
 
 class _GetExcelState extends State<GetExcel> {
   getExcelData() async {
-    String url = "https://imei.yacdem.uz/api/v1/export/";
+    String url = "https://bekpolatnormurodov.uz/imeiApi/api/v1/export/";
     // String token = Hive.box('token').get('token');
     var _response = await http.get(
       Uri.parse(url),

@@ -7,7 +7,7 @@ class AccountService {
     try {
       String token = Hive.box('token').get('token');
       var _response = await http.get(
-        Uri.parse('http://imei.yacdem.uz/api/v1/profile/'),
+        Uri.parse('http://bekpolatnormurodov.uz/imeiApi/api/v1/profile/'),
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $token',
         },

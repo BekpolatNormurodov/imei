@@ -15,7 +15,7 @@ class AccountPost {
   }) async {
     var request = await http.MultipartRequest(
       'post',
-      Uri.parse('http://imei.yacdem.uz/api/v1/ariza/'),
+      Uri.parse('http://bekpolatnormurodov.uz/imeiApi/api/v1/ariza/'),
     );
 
     request.fields.addAll({
